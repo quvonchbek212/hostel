@@ -1,0 +1,10 @@
+node_modules/
+*.log
+.DS_Store
+*.tar.gz
+*.zip
+makon-demo/node_modules/
+makon-demo/android/.gradle/
+makon-demo/android/build/
+makon-demo/android/app/build/
+makon-demo/android/local.properties
