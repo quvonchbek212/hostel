@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#184d3b">
+  <meta name="description" content="Makon — yotoqxona xonalari, bolalar, to‘lovlar va xarajatlarni bitta joyda boshqarish.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>Makon — Yotoqxona boshqaruvi</title>
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <svg class="svg-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></symbol>
+    <symbol id="i-rooms" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h1m4 0h1M9 11h1m4 0h1M10 21v-6h4v6"/></symbol>
+    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M16 5a3 3 0 0 1 0 6m2 4a5 5 0 0 1 3 5v1"/></symbol>
+    <symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 18v3m18-3v3M3 18V7m0 8h18v3H3m18-3v-5a2 2 0 0 0-2-2h-8v7"/><rect x="5" y="9" width="4" height="4" rx="1"/></symbol>
+    <symbol id="i-debt" viewBox="0 0 24 24"><path d="M20 12V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6M4 8h16"/><circle cx="17.5" cy="17.5" r="4.5"/><path d="M17.5 15v3m0 1v.1M8 12h3"/></symbol>
+    <symbol id="i-expenses" viewBox="0 0 24 24"><path d="M5 3v18l3-2 4 2 4-2 3 2V3l-3 2-4-2-4 2-3-2ZM9 9h6M9 13h6M9 17h2"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  </svg>
+  <aside class="sidebar" aria-label="Asosiy menyu">
+    <a class="brand" href="#dashboard" aria-label="Makon bosh sahifa"><img src="./icon.svg" width="39" height="39" alt=""><span>Makon<span class="brand-subtitle">YOTOQXONA BOSHQARUVI</span></span></a>
+    <div class="sidebar-label">ASOSIY MENYU</div>
+    <nav class="side-nav">
+      <button type="button" data-nav="dashboard" class="active"><svg class="icon"><use href="#i-dashboard"/></svg><span>Boshqaruv</span></button>
+      <button type="button" data-nav="rooms"><svg class="icon"><use href="#i-rooms"/></svg><span>Xonalar</span></button>
+      <button type="button" data-nav="residents"><svg class="icon"><use href="#i-people"/></svg><span>Bolalar</span></button>
+      <button type="button" data-nav="vacancies"><svg class="icon"><use href="#i-bed"/></svg><span>Bo‘sh joylar</span><span class="nav-badge" id="nav-vacancies"></span></button>
+      <button type="button" data-nav="debtors"><svg class="icon"><use href="#i-debt"/></svg><span>Qarzdorlar</span><span class="nav-badge amber" id="nav-debtors"></span></button>
+      <button type="button" data-nav="expenses"><svg class="icon"><use href="#i-expenses"/></svg><span>Xarajatlar</span></button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="tariff-card"><span class="tariff-icon"><svg class="icon"><use href="#i-bed"/></svg></span><p>Oylik to‘lov</p><strong>800 000 <small>so‘m</small></strong><div><span class="tiny-dot"></span>Har 30 kunda</div></div>
+      <button class="demo-note" data-action="demo-info"><span class="demo-pill">DEMO</span><span>Sinab ko‘rish uchun</span><svg class="icon"><use href="#i-arrow"/></svg></button>
+      <div class="sidebar-account"><div class="avatar sage">BK</div><div><strong>Boshqaruvchi</strong><small>Yotoqxona administratori</small></div></div>
+    </div>
+  </aside>
+  <div class="workspace">
+    <header class="topbar">
+      <a class="mobile-brand" href="#dashboard"><img src="./icon.svg" alt="" width="31" height="31"><span>Makon</span></a>
+      <div class="breadcrumb"><span>Yotoqxona</span><svg class="icon"><use href="#i-arrow"/></svg><strong id="breadcrumb">Boshqaruv</strong></div>
+      <div class="topbar-actions">
+        <button class="top-search" type="button" data-action="global-search" aria-label="Bolani qidirish"><svg class="icon"><use href="#i-search"/></svg><span>Bolani qidirish...</span><kbd>⌕</kbd></button>
+        <span id="top-date" class="top-date"></span>
+        <button type="button" class="notification-button" data-action="notifications" aria-label="To‘lov eslatmalari"><svg class="icon"><use href="#i-bell"/></svg><span class="notification-dot"></span></button>
+        <div class="top-avatar" aria-label="Boshqaruvchi">BK</div>
+        <button class="demo-pill mobile-demo" data-action="demo-info">DEMO</button>
+      </div>
+    </header>
+    <main id="app" tabindex="-1" aria-live="polite"></main>
+    <footer class="workspace-footer"><span>Makon <span class="footer-dot">·</span> Hammasi nazorat ostida.</span><span>3 blok <span class="footer-dot">·</span> 46 xona <span class="footer-dot">·</span> 184 o‘rin</span></footer>
+  </div>
+  <nav class="mobile-nav" aria-label="Mobil menyu">
+    <button data-nav="dashboard" class="active"><svg class="icon"><use href="#i-dashboard"/></svg><span>Bosh sahifa</span></button>
+    <button data-nav="rooms"><svg class="icon"><use href="#i-rooms"/></svg><span>Xonalar</span></button>
+    <button data-nav="residents"><svg class="icon"><use href="#i-people"/></svg><span>Bolalar</span></button>
+    <button data-nav="vacancies"><svg class="icon"><use href="#i-bed"/></svg><span>Bo‘sh joy</span></button>
+    <button data-nav="debtors"><svg class="icon"><use href="#i-debt"/></svg><span>Qarzlar</span></button>
+    <button data-nav="expenses"><svg class="icon"><use href="#i-expenses"/></svg><span>Xarajat</span></button>
+  </nav>
+  <dialog id="modal" class="modal"></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>

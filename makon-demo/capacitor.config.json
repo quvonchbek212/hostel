@@ -1,0 +1,9 @@
+{
+  "appId": "uz.makon.hostel",
+  "appName": "Makon",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "android": {
+    "backgroundColor": "#184d3b"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "makon-hostel-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Uzbek-language, mobile-friendly hostel management demo",
+  "scripts": {
+    "start": "python -m http.server 8000 --bind 127.0.0.1 --directory dist",
+    "test": "node --test tests/*.test.mjs",
+    "check": "node --check dist/app.mjs && node --check dist/engine.mjs",
+    "sync": "npx cap sync android",
+    "open": "npx cap open android"
+  },
+  "devDependencies": {
+    "linkedom": "^0.18.15"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.2",
+    "@capacitor/cli": "^8.6.2",
+    "@capacitor/core": "^8.6.2"
+  }
+}
