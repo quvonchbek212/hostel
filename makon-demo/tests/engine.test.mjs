@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { RATE, CAPACITY, BLOCKS, todayISO, addDays, daysBetween, roomList, roomOccupants, seedData, residentStatus, getSummary, addResident, recordPayment, checkoutResident, addExpense } from '../dist/engine.mjs';
+import { RATE, CAPACITY, BLOCKS, todayISO, addDays, daysBetween, roomList, roomOccupants, seedData, residentStatus, getSummary, addResident, recordPayment, checkoutResident, addExpense, deletePayment, deleteExpense } from '../dist/engine.mjs';
 
 const empty = () => ({ version: 1, residents: [], payments: [], expenses: [] });
 const input = (overrides = {}) => ({ firstName: 'Aziz', lastName: 'Karimov', phone: '+998 90 123 45 67', block: 'A', room: 1, joined: '2026-01-01', ...overrides });
@@ -171,4 +171,25 @@ test('default last-30-day dashboard totals match seeded ledger and expense categ
   assert.ok(state.expenses.some(expense => expense.category === 'tax'));
   assert.ok(state.expenses.some(expense => expense.category === 'utilities'));
   assert.ok(state.expenses.some(expense => expense.category === 'other'));
+});
+
+test('deletePayment removes payment and restores arrears correctly', () => {
+  const state = empty(), resident = add(state);
+  const payment = recordPayment(state, resident.id, 500000, 'cash', '2026-01-01');
+  assert.equal(residentStatus(state, resident, '2026-01-01').owed, 300000);
+  const removed = deletePayment(state, payment.id);
+  assert.equal(removed.id, payment.id);
+  assert.equal(state.payments.length, 0);
+  assert.equal(residentStatus(state, resident, '2026-01-01').owed, RATE);
+  assert.throws(() => deletePayment(state, 'non-existent'));
+});
+
+test('deleteExpense removes expense and updates summary', () => {
+  const state = empty();
+  const expense = addExpense(state, { name: 'Elektr', amount: 500000, category: 'utilities', date: '2026-01-01' });
+  assert.equal(state.expenses.length, 1);
+  const removed = deleteExpense(state, expense.id);
+  assert.equal(removed.id, expense.id);
+  assert.equal(state.expenses.length, 0);
+  assert.throws(() => deleteExpense(state, 'non-existent'));
 });

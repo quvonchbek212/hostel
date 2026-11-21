@@ -6,7 +6,7 @@ import { todayISO, addDays, residentStatus, roomOccupants, getSummary } from '..
 
 // This is an event-driven DOM integration test, not a rendering/browser test.
 // Linkedom supplies the DOM; only browser services it lacks are shimmed.
-const STORAGE_KEY = 'makon.hostel.demo.v1';
+const STORAGE_KEY = 'makon.hostel.v2';
 const html = await readFile(new URL('../dist/index.html', import.meta.url), 'utf8');
 
 function createEnvironment(savedEntries = []) {
@@ -75,6 +75,7 @@ test('actual app DOM: navigation, payments, residents, expenses, date reports an
   const maliciousName = '<img src=x onerror=alert(1)>';
   const phone = '+998 99 111 22 33';
   const today = todayISO();
+  globalThis.__FORCE_SEED__ = true;
   try {
     await import(`../dist/app.mjs?ui-smoke=${Date.now()}`);
 
@@ -213,6 +214,28 @@ test('actual app DOM: navigation, payments, residents, expenses, date reports an
       assert.equal(residentStatus(state, resident).owed, 0);
       nav('debtors');
       assert.equal(document.querySelector(`[data-action="pay"][data-id="${residentId}"]`), null);
+    });
+
+    await t.test('mistaken payment and expense can be cancelled and deleted', () => {
+      nav('residents');
+      fill('#status-filter', 'inactive', 'change');
+      click(`[data-action="profile"][data-id="${residentId}"]`);
+      const residentPayments = data().payments.filter(p => p.residentId === residentId);
+      assert.ok(residentPayments.length > 0);
+      const targetPayment = residentPayments[0];
+      click(`[data-action="delete-payment-confirm"][data-id="${targetPayment.id}"]`);
+      click('[data-action="delete-payment"]');
+      assert.equal(data().payments.some(p => p.id === targetPayment.id), false);
+      click('#modal [data-action="close-modal"]');
+      assertSaved();
+
+      nav('expenses');
+      const stateWithExpenses = data();
+      const lastExpense = stateWithExpenses.expenses[stateWithExpenses.expenses.length - 1];
+      click(`[data-action="delete-expense-confirm"][data-id="${lastExpense.id}"]`);
+      click('[data-action="delete-expense"]');
+      assertSaved();
+      assert.equal(data().expenses.some(e => e.id === lastExpense.id), false);
     });
 
     await t.test('fresh app import restores saved residents, payments and expenses', async () => {

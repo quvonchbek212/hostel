@@ -220,6 +220,18 @@ export function emptyData() {
   return { version: 1, residents: [], payments: [], expenses: [] };
 }
 
+export function deletePayment(state, paymentId) {
+  const index = state.payments.findIndex(p => p.id === paymentId);
+  if (index === -1) throw new Error('To‘lov topilmadi.');
+  return state.payments.splice(index, 1)[0];
+}
+
+export function deleteExpense(state, expenseId) {
+  const index = state.expenses.findIndex(e => e.id === expenseId);
+  if (index === -1) throw new Error('Xarajat topilmadi.');
+  return state.expenses.splice(index, 1)[0];
+}
+
 export function validateState(data) {
   if (!data || typeof data !== 'object') throw new Error('Ma’lumotlar formati noto‘g‘ri.');
   if (data.version !== 1) throw new Error('Ma’lumotlar versiyasi mos kelmadi.');
