@@ -3,6 +3,7 @@ node_modules/
 .DS_Store
 *.tar.gz
 *.zip
+*.apk
 makon-demo/node_modules/
 makon-demo/android/.gradle/
 makon-demo/android/build/
