@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { RATE, CAPACITY, BLOCKS, todayISO, addDays, daysBetween, roomList, roomOccupants, seedData, residentStatus, getSummary, addResident, recordPayment, checkoutResident, addExpense, deletePayment, deleteExpense } from '../dist/engine.mjs';
+import { RATE, CAPACITY, BLOCKS, todayISO, addDays, daysBetween, roomList, roomOccupants, seedData, residentStatus, getSummary, addResident, recordPayment, checkoutResident, addExpense, deletePayment, deleteExpense, createZip, generateDocxReport } from '../dist/engine.mjs';
 
 const empty = () => ({ version: 1, residents: [], payments: [], expenses: [] });
 const input = (overrides = {}) => ({ firstName: 'Aziz', lastName: 'Karimov', phone: '+998 90 123 45 67', block: 'A', room: 1, joined: '2026-01-01', ...overrides });
@@ -192,4 +192,27 @@ test('deleteExpense removes expense and updates summary', () => {
   assert.equal(removed.id, expense.id);
   assert.equal(state.expenses.length, 0);
   assert.throws(() => deleteExpense(state, 'non-existent'));
+});
+
+test('generateDocxReport and createZip produce valid docx archive', () => {
+  const zip = createZip([{ name: 'test.txt', content: 'test' }]);
+  assert.equal(zip[0], 0x50);
+  assert.equal(zip[1], 0x4b);
+  assert.equal(zip[2], 0x03);
+  assert.equal(zip[3], 0x04);
+
+  const state = seedData();
+  const docx = generateDocxReport(state, '2026-11-22');
+  assert.ok(docx instanceof Uint8Array);
+  assert.ok(docx.length > 2000);
+  assert.equal(docx[0], 0x50);
+  assert.equal(docx[1], 0x4b);
+});
+
+test('custom monthlyRate in settings changes billing calculations', () => {
+  const state = empty();
+  state.settings = { monthlyRate: 600000 };
+  const resident = add(state, { joined: '2026-01-01' });
+  const status = residentStatus(state, resident, '2026-01-01');
+  assert.equal(status.owed, 600000);
 });

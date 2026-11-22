@@ -478,3 +478,264 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   .mobile-demo { color: #476fa5; background: #f0f6ff; border-color: #dce8fa; }
   .stat-card.featured { box-shadow: 0 5px 15px #153e751c; }
 }
+
+/* ==========================================================================
+   PIN LOCK SCREEN
+   ========================================================================== */
+.pin-lock-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: linear-gradient(135deg, #10243e 0%, #1e3a8a 50%, #0f172a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+.pin-lock-screen.unlocked {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+  visibility: hidden;
+}
+.pin-card {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+.pin-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.pin-logo img {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.pin-logo h2 {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 0;
+  color: #ffffff;
+}
+.pin-subtitle {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #93c5fd;
+  margin-top: 2px;
+}
+.pin-prompt {
+  font-size: 13px;
+  color: #e2e8f0;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+.pin-dots {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.pin-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  transition: all 0.2s ease;
+}
+.pin-dot.filled {
+  background: #38bdf8;
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+  transform: scale(1.15);
+}
+.pin-dots.error .pin-dot {
+  border-color: #ef4444;
+  background: #ef4444;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.7);
+}
+.pin-dots.shake {
+  animation: pin-shake 0.4s ease;
+}
+@keyframes pin-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+.pin-error {
+  min-height: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f87171;
+  margin-bottom: 14px;
+}
+.pin-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+.pin-btn {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.pin-btn:active {
+  background: rgba(255, 255, 255, 0.28);
+  transform: scale(0.92);
+}
+.pin-btn.pin-empty {
+  visibility: hidden;
+}
+.pin-btn.pin-del {
+  font-size: 20px;
+  border-color: transparent;
+  background: transparent;
+  color: #94a3b8;
+}
+.pin-btn.pin-del:active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.topbar-lock-button {
+  background: transparent;
+  border: 1px solid #dbe9fc;
+  border-radius: 8px;
+  color: #3b82f6;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.topbar-lock-button:hover {
+  background: #edf5ff;
+  border-color: #bfdbfe;
+}
+
+/* ==========================================================================
+   UZBEK CALENDAR MODAL
+   ========================================================================== */
+.uz-calendar-dialog {
+  padding: 0;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  max-width: 320px;
+  width: 90vw;
+  background: #ffffff;
+  color: #0f172a;
+}
+.uz-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #2563eb;
+  color: #ffffff;
+  border-radius: 16px 16px 0 0;
+}
+.uz-calendar-header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+.uz-cal-nav {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+.uz-cal-nav:active {
+  background: rgba(255, 255, 255, 0.35);
+}
+.uz-calendar-body {
+  padding: 12px 14px 6px 14px;
+}
+.uz-weekdays-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+.uz-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.uz-day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #1e293b;
+  cursor: pointer;
+}
+.uz-day-cell:hover:not(:disabled) {
+  background: #eff6ff;
+}
+.uz-day-cell.selected {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+}
+.uz-day-cell.today {
+  border: 1px solid #2563eb;
+  font-weight: 700;
+}
+.uz-day-cell:disabled {
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+.uz-calendar-footer {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px 14px 14px;
+  border-top: 1px solid #f1f5f9;
+}
+.uz-calendar-footer button {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 12px;
+}

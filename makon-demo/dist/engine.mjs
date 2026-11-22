@@ -68,16 +68,17 @@ export function roomOccupants(state, block, room) {
 // partial payments; they never reset the original arrival-based billing clock.
 export function residentStatus(state, resident, today = todayISO()) {
   validDate(today);
+  const currentRate = state?.settings?.monthlyRate || resident.monthlyRate || RATE;
   const asOf = !resident.active && resident.leftAt && resident.leftAt < today ? resident.leftAt : today;
   const elapsed = daysBetween(resident.joined, asOf);
   const cycleNumber = elapsed < 0 ? 0 : Math.floor(elapsed / 30) + 1;
   const cycleStart = cycleNumber ? addDays(resident.joined, (cycleNumber - 1) * 30) : resident.joined;
-  const totalCharged = cycleNumber * RATE;
+  const totalCharged = cycleNumber * currentRate;
   const totalPaid = state.payments.filter(payment => payment.residentId === resident.id && payment.date <= today).reduce((sum, payment) => sum + payment.amount, 0);
   const owed = Math.max(0, totalCharged - totalPaid);
-  const paidThisCycle = cycleNumber ? Math.min(RATE, Math.max(0, totalPaid - (cycleNumber - 1) * RATE)) : 0;
+  const paidThisCycle = cycleNumber ? Math.min(currentRate, Math.max(0, totalPaid - (cycleNumber - 1) * currentRate)) : 0;
   // Advance payments cover future periods. Do not remind an already paid period.
-  const nextDue = resident.active ? addDays(resident.joined, Math.max(cycleNumber, Math.floor(totalPaid / RATE)) * 30) : null;
+  const nextDue = resident.active ? addDays(resident.joined, Math.max(cycleNumber, Math.floor(totalPaid / currentRate)) * 30) : null;
   const daysUntilDue = nextDue ? daysBetween(today, nextDue) : null;
   const status = owed > 0 ? 'debt' : resident.active && daysUntilDue >= 0 && daysUntilDue <= 5 ? 'soon' : 'paid';
   return { owed, totalCharged, totalPaid, cycleStart, nextDue, daysUntilDue, status, paidThisCycle, cycleNumber };
@@ -88,6 +89,7 @@ export function residentStatus(state, resident, today = todayISO()) {
 export function getSummary(state, from = `${todayISO().slice(0, 7)}-01`, to = todayISO(), today = todayISO()) {
   validDate(from); validDate(to); validDate(today);
   if (from > to) throw new Error('Boshlanish sanasi tugash sanasidan keyin bo‘lmasligi kerak.');
+  const currentRate = state?.settings?.monthlyRate || RATE;
   const inRange = item => item.date >= from && item.date <= to && item.date <= today;
   const collected = state.payments.filter(inRange).reduce((sum, payment) => sum + payment.amount, 0);
   const expenses = state.expenses.filter(inRange).reduce((sum, expense) => sum + expense.amount, 0);
@@ -101,7 +103,7 @@ export function getSummary(state, from = `${todayISO().slice(0, 7)}-01`, to = to
     if (end < resident.joined) continue;
     const firstCycle = Math.max(0, Math.ceil(daysBetween(resident.joined, from) / 30));
     const lastCycle = Math.floor(daysBetween(resident.joined, end) / 30);
-    expected += Math.max(0, lastCycle - firstCycle + 1) * RATE;
+    expected += Math.max(0, lastCycle - firstCycle + 1) * currentRate;
   }
   const occupied = state.residents.filter(resident => resident.active).length;
   return { collected, expenses, profit: collected - expenses, owed, expected, occupied, vacant: CAPACITY - occupied, debtors, dueSoon };
@@ -126,6 +128,7 @@ export function addResident(state, input, today = todayISO()) {
 
 export function recordPayment(state, residentId, amount, method, date = todayISO()) {
   const resident = requireResident(state, residentId);
+  const currentRate = state?.settings?.monthlyRate || resident.monthlyRate || RATE;
   amount = amountValue(amount);
   notFuture(date, 'To‘lov sanasi');
   if (date < resident.joined) throw new Error('To‘lov sanasi kelgan sanadan oldin bo‘lmasligi kerak.');
@@ -141,7 +144,7 @@ export function recordPayment(state, residentId, amount, method, date = todayISO
   for (const checkpoint of checkpoints) {
     const status = residentStatus(state, resident, checkpoint);
     const wasActive = resident.active || resident.leftAt && checkpoint < resident.leftAt;
-    const allowed = Math.max(0, status.totalCharged + (wasActive ? RATE : 0) - status.totalPaid);
+    const allowed = Math.max(0, status.totalCharged + (wasActive ? currentRate : 0) - status.totalPaid);
     if (amount > allowed) throw new Error(resident.active ? 'Qarz va bir davr oldindan to‘lovdan ortiq summa kiritildi.' : 'Summa qolgan qarzdan oshmasligi kerak.');
   }
   const payment = { id: uid('p'), residentId, amount, date, method };
@@ -172,7 +175,7 @@ export function addExpense(state, input) {
 
 export function seedData(today = todayISO()) {
   validDate(today);
-  const state = { version: 1, residents: [], payments: [], expenses: [] };
+  const state = { version: 1, residents: [], payments: [], expenses: [], settings: { monthlyRate: 800000, pin: '1234' } };
   const firstNames = ['Azizbek', 'Javohir', 'Muhammadali', 'Sardor', 'Diyorbek', 'Bekzod', 'Shahzod', 'Asadbek', 'Abdulaziz', 'Islom', 'Temur', 'Jasurbek', 'Oybek', 'Shoxrux', 'Bobur', 'Akmal', 'Murod', 'Sanjar', 'Alisher', 'Farrux', 'Davron', 'Ulug‘bek', 'Rustam', 'Kamron', 'Abbos', 'Miraziz', 'Jamshid', 'Bilol', 'Ibrohim', 'Nodir', 'Sherzod'];
   const lastNames = ['Karimov', 'Abdullayev', 'Rahimov', 'Tursunov', 'Ismoilov', 'Yusupov', 'Qodirov', 'Ergashev', 'Aliyev', 'Usmonov', 'Rasulov', 'Saidov', 'Nazarov', 'Mahmudov', 'Sobirov', 'Olimov', 'Jo‘rayev', 'Hamidov', 'Akbarov', 'Nabiyev', 'To‘xtayev', 'Sodiqov', 'Salimov'];
   let index = 0;
@@ -217,7 +220,7 @@ export function seedData(today = todayISO()) {
 }
 
 export function emptyData() {
-  return { version: 1, residents: [], payments: [], expenses: [] };
+  return { version: 1, residents: [], payments: [], expenses: [], settings: { monthlyRate: 800000, pin: '1234' } };
 }
 
 export function deletePayment(state, paymentId) {
@@ -239,4 +242,289 @@ export function validateState(data) {
     throw new Error('Ma’lumotlar tuzilishi yaroqsiz.');
   }
   return true;
+}
+
+// Pure JS ZIP Builder for standard uncompressed (.zip / .docx) packages
+export function createZip(files) {
+  const fileRecords = [];
+  let offset = 0;
+  const parts = [];
+  const crcTable = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
+    crcTable[n] = c >>> 0;
+  }
+  function calcCrc32(buf) {
+    let crc = 0xffffffff;
+    for (let i = 0; i < buf.length; i++) crc = (crc >>> 8) ^ crcTable[(crc ^ buf[i]) & 0xff];
+    return (crc ^ 0xffffffff) >>> 0;
+  }
+  const encoder = new TextEncoder();
+  for (const f of files) {
+    const data = typeof f.content === 'string' ? encoder.encode(f.content) : f.content;
+    const nameBytes = encoder.encode(f.name);
+    const crc = calcCrc32(data);
+    const size = data.length;
+    const header = new Uint8Array(30 + nameBytes.length);
+    const view = new DataView(header.buffer);
+    view.setUint32(0, 0x04034b50, true);
+    view.setUint16(4, 20, true);
+    view.setUint16(6, 0, true);
+    view.setUint16(8, 0, true);
+    view.setUint16(10, 0, true);
+    view.setUint16(12, 0, true);
+    view.setUint32(14, crc, true);
+    view.setUint32(18, size, true);
+    view.setUint32(22, size, true);
+    view.setUint16(26, nameBytes.length, true);
+    view.setUint16(28, 0, true);
+    header.set(nameBytes, 30);
+    fileRecords.push({ nameBytes, crc, size, offset });
+    parts.push(header, data);
+    offset += header.length + size;
+  }
+  const cdStart = offset;
+  let cdSize = 0;
+  for (const r of fileRecords) {
+    const cd = new Uint8Array(46 + r.nameBytes.length);
+    const view = new DataView(cd.buffer);
+    view.setUint32(0, 0x02014b50, true);
+    view.setUint16(4, 20, true);
+    view.setUint16(6, 20, true);
+    view.setUint16(8, 0, true);
+    view.setUint16(10, 0, true);
+    view.setUint16(12, 0, true);
+    view.setUint16(14, 0, true);
+    view.setUint32(16, r.crc, true);
+    view.setUint32(20, r.size, true);
+    view.setUint32(24, r.size, true);
+    view.setUint16(28, r.nameBytes.length, true);
+    view.setUint16(30, 0, true);
+    view.setUint16(32, 0, true);
+    view.setUint16(34, 0, true);
+    view.setUint16(36, 0, true);
+    view.setUint32(38, 0, true);
+    view.setUint32(42, r.offset, true);
+    cd.set(r.nameBytes, 46);
+    parts.push(cd);
+    cdSize += cd.length;
+  }
+  const eocd = new Uint8Array(22);
+  const view = new DataView(eocd.buffer);
+  view.setUint32(0, 0x06054b50, true);
+  view.setUint16(4, 0, true);
+  view.setUint16(6, 0, true);
+  view.setUint16(8, fileRecords.length, true);
+  view.setUint16(10, fileRecords.length, true);
+  view.setUint32(12, cdSize, true);
+  view.setUint32(16, cdStart, true);
+  view.setUint16(20, 0, true);
+  parts.push(eocd);
+  const totalLen = parts.reduce((acc, p) => acc + p.length, 0);
+  const result = new Uint8Array(totalLen);
+  let pos = 0;
+  for (const p of parts) {
+    result.set(p, pos);
+    pos += p.length;
+  }
+  return result;
+}
+
+function escapeXml(unsafe) {
+  return String(unsafe ?? '').replace(/[<>&'"]/g, c => {
+    switch (c) {
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '&': return '&amp;';
+      case '\'': return '&apos;';
+      case '"': return '&quot;';
+    }
+  });
+}
+
+function wText(text, { bold = false, size = 20, color = '000000', font = 'Calibri' } = {}) {
+  return `<w:r><w:rPr><w:rFonts w:ascii="${font}" w:hAnsi="${font}"/><w:sz w:val="${size}"/><w:color w:val="${color}"/>${bold ? '<w:b/>' : ''}</w:rPr><w:t xml:space="preserve">${escapeXml(text)}</w:t></w:r>`;
+}
+
+function wPara(runs, { align = 'left', spaceBefore = 60, spaceAfter = 60 } = {}) {
+  const runsXml = Array.isArray(runs) ? runs.join('') : runs;
+  return `<w:p><w:pPr><w:jc w:val="${align}"/><w:spacing w:before="${spaceBefore}" w:after="${spaceAfter}"/></w:pPr>${runsXml}</w:p>`;
+}
+
+function wCell(content, { bold = false, bg = '', align = 'left', color = '000000', size = 18 } = {}) {
+  const p = wPara(typeof content === 'string' ? wText(content, { bold, color, size }) : content, { align, spaceBefore: 30, spaceAfter: 30 });
+  const shd = bg ? `<w:shd w:val="clear" w:color="auto" w:fill="${bg}"/>` : '';
+  return `<w:tc><w:tcPr>${shd}<w:tcMar><w:top w:w="80" w:type="dxa"/><w:bottom w:w="80" w:type="dxa"/><w:left w:w="120" w:type="dxa"/><w:right w:w="120" w:type="dxa"/></w:tcMar></w:tcPr>${p}</w:tc>`;
+}
+
+function wRow(cells, isHeader = false) {
+  return `<w:tr>${isHeader ? '<w:trPr><w:tblHeader/></w:trPr>' : ''}${cells.join('')}</w:tr>`;
+}
+
+function wTable(rows) {
+  const borders = `<w:tblBorders>
+    <w:top w:val="single" w:sz="4" w:space="0" w:color="D1D5DB"/>
+    <w:left w:val="single" w:sz="4" w:space="0" w:color="D1D5DB"/>
+    <w:bottom w:val="single" w:sz="4" w:space="0" w:color="D1D5DB"/>
+    <w:right w:val="single" w:sz="4" w:space="0" w:color="D1D5DB"/>
+    <w:insideH w:val="single" w:sz="4" w:space="0" w:color="E5E7EB"/>
+    <w:insideV w:val="single" w:sz="4" w:space="0" w:color="E5E7EB"/>
+  </w:tblBorders>`;
+  return `<w:tbl><w:tblPr><w:tblW w:w="5000" w:type="pct"/>${borders}</w:tblPr>${rows.join('')}</w:tbl>`;
+}
+
+function fmtMoney(amount) {
+  return Number(amount || 0).toLocaleString('uz-UZ').replace(/,/g, ' ');
+}
+
+// Generates an OpenXML .docx Microsoft Word document buffer with all hostel details
+export function generateDocxReport(state, today = todayISO()) {
+  const summary = getSummary(state, `${today.slice(0, 7)}-01`, today, today);
+  const totalPaid = state.payments.reduce((sum, p) => sum + p.amount, 0);
+  const totalExpenses = state.expenses.reduce((sum, e) => sum + e.amount, 0);
+  const netProfit = totalPaid - totalExpenses;
+  const occupiedCount = state.residents.filter(r => r.active).length;
+
+  const body = [];
+
+  // Title
+  body.push(wPara(wText('«MAKON» YOTOQXONA BOSHQARUVI — TO‘LIQ HISOBOT', { bold: true, size: 28, color: '1E3A8A' }), { align: 'center', spaceBefore: 120, spaceAfter: 60 }));
+  body.push(wPara(wText(`Hisobot sanasi: ${today} yil | Jami bolalar: ${state.residents.length} nafar`, { size: 18, color: '6B7280' }), { align: 'center', spaceBefore: 0, spaceAfter: 180 }));
+
+  // Section 1: Financial & Hostel Summary
+  body.push(wPara(wText('1. MOLIYAVIY VA XO‘JALIK XULOSASI', { bold: true, size: 22, color: '1E40AF' }), { spaceBefore: 140, spaceAfter: 60 }));
+  const summaryRows = [
+    wRow([wCell('Ko‘rsatkich nomi', { bold: true, bg: '2563EB', color: 'FFFFFF' }), wCell('Qiymat', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'right' })], true),
+    wRow([wCell('Jami yig‘ilgan to‘lovlar'), wCell(`${fmtMoney(totalPaid)} so‘m`, { bold: true, align: 'right', color: '16A34A' })]),
+    wRow([wCell('Jami xarajatlar'), wCell(`${fmtMoney(totalExpenses)} so‘m`, { bold: true, align: 'right', color: 'DC2626' })]),
+    wRow([wCell('Sof foyda (Tushum − Xarajat)', { bold: true, bg: 'F3F4F6' }), wCell(`${fmtMoney(netProfit)} so‘m`, { bold: true, align: 'right', bg: 'F3F4F6', color: netProfit >= 0 ? '16A34A' : 'DC2626' })]),
+    wRow([wCell('Kutilayotgan qarzlar miqdori'), wCell(`${fmtMoney(summary.owed)} so‘m (${summary.debtors} ta qarzdor bola)`, { bold: true, align: 'right', color: summary.owed > 0 ? 'B91C1C' : '4B5563' })]),
+    wRow([wCell('Band o‘rinlar'), wCell(`${occupiedCount} ta o‘rin`, { align: 'right' })]),
+    wRow([wCell('Bo‘sh o‘rinlar'), wCell(`${CAPACITY - occupiedCount} ta o‘rin (jami 184)`, { align: 'right' })])
+  ];
+  body.push(wTable(summaryRows));
+
+  // Section 2: Residents List
+  body.push(wPara(wText(`2. BOLALAR RO‘YXATI (${state.residents.length} nafar)`, { bold: true, size: 22, color: '1E40AF' }), { spaceBefore: 180, spaceAfter: 60 }));
+  const residentRows = [
+    wRow([
+      wCell('T/r', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('F.I.Sh', { bold: true, bg: '2563EB', color: 'FFFFFF', size: 16 }),
+      wCell('Xona', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Telefon', { bold: true, bg: '2563EB', color: 'FFFFFF', size: 16 }),
+      wCell('Kelgan sana', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Holati', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('To‘langan', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'right', size: 16 }),
+      wCell('Qarz', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'right', size: 16 })
+    ], true)
+  ];
+
+  if (!state.residents.length) {
+    residentRows.push(wRow([wCell('Hozircha bolalar kiritilmagan.', { align: 'center', color: '6B7280' })]));
+  } else {
+    state.residents.forEach((r, idx) => {
+      const st = residentStatus(state, r, today);
+      const bg = idx % 2 === 1 ? 'F9FAFB' : '';
+      residentRows.push(wRow([
+        wCell(String(idx + 1), { align: 'center', bg, size: 16 }),
+        wCell(`${r.lastName} ${r.firstName}`, { bold: true, bg, size: 16 }),
+        wCell(`${r.block}-${r.room}`, { align: 'center', bg, size: 16 }),
+        wCell(r.phone || '', { bg, size: 16 }),
+        wCell(r.joined || '', { align: 'center', bg, size: 16 }),
+        wCell(r.active ? 'Faol' : 'Ketgan', { align: 'center', bg, size: 16, color: r.active ? '16A34A' : '6B7280' }),
+        wCell(`${fmtMoney(st.totalPaid)} so‘m`, { align: 'right', bg, size: 16 }),
+        wCell(`${fmtMoney(st.owed)} so‘m`, { align: 'right', bg, size: 16, bold: st.owed > 0, color: st.owed > 0 ? 'DC2626' : '000000' })
+      ]));
+    });
+  }
+  body.push(wTable(residentRows));
+
+  // Section 3: Payments History
+  body.push(wPara(wText(`3. TO‘LOVLAR TARIXI (${state.payments.length} ta amaliyot)`, { bold: true, size: 22, color: '1E40AF' }), { spaceBefore: 180, spaceAfter: 60 }));
+  const paymentRows = [
+    wRow([
+      wCell('T/r', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Sana', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Bola ismi', { bold: true, bg: '2563EB', color: 'FFFFFF', size: 16 }),
+      wCell('Summa', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'right', size: 16 }),
+      wCell('To‘lov turi', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 })
+    ], true)
+  ];
+
+  if (!state.payments.length) {
+    paymentRows.push(wRow([wCell('Hozircha to‘lovlar yo‘q.', { align: 'center', color: '6B7280' })]));
+  } else {
+    // Show newest first
+    const sortedPayments = [...state.payments].sort((a, b) => b.date.localeCompare(a.date));
+    sortedPayments.forEach((p, idx) => {
+      const resident = state.residents.find(r => r.id === p.residentId);
+      const name = resident ? `${resident.lastName} ${resident.firstName}` : 'Noma’lum';
+      const bg = idx % 2 === 1 ? 'F9FAFB' : '';
+      paymentRows.push(wRow([
+        wCell(String(idx + 1), { align: 'center', bg, size: 16 }),
+        wCell(p.date, { align: 'center', bg, size: 16 }),
+        wCell(name, { bold: true, bg, size: 16 }),
+        wCell(`+${fmtMoney(p.amount)} so‘m`, { align: 'right', bg, size: 16, bold: true, color: '16A34A' }),
+        wCell(p.method === 'card' ? 'Karta' : 'Naqd pul', { align: 'center', bg, size: 16 })
+      ]));
+    });
+  }
+  body.push(wTable(paymentRows));
+
+  // Section 4: Expenses History
+  body.push(wPara(wText(`4. XARAJATLAR RO‘YXATI (${state.expenses.length} ta)`, { bold: true, size: 22, color: '1E40AF' }), { spaceBefore: 180, spaceAfter: 60 }));
+  const catNames = { utilities: 'Kommunal', tax: 'Soliq', other: 'Xo‘jalik / Boshqa' };
+  const expenseRows = [
+    wRow([
+      wCell('T/r', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Sana', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Xarajat nomi', { bold: true, bg: '2563EB', color: 'FFFFFF', size: 16 }),
+      wCell('Kategoriya', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Summa', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'right', size: 16 })
+    ], true)
+  ];
+
+  if (!state.expenses.length) {
+    expenseRows.push(wRow([wCell('Hozircha xarajatlar yo‘q.', { align: 'center', color: '6B7280' })]));
+  } else {
+    const sortedExpenses = [...state.expenses].sort((a, b) => b.date.localeCompare(a.date));
+    sortedExpenses.forEach((e, idx) => {
+      const bg = idx % 2 === 1 ? 'F9FAFB' : '';
+      expenseRows.push(wRow([
+        wCell(String(idx + 1), { align: 'center', bg, size: 16 }),
+        wCell(e.date, { align: 'center', bg, size: 16 }),
+        wCell(e.name, { bold: true, bg, size: 16 }),
+        wCell(catNames[e.category] || e.category, { align: 'center', bg, size: 16 }),
+        wCell(`−${fmtMoney(e.amount)} so‘m`, { align: 'right', bg, size: 16, bold: true, color: 'DC2626' })
+      ]));
+    });
+  }
+  body.push(wTable(expenseRows));
+
+  const docXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:body>
+    ${body.join('')}
+    <w:sectPr/>
+  </w:body>
+</w:document>`;
+
+  const contentTypes = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+</Types>`;
+
+  const rels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>`;
+
+  return createZip([
+    { name: '[Content_Types].xml', content: contentTypes },
+    { name: '_rels/.rels', content: rels },
+    { name: 'word/document.xml', content: docXml }
+  ]);
 }

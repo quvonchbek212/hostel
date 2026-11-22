@@ -40,10 +40,12 @@ function createEnvironment(savedEntries = []) {
     }
     [Symbol.iterator]() { return this.entries[Symbol.iterator](); }
   }
+  for (const modal of document.querySelectorAll('dialog')) {
+    Object.defineProperty(modal, 'open', { configurable: true, get() { return this.hasAttribute('open'); } });
+    modal.showModal = function () { this.setAttribute('open', ''); };
+    modal.close = function () { this.removeAttribute('open'); this.dispatchEvent(new window.Event('close')); };
+  }
   const modal = document.querySelector('#modal');
-  Object.defineProperty(modal, 'open', { configurable: true, get() { return this.hasAttribute('open'); } });
-  modal.showModal = function () { this.setAttribute('open', ''); };
-  modal.close = function () { this.removeAttribute('open'); this.dispatchEvent(new window.Event('close')); };
   window.scrollTo = () => {};
   const originalTimeout = globalThis.setTimeout;
   const globals = { window, document, localStorage, location, history, FormData: DOMFormData, setTimeout: (fn, ms, ...args) => { const timer = originalTimeout(fn, ms, ...args); timer.unref?.(); return timer; } };
@@ -238,6 +240,46 @@ test('actual app DOM: navigation, payments, residents, expenses, date reports an
       assert.equal(data().expenses.some(e => e.id === lastExpense.id), false);
     });
 
+    await t.test('settings allows updating standard monthly rate and pin lock works', () => {
+      click('[data-action="demo-info"]');
+      assert.equal(find('#modal').open, true);
+      fill('#settings-monthly-rate', '700000');
+      click('[data-action="save-rate"]');
+      assert.equal(data().settings.monthlyRate, 700000);
+      assert.ok(numericText(find('#sidebar-tariff').textContent).includes('700000'));
+      click('#modal [data-action="close-modal"]');
+
+      // Test PIN lock screen
+      click('[data-action="lock-app"]');
+      const pinScreen = find('#pin-lock-screen');
+      assert.equal(pinScreen.classList.contains('unlocked'), false);
+
+      // Enter digits 1, 2, 3, 4
+      click('.pin-keypad [data-pin="1"]');
+      click('.pin-keypad [data-pin="2"]');
+      click('.pin-keypad [data-pin="3"]');
+      click('.pin-keypad [data-pin="4"]');
+      assert.equal(pinScreen.classList.contains('unlocked'), true);
+    });
+
+    await t.test('Uzbek datepicker modal opens on date input and applies date in Uzbek', () => {
+      nav('rooms');
+      click('[data-action="room"][data-block-id="C"][data-room="18"]');
+      click('#modal [data-action="add-resident"]');
+      const dateInput = find('input[name="joined"]');
+      click('input[name="joined"]');
+      const calModal = find('#uz-calendar-modal');
+      assert.equal(calModal.open, true);
+      assert.ok(calModal.textContent.includes('Du'));
+      assert.ok(calModal.textContent.includes('Se'));
+      assert.ok(calModal.textContent.includes('Tanlash'));
+      assert.ok(calModal.textContent.includes('Bekor qilish'));
+      click('#uz-calendar-modal [data-cal-action="today"]');
+      assert.equal(calModal.open, false);
+      assert.equal(dateInput.value, today);
+      click('#modal [data-action="close-modal"]');
+    });
+
     await t.test('fresh app import restores saved residents, payments and expenses', async () => {
       const savedState = data();
       const second = createEnvironment([...env.storage]);
@@ -249,6 +291,17 @@ test('actual app DOM: navigation, payments, residents, expenses, date reports an
         assert.ok(second.document.querySelector(`[data-action="profile"][data-id="${residentId}"]`));
         assert.equal(second.document.querySelectorAll('#app img, #app [onerror]').length, 0);
       } finally { second.restore(); }
+    });
+
+    await t.test('clean database button is named Malumotlarni tozalash and resets records', () => {
+      click('[data-action="demo-info"]');
+      click('[data-action="clear-confirm"]');
+      assert.ok(find('#modal').textContent.includes('Ma’lumotlarni tozalash'));
+      click('[data-action="clear-database"]');
+      assert.equal(data().residents.length, 0);
+      assert.equal(data().payments.length, 0);
+      assert.equal(data().expenses.length, 0);
+      assert.equal(data().settings.monthlyRate, 700000);
     });
   } finally { env.restore(); }
 });

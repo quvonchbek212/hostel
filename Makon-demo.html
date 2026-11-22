@@ -8,8 +8,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>Makon — Yotoqxona boshqaruvi</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMiIgZmlsbD0iIzFkNGVkOCIvPjxwYXRoIGQ9Ik0zMCA5MlY0MmwzNC0xNSAzNCAxNXY1MEg3NVY2Mkg1M3YzMFoiIGZpbGw9IiNkYmVhZmUiLz48cGF0aCBkPSJNNDEgNDZoMTJ2OUg0MVptMzQgMGgxMnY5SDc1Wk00MSA2NGg3djExaC03Wm0zOSAwaDd2MTFoLTdaIiBmaWxsPSIjMWQ0ZWQ4Ii8+PHJlY3QgeD0iNTkiIHk9IjcyIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+Cg==">
-  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMiIgZmlsbD0iIzFkNGVkOCIvPjxwYXRoIGQ9Ik0zMCA5MlY0MmwzNC0xNSAzNCAxNXY1MEg3NVY2Mkg1M3YzMFoiIGZpbGw9IiNkYmVhZmUiLz48cGF0aCBkPSJNNDEgNDZoMTJ2OUg0MVptMzQgMGgxMnY5SDc1Wk00MSA2NGg3djExaC03Wm0zOSAwaDd2MTFoLTdaIiBmaWxsPSIjMWQ0ZWQ4Ii8+PHJlY3QgeD0iNTkiIHk9IjcyIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+Cg==">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMiIgZmlsbD0iIzFkNGVkOCIvPjxwYXRoIGQ9Ik0zMCA5MlY0MmwzNC0xNSAzNCAxNXY1MEg3NVY2Mkg1M3YzMFoiIGZpbGw9IiNkYmVhZmUiLz48cGF0aCBkPSJNNDEgNDZoMTJ2OUg0MVptMzQgMGgxMnY5SDc1Wk00MSA2NGg3djExaC03Wm0zOSAwaDd2MTFoLTdaIiBmaWxsPSIjMWQ0ZWQ4Ii8+PHJlY3QgeD0iNTkiIHk9IjcyIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+DQo=">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMiIgZmlsbD0iIzFkNGVkOCIvPjxwYXRoIGQ9Ik0zMCA5MlY0MmwzNC0xNSAzNCAxNXY1MEg3NVY2Mkg1M3YzMFoiIGZpbGw9IiNkYmVhZmUiLz48cGF0aCBkPSJNNDEgNDZoMTJ2OUg0MVptMzQgMGgxMnY5SDc1Wk00MSA2NGg3djExaC03Wm0zOSAwaDd2MTFoLTdaIiBmaWxsPSIjMWQ0ZWQ4Ii8+PHJlY3QgeD0iNTkiIHk9IjcyIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+DQo=">
   <style>
 
 
@@ -492,9 +492,302 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   .stat-card.featured { box-shadow: 0 5px 15px #153e751c; }
 }
 
+/* ==========================================================================
+   PIN LOCK SCREEN
+   ========================================================================== */
+.pin-lock-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: linear-gradient(135deg, #10243e 0%, #1e3a8a 50%, #0f172a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  backdrop-filter: blur(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+.pin-lock-screen.unlocked {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+  visibility: hidden;
+}
+.pin-card {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+.pin-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.pin-logo img {
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.pin-logo h2 {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin: 0;
+  color: #ffffff;
+}
+.pin-subtitle {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #93c5fd;
+  margin-top: 2px;
+}
+.pin-prompt {
+  font-size: 13px;
+  color: #e2e8f0;
+  margin-bottom: 18px;
+  font-weight: 500;
+}
+.pin-dots {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.pin-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  transition: all 0.2s ease;
+}
+.pin-dot.filled {
+  background: #38bdf8;
+  border-color: #38bdf8;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+  transform: scale(1.15);
+}
+.pin-dots.error .pin-dot {
+  border-color: #ef4444;
+  background: #ef4444;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.7);
+}
+.pin-dots.shake {
+  animation: pin-shake 0.4s ease;
+}
+@keyframes pin-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+.pin-error {
+  min-height: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f87171;
+  margin-bottom: 14px;
+}
+.pin-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+.pin-btn {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.pin-btn:active {
+  background: rgba(255, 255, 255, 0.28);
+  transform: scale(0.92);
+}
+.pin-btn.pin-empty {
+  visibility: hidden;
+}
+.pin-btn.pin-del {
+  font-size: 20px;
+  border-color: transparent;
+  background: transparent;
+  color: #94a3b8;
+}
+.pin-btn.pin-del:active {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.topbar-lock-button {
+  background: transparent;
+  border: 1px solid #dbe9fc;
+  border-radius: 8px;
+  color: #3b82f6;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.topbar-lock-button:hover {
+  background: #edf5ff;
+  border-color: #bfdbfe;
+}
+
+/* ==========================================================================
+   UZBEK CALENDAR MODAL
+   ========================================================================== */
+.uz-calendar-dialog {
+  padding: 0;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  max-width: 320px;
+  width: 90vw;
+  background: #ffffff;
+  color: #0f172a;
+}
+.uz-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #2563eb;
+  color: #ffffff;
+  border-radius: 16px 16px 0 0;
+}
+.uz-calendar-header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+.uz-cal-nav {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+}
+.uz-cal-nav:active {
+  background: rgba(255, 255, 255, 0.35);
+}
+.uz-calendar-body {
+  padding: 12px 14px 6px 14px;
+}
+.uz-weekdays-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+.uz-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+.uz-day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #1e293b;
+  cursor: pointer;
+}
+.uz-day-cell:hover:not(:disabled) {
+  background: #eff6ff;
+}
+.uz-day-cell.selected {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.4);
+}
+.uz-day-cell.today {
+  border: 1px solid #2563eb;
+  font-weight: 700;
+}
+.uz-day-cell:disabled {
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+.uz-calendar-footer {
+  display: flex;
+  gap: 8px;
+  padding: 10px 14px 14px 14px;
+  border-top: 1px solid #f1f5f9;
+}
+.uz-calendar-footer button {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
 </style>
 </head>
 <body data-theme="blue">
+  <div id="pin-lock-screen" class="pin-lock-screen">
+    <div class="pin-card">
+      <div class="pin-logo">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMiIgZmlsbD0iIzFkNGVkOCIvPjxwYXRoIGQ9Ik0zMCA5MlY0MmwzNC0xNSAzNCAxNXY1MEg3NVY2Mkg1M3YzMFoiIGZpbGw9IiNkYmVhZmUiLz48cGF0aCBkPSJNNDEgNDZoMTJ2OUg0MVptMzQgMGgxMnY5SDc1Wk00MSA2NGg3djExaC03Wm0zOSAwaDd2MTFoLTdaIiBmaWxsPSIjMWQ0ZWQ4Ii8+PHJlY3QgeD0iNTkiIHk9IjcyIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+DQo=" width="56" height="56" alt="Makon">
+        <h2>Makon</h2>
+        <p class="pin-subtitle">YOTOQXONA BOSHQARUVI</p>
+      </div>
+      <p class="pin-prompt">Ilovaga kirish uchun parolni kiriting</p>
+      <div class="pin-dots" id="pin-dots">
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+        <span class="pin-dot"></span>
+      </div>
+      <div class="pin-error" id="pin-error"></div>
+      <div class="pin-keypad">
+        <button type="button" class="pin-btn" data-pin="1">1</button>
+        <button type="button" class="pin-btn" data-pin="2">2</button>
+        <button type="button" class="pin-btn" data-pin="3">3</button>
+        <button type="button" class="pin-btn" data-pin="4">4</button>
+        <button type="button" class="pin-btn" data-pin="5">5</button>
+        <button type="button" class="pin-btn" data-pin="6">6</button>
+        <button type="button" class="pin-btn" data-pin="7">7</button>
+        <button type="button" class="pin-btn" data-pin="8">8</button>
+        <button type="button" class="pin-btn" data-pin="9">9</button>
+        <button type="button" class="pin-btn pin-empty" tabindex="-1"></button>
+        <button type="button" class="pin-btn" data-pin="0">0</button>
+        <button type="button" class="pin-btn pin-del" data-pin="delete" title="O‘chirish">⌫</button>
+      </div>
+    </div>
+  </div>
+
   <svg class="svg-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <symbol id="i-dashboard" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></symbol>
     <symbol id="i-rooms" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h1m4 0h1M9 11h1m4 0h1M10 21v-6h4v6"/></symbol>
@@ -505,9 +798,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
     <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></symbol>
   </svg>
   <aside class="sidebar" aria-label="Asosiy menyu">
-    <a class="brand" href="#dashboard" aria-label="Makon bosh sahifa"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMiIgZmlsbD0iIzFkNGVkOCIvPjxwYXRoIGQ9Ik0zMCA5MlY0MmwzNC0xNSAzNCAxNXY1MEg3NVY2Mkg1M3YzMFoiIGZpbGw9IiNkYmVhZmUiLz48cGF0aCBkPSJNNDEgNDZoMTJ2OUg0MVptMzQgMGgxMnY5SDc1Wk00MSA2NGg3djExaC03Wm0zOSAwaDd2MTFoLTdaIiBmaWxsPSIjMWQ0ZWQ4Ii8+PHJlY3QgeD0iNTkiIHk9IjcyIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+Cg==" width="39" height="39" alt=""><span>Makon<span class="brand-subtitle">YOTOQXONA BOSHQARUVI</span></span></a>
+    <a class="brand" href="#dashboard" aria-label="Makon bosh sahifa"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMiIgZmlsbD0iIzFkNGVkOCIvPjxwYXRoIGQ9Ik0zMCA5MlY0MmwzNC0xNSAzNCAxNXY1MEg3NVY2Mkg1M3YzMFoiIGZpbGw9IiNkYmVhZmUiLz48cGF0aCBkPSJNNDEgNDZoMTJ2OUg0MVptMzQgMGgxMnY5SDc1Wk00MSA2NGg3djExaC03Wm0zOSAwaDd2MTFoLTdaIiBmaWxsPSIjMWQ0ZWQ4Ii8+PHJlY3QgeD0iNTkiIHk9IjcyIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+DQo=" width="39" height="39" alt=""><span>Makon<span class="brand-subtitle">YOTOQXONA BOSHQARUVI</span></span></a>
     <div class="sidebar-label">ASOSIY MENYU</div>
     <nav class="side-nav">
       <button type="button" data-nav="dashboard" class="active"><svg class="icon"><use href="#i-dashboard"/></svg><span>Boshqaruv</span></button>
@@ -518,19 +813,20 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
       <button type="button" data-nav="expenses"><svg class="icon"><use href="#i-expenses"/></svg><span>Xarajatlar</span></button>
     </nav>
     <div class="sidebar-bottom">
-      <div class="tariff-card"><span class="tariff-icon"><svg class="icon"><use href="#i-bed"/></svg></span><p>Oylik to‘lov</p><strong>800 000 <small>so‘m</small></strong><div><span class="tiny-dot"></span>Har 30 kunda</div></div>
+      <div class="tariff-card"><span class="tariff-icon"><svg class="icon"><use href="#i-bed"/></svg></span><p>Oylik to‘lov</p><strong id="sidebar-tariff">800 000 <small>so‘m</small></strong><div><span class="tiny-dot"></span>Har 30 kunda</div></div>
       <button class="demo-note" data-action="demo-info"><span class="demo-pill">SOZLAMALAR</span><span>Tizim va zaxira</span><svg class="icon"><use href="#i-arrow"/></svg></button>
       <div class="sidebar-account"><div class="avatar sage">BK</div><div><strong>Boshqaruvchi</strong><small>Yotoqxona administratori</small></div></div>
     </div>
   </aside>
   <div class="workspace">
     <header class="topbar">
-      <a class="mobile-brand" href="#dashboard"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMiIgZmlsbD0iIzFkNGVkOCIvPjxwYXRoIGQ9Ik0zMCA5MlY0MmwzNC0xNSAzNCAxNXY1MEg3NVY2Mkg1M3YzMFoiIGZpbGw9IiNkYmVhZmUiLz48cGF0aCBkPSJNNDEgNDZoMTJ2OUg0MVptMzQgMGgxMnY5SDc1Wk00MSA2NGg3djExaC03Wm0zOSAwaDd2MTFoLTdaIiBmaWxsPSIjMWQ0ZWQ4Ii8+PHJlY3QgeD0iNTkiIHk9IjcyIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+Cg==" alt="" width="31" height="31"><span>Makon</span></a>
+      <a class="mobile-brand" href="#dashboard"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjgiIGhlaWdodD0iMTI4IiB2aWV3Qm94PSIwIDAgMTI4IDEyOCI+PHJlY3Qgd2lkdGg9IjEyOCIgaGVpZ2h0PSIxMjgiIHJ4PSIzMiIgZmlsbD0iIzFkNGVkOCIvPjxwYXRoIGQ9Ik0zMCA5MlY0MmwzNC0xNSAzNCAxNXY1MEg3NVY2Mkg1M3YzMFoiIGZpbGw9IiNkYmVhZmUiLz48cGF0aCBkPSJNNDEgNDZoMTJ2OUg0MVptMzQgMGgxMnY5SDc1Wk00MSA2NGg3djExaC03Wm0zOSAwaDd2MTFoLTdaIiBmaWxsPSIjMWQ0ZWQ4Ii8+PHJlY3QgeD0iNTkiIHk9IjcyIiB3aWR0aD0iMTAiIGhlaWdodD0iMjAiIHJ4PSIxIiBmaWxsPSIjZmZmIi8+PC9zdmc+DQo=" alt="" width="31" height="31"><span>Makon</span></a>
       <div class="breadcrumb"><span>Yotoqxona</span><svg class="icon"><use href="#i-arrow"/></svg><strong id="breadcrumb">Boshqaruv</strong></div>
       <div class="topbar-actions">
         <button class="top-search" type="button" data-action="global-search" aria-label="Bolani qidirish"><svg class="icon"><use href="#i-search"/></svg><span>Bolani qidirish...</span><kbd>⌕</kbd></button>
         <span id="top-date" class="top-date"></span>
         <button type="button" class="notification-button" data-action="notifications" aria-label="To‘lov eslatmalari"><svg class="icon"><use href="#i-bell"/></svg><span class="notification-dot"></span></button>
+        <button type="button" class="notification-button" data-action="lock-app" title="Ilovani qulflash" aria-label="Ilovani qulflash"><svg class="icon"><use href="#i-lock"/></svg></button>
         <div class="top-avatar" aria-label="Boshqaruvchi">BK</div>
         <button class="demo-pill mobile-demo" data-action="demo-info">SOZLAMALAR</button>
       </div>
@@ -547,6 +843,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
     <button data-nav="expenses"><svg class="icon"><use href="#i-expenses"/></svg><span>Xarajat</span></button>
   </nav>
   <dialog id="modal" class="modal"></dialog>
+  <dialog id="uz-calendar-modal" class="modal uz-calendar-dialog"></dialog>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script>
 (() => {
@@ -622,16 +919,17 @@ function roomOccupants(state, block, room) {
 // partial payments; they never reset the original arrival-based billing clock.
 function residentStatus(state, resident, today = todayISO()) {
   validDate(today);
+  const currentRate = state?.settings?.monthlyRate || resident.monthlyRate || RATE;
   const asOf = !resident.active && resident.leftAt && resident.leftAt < today ? resident.leftAt : today;
   const elapsed = daysBetween(resident.joined, asOf);
   const cycleNumber = elapsed < 0 ? 0 : Math.floor(elapsed / 30) + 1;
   const cycleStart = cycleNumber ? addDays(resident.joined, (cycleNumber - 1) * 30) : resident.joined;
-  const totalCharged = cycleNumber * RATE;
+  const totalCharged = cycleNumber * currentRate;
   const totalPaid = state.payments.filter(payment => payment.residentId === resident.id && payment.date <= today).reduce((sum, payment) => sum + payment.amount, 0);
   const owed = Math.max(0, totalCharged - totalPaid);
-  const paidThisCycle = cycleNumber ? Math.min(RATE, Math.max(0, totalPaid - (cycleNumber - 1) * RATE)) : 0;
+  const paidThisCycle = cycleNumber ? Math.min(currentRate, Math.max(0, totalPaid - (cycleNumber - 1) * currentRate)) : 0;
   // Advance payments cover future periods. Do not remind an already paid period.
-  const nextDue = resident.active ? addDays(resident.joined, Math.max(cycleNumber, Math.floor(totalPaid / RATE)) * 30) : null;
+  const nextDue = resident.active ? addDays(resident.joined, Math.max(cycleNumber, Math.floor(totalPaid / currentRate)) * 30) : null;
   const daysUntilDue = nextDue ? daysBetween(today, nextDue) : null;
   const status = owed > 0 ? 'debt' : resident.active && daysUntilDue >= 0 && daysUntilDue <= 5 ? 'soon' : 'paid';
   return { owed, totalCharged, totalPaid, cycleStart, nextDue, daysUntilDue, status, paidThisCycle, cycleNumber };
@@ -642,6 +940,7 @@ function residentStatus(state, resident, today = todayISO()) {
 function getSummary(state, from = `${todayISO().slice(0, 7)}-01`, to = todayISO(), today = todayISO()) {
   validDate(from); validDate(to); validDate(today);
   if (from > to) throw new Error('Boshlanish sanasi tugash sanasidan keyin bo‘lmasligi kerak.');
+  const currentRate = state?.settings?.monthlyRate || RATE;
   const inRange = item => item.date >= from && item.date <= to && item.date <= today;
   const collected = state.payments.filter(inRange).reduce((sum, payment) => sum + payment.amount, 0);
   const expenses = state.expenses.filter(inRange).reduce((sum, expense) => sum + expense.amount, 0);
@@ -655,7 +954,7 @@ function getSummary(state, from = `${todayISO().slice(0, 7)}-01`, to = todayISO(
     if (end < resident.joined) continue;
     const firstCycle = Math.max(0, Math.ceil(daysBetween(resident.joined, from) / 30));
     const lastCycle = Math.floor(daysBetween(resident.joined, end) / 30);
-    expected += Math.max(0, lastCycle - firstCycle + 1) * RATE;
+    expected += Math.max(0, lastCycle - firstCycle + 1) * currentRate;
   }
   const occupied = state.residents.filter(resident => resident.active).length;
   return { collected, expenses, profit: collected - expenses, owed, expected, occupied, vacant: CAPACITY - occupied, debtors, dueSoon };
@@ -680,6 +979,7 @@ function addResident(state, input, today = todayISO()) {
 
 function recordPayment(state, residentId, amount, method, date = todayISO()) {
   const resident = requireResident(state, residentId);
+  const currentRate = state?.settings?.monthlyRate || resident.monthlyRate || RATE;
   amount = amountValue(amount);
   notFuture(date, 'To‘lov sanasi');
   if (date < resident.joined) throw new Error('To‘lov sanasi kelgan sanadan oldin bo‘lmasligi kerak.');
@@ -695,7 +995,7 @@ function recordPayment(state, residentId, amount, method, date = todayISO()) {
   for (const checkpoint of checkpoints) {
     const status = residentStatus(state, resident, checkpoint);
     const wasActive = resident.active || resident.leftAt && checkpoint < resident.leftAt;
-    const allowed = Math.max(0, status.totalCharged + (wasActive ? RATE : 0) - status.totalPaid);
+    const allowed = Math.max(0, status.totalCharged + (wasActive ? currentRate : 0) - status.totalPaid);
     if (amount > allowed) throw new Error(resident.active ? 'Qarz va bir davr oldindan to‘lovdan ortiq summa kiritildi.' : 'Summa qolgan qarzdan oshmasligi kerak.');
   }
   const payment = { id: uid('p'), residentId, amount, date, method };
@@ -726,7 +1026,7 @@ function addExpense(state, input) {
 
 function seedData(today = todayISO()) {
   validDate(today);
-  const state = { version: 1, residents: [], payments: [], expenses: [] };
+  const state = { version: 1, residents: [], payments: [], expenses: [], settings: { monthlyRate: 800000, pin: '1234' } };
   const firstNames = ['Azizbek', 'Javohir', 'Muhammadali', 'Sardor', 'Diyorbek', 'Bekzod', 'Shahzod', 'Asadbek', 'Abdulaziz', 'Islom', 'Temur', 'Jasurbek', 'Oybek', 'Shoxrux', 'Bobur', 'Akmal', 'Murod', 'Sanjar', 'Alisher', 'Farrux', 'Davron', 'Ulug‘bek', 'Rustam', 'Kamron', 'Abbos', 'Miraziz', 'Jamshid', 'Bilol', 'Ibrohim', 'Nodir', 'Sherzod'];
   const lastNames = ['Karimov', 'Abdullayev', 'Rahimov', 'Tursunov', 'Ismoilov', 'Yusupov', 'Qodirov', 'Ergashev', 'Aliyev', 'Usmonov', 'Rasulov', 'Saidov', 'Nazarov', 'Mahmudov', 'Sobirov', 'Olimov', 'Jo‘rayev', 'Hamidov', 'Akbarov', 'Nabiyev', 'To‘xtayev', 'Sodiqov', 'Salimov'];
   let index = 0;
@@ -771,7 +1071,7 @@ function seedData(today = todayISO()) {
 }
 
 function emptyData() {
-  return { version: 1, residents: [], payments: [], expenses: [] };
+  return { version: 1, residents: [], payments: [], expenses: [], settings: { monthlyRate: 800000, pin: '1234' } };
 }
 
 function deletePayment(state, paymentId) {
@@ -793,6 +1093,291 @@ function validateState(data) {
     throw new Error('Ma’lumotlar tuzilishi yaroqsiz.');
   }
   return true;
+}
+
+// Pure JS ZIP Builder for standard uncompressed (.zip / .docx) packages
+function createZip(files) {
+  const fileRecords = [];
+  let offset = 0;
+  const parts = [];
+  const crcTable = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) {
+    let c = n;
+    for (let k = 0; k < 8; k++) c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
+    crcTable[n] = c >>> 0;
+  }
+  function calcCrc32(buf) {
+    let crc = 0xffffffff;
+    for (let i = 0; i < buf.length; i++) crc = (crc >>> 8) ^ crcTable[(crc ^ buf[i]) & 0xff];
+    return (crc ^ 0xffffffff) >>> 0;
+  }
+  const encoder = new TextEncoder();
+  for (const f of files) {
+    const data = typeof f.content === 'string' ? encoder.encode(f.content) : f.content;
+    const nameBytes = encoder.encode(f.name);
+    const crc = calcCrc32(data);
+    const size = data.length;
+    const header = new Uint8Array(30 + nameBytes.length);
+    const view = new DataView(header.buffer);
+    view.setUint32(0, 0x04034b50, true);
+    view.setUint16(4, 20, true);
+    view.setUint16(6, 0, true);
+    view.setUint16(8, 0, true);
+    view.setUint16(10, 0, true);
+    view.setUint16(12, 0, true);
+    view.setUint32(14, crc, true);
+    view.setUint32(18, size, true);
+    view.setUint32(22, size, true);
+    view.setUint16(26, nameBytes.length, true);
+    view.setUint16(28, 0, true);
+    header.set(nameBytes, 30);
+    fileRecords.push({ nameBytes, crc, size, offset });
+    parts.push(header, data);
+    offset += header.length + size;
+  }
+  const cdStart = offset;
+  let cdSize = 0;
+  for (const r of fileRecords) {
+    const cd = new Uint8Array(46 + r.nameBytes.length);
+    const view = new DataView(cd.buffer);
+    view.setUint32(0, 0x02014b50, true);
+    view.setUint16(4, 20, true);
+    view.setUint16(6, 20, true);
+    view.setUint16(8, 0, true);
+    view.setUint16(10, 0, true);
+    view.setUint16(12, 0, true);
+    view.setUint16(14, 0, true);
+    view.setUint32(16, r.crc, true);
+    view.setUint32(20, r.size, true);
+    view.setUint32(24, r.size, true);
+    view.setUint16(28, r.nameBytes.length, true);
+    view.setUint16(30, 0, true);
+    view.setUint16(32, 0, true);
+    view.setUint16(34, 0, true);
+    view.setUint16(36, 0, true);
+    view.setUint32(38, 0, true);
+    view.setUint32(42, r.offset, true);
+    cd.set(r.nameBytes, 46);
+    parts.push(cd);
+    cdSize += cd.length;
+  }
+  const eocd = new Uint8Array(22);
+  const view = new DataView(eocd.buffer);
+  view.setUint32(0, 0x06054b50, true);
+  view.setUint16(4, 0, true);
+  view.setUint16(6, 0, true);
+  view.setUint16(8, fileRecords.length, true);
+  view.setUint16(10, fileRecords.length, true);
+  view.setUint32(12, cdSize, true);
+  view.setUint32(16, cdStart, true);
+  view.setUint16(20, 0, true);
+  parts.push(eocd);
+  const totalLen = parts.reduce((acc, p) => acc + p.length, 0);
+  const result = new Uint8Array(totalLen);
+  let pos = 0;
+  for (const p of parts) {
+    result.set(p, pos);
+    pos += p.length;
+  }
+  return result;
+}
+
+function escapeXml(unsafe) {
+  return String(unsafe ?? '').replace(/[<>&'"]/g, c => {
+    switch (c) {
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '&': return '&amp;';
+      case '\'': return '&apos;';
+      case '"': return '&quot;';
+    }
+  });
+}
+
+function wText(text, { bold = false, size = 20, color = '000000', font = 'Calibri' } = {}) {
+  return `<w:r><w:rPr><w:rFonts w:ascii="${font}" w:hAnsi="${font}"/><w:sz w:val="${size}"/><w:color w:val="${color}"/>${bold ? '<w:b/>' : ''}</w:rPr><w:t xml:space="preserve">${escapeXml(text)}</w:t></w:r>`;
+}
+
+function wPara(runs, { align = 'left', spaceBefore = 60, spaceAfter = 60 } = {}) {
+  const runsXml = Array.isArray(runs) ? runs.join('') : runs;
+  return `<w:p><w:pPr><w:jc w:val="${align}"/><w:spacing w:before="${spaceBefore}" w:after="${spaceAfter}"/></w:pPr>${runsXml}</w:p>`;
+}
+
+function wCell(content, { bold = false, bg = '', align = 'left', color = '000000', size = 18 } = {}) {
+  const p = wPara(typeof content === 'string' ? wText(content, { bold, color, size }) : content, { align, spaceBefore: 30, spaceAfter: 30 });
+  const shd = bg ? `<w:shd w:val="clear" w:color="auto" w:fill="${bg}"/>` : '';
+  return `<w:tc><w:tcPr>${shd}<w:tcMar><w:top w:w="80" w:type="dxa"/><w:bottom w:w="80" w:type="dxa"/><w:left w:w="120" w:type="dxa"/><w:right w:w="120" w:type="dxa"/></w:tcMar></w:tcPr>${p}</w:tc>`;
+}
+
+function wRow(cells, isHeader = false) {
+  return `<w:tr>${isHeader ? '<w:trPr><w:tblHeader/></w:trPr>' : ''}${cells.join('')}</w:tr>`;
+}
+
+function wTable(rows) {
+  const borders = `<w:tblBorders>
+    <w:top w:val="single" w:sz="4" w:space="0" w:color="D1D5DB"/>
+    <w:left w:val="single" w:sz="4" w:space="0" w:color="D1D5DB"/>
+    <w:bottom w:val="single" w:sz="4" w:space="0" w:color="D1D5DB"/>
+    <w:right w:val="single" w:sz="4" w:space="0" w:color="D1D5DB"/>
+    <w:insideH w:val="single" w:sz="4" w:space="0" w:color="E5E7EB"/>
+    <w:insideV w:val="single" w:sz="4" w:space="0" w:color="E5E7EB"/>
+  </w:tblBorders>`;
+  return `<w:tbl><w:tblPr><w:tblW w:w="5000" w:type="pct"/>${borders}</w:tblPr>${rows.join('')}</w:tbl>`;
+}
+
+function fmtMoney(amount) {
+  return Number(amount || 0).toLocaleString('uz-UZ').replace(/,/g, ' ');
+}
+
+// Generates an OpenXML .docx Microsoft Word document buffer with all hostel details
+function generateDocxReport(state, today = todayISO()) {
+  const summary = getSummary(state, `${today.slice(0, 7)}-01`, today, today);
+  const totalPaid = state.payments.reduce((sum, p) => sum + p.amount, 0);
+  const totalExpenses = state.expenses.reduce((sum, e) => sum + e.amount, 0);
+  const netProfit = totalPaid - totalExpenses;
+  const occupiedCount = state.residents.filter(r => r.active).length;
+
+  const body = [];
+
+  // Title
+  body.push(wPara(wText('«MAKON» YOTOQXONA BOSHQARUVI — TO‘LIQ HISOBOT', { bold: true, size: 28, color: '1E3A8A' }), { align: 'center', spaceBefore: 120, spaceAfter: 60 }));
+  body.push(wPara(wText(`Hisobot sanasi: ${today} yil | Jami bolalar: ${state.residents.length} nafar`, { size: 18, color: '6B7280' }), { align: 'center', spaceBefore: 0, spaceAfter: 180 }));
+
+  // Section 1: Financial & Hostel Summary
+  body.push(wPara(wText('1. MOLIYAVIY VA XO‘JALIK XULOSASI', { bold: true, size: 22, color: '1E40AF' }), { spaceBefore: 140, spaceAfter: 60 }));
+  const summaryRows = [
+    wRow([wCell('Ko‘rsatkich nomi', { bold: true, bg: '2563EB', color: 'FFFFFF' }), wCell('Qiymat', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'right' })], true),
+    wRow([wCell('Jami yig‘ilgan to‘lovlar'), wCell(`${fmtMoney(totalPaid)} so‘m`, { bold: true, align: 'right', color: '16A34A' })]),
+    wRow([wCell('Jami xarajatlar'), wCell(`${fmtMoney(totalExpenses)} so‘m`, { bold: true, align: 'right', color: 'DC2626' })]),
+    wRow([wCell('Sof foyda (Tushum − Xarajat)', { bold: true, bg: 'F3F4F6' }), wCell(`${fmtMoney(netProfit)} so‘m`, { bold: true, align: 'right', bg: 'F3F4F6', color: netProfit >= 0 ? '16A34A' : 'DC2626' })]),
+    wRow([wCell('Kutilayotgan qarzlar miqdori'), wCell(`${fmtMoney(summary.owed)} so‘m (${summary.debtors} ta qarzdor bola)`, { bold: true, align: 'right', color: summary.owed > 0 ? 'B91C1C' : '4B5563' })]),
+    wRow([wCell('Band o‘rinlar'), wCell(`${occupiedCount} ta o‘rin`, { align: 'right' })]),
+    wRow([wCell('Bo‘sh o‘rinlar'), wCell(`${CAPACITY - occupiedCount} ta o‘rin (jami 184)`, { align: 'right' })])
+  ];
+  body.push(wTable(summaryRows));
+
+  // Section 2: Residents List
+  body.push(wPara(wText(`2. BOLALAR RO‘YXATI (${state.residents.length} nafar)`, { bold: true, size: 22, color: '1E40AF' }), { spaceBefore: 180, spaceAfter: 60 }));
+  const residentRows = [
+    wRow([
+      wCell('T/r', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('F.I.Sh', { bold: true, bg: '2563EB', color: 'FFFFFF', size: 16 }),
+      wCell('Xona', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Telefon', { bold: true, bg: '2563EB', color: 'FFFFFF', size: 16 }),
+      wCell('Kelgan sana', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Holati', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('To‘langan', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'right', size: 16 }),
+      wCell('Qarz', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'right', size: 16 })
+    ], true)
+  ];
+
+  if (!state.residents.length) {
+    residentRows.push(wRow([wCell('Hozircha bolalar kiritilmagan.', { align: 'center', color: '6B7280' })]));
+  } else {
+    state.residents.forEach((r, idx) => {
+      const st = residentStatus(state, r, today);
+      const bg = idx % 2 === 1 ? 'F9FAFB' : '';
+      residentRows.push(wRow([
+        wCell(String(idx + 1), { align: 'center', bg, size: 16 }),
+        wCell(`${r.lastName} ${r.firstName}`, { bold: true, bg, size: 16 }),
+        wCell(`${r.block}-${r.room}`, { align: 'center', bg, size: 16 }),
+        wCell(r.phone || '', { bg, size: 16 }),
+        wCell(r.joined || '', { align: 'center', bg, size: 16 }),
+        wCell(r.active ? 'Faol' : 'Ketgan', { align: 'center', bg, size: 16, color: r.active ? '16A34A' : '6B7280' }),
+        wCell(`${fmtMoney(st.totalPaid)} so‘m`, { align: 'right', bg, size: 16 }),
+        wCell(`${fmtMoney(st.owed)} so‘m`, { align: 'right', bg, size: 16, bold: st.owed > 0, color: st.owed > 0 ? 'DC2626' : '000000' })
+      ]));
+    });
+  }
+  body.push(wTable(residentRows));
+
+  // Section 3: Payments History
+  body.push(wPara(wText(`3. TO‘LOVLAR TARIXI (${state.payments.length} ta amaliyot)`, { bold: true, size: 22, color: '1E40AF' }), { spaceBefore: 180, spaceAfter: 60 }));
+  const paymentRows = [
+    wRow([
+      wCell('T/r', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Sana', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Bola ismi', { bold: true, bg: '2563EB', color: 'FFFFFF', size: 16 }),
+      wCell('Summa', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'right', size: 16 }),
+      wCell('To‘lov turi', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 })
+    ], true)
+  ];
+
+  if (!state.payments.length) {
+    paymentRows.push(wRow([wCell('Hozircha to‘lovlar yo‘q.', { align: 'center', color: '6B7280' })]));
+  } else {
+    // Show newest first
+    const sortedPayments = [...state.payments].sort((a, b) => b.date.localeCompare(a.date));
+    sortedPayments.forEach((p, idx) => {
+      const resident = state.residents.find(r => r.id === p.residentId);
+      const name = resident ? `${resident.lastName} ${resident.firstName}` : 'Noma’lum';
+      const bg = idx % 2 === 1 ? 'F9FAFB' : '';
+      paymentRows.push(wRow([
+        wCell(String(idx + 1), { align: 'center', bg, size: 16 }),
+        wCell(p.date, { align: 'center', bg, size: 16 }),
+        wCell(name, { bold: true, bg, size: 16 }),
+        wCell(`+${fmtMoney(p.amount)} so‘m`, { align: 'right', bg, size: 16, bold: true, color: '16A34A' }),
+        wCell(p.method === 'card' ? 'Karta' : 'Naqd pul', { align: 'center', bg, size: 16 })
+      ]));
+    });
+  }
+  body.push(wTable(paymentRows));
+
+  // Section 4: Expenses History
+  body.push(wPara(wText(`4. XARAJATLAR RO‘YXATI (${state.expenses.length} ta)`, { bold: true, size: 22, color: '1E40AF' }), { spaceBefore: 180, spaceAfter: 60 }));
+  const catNames = { utilities: 'Kommunal', tax: 'Soliq', other: 'Xo‘jalik / Boshqa' };
+  const expenseRows = [
+    wRow([
+      wCell('T/r', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Sana', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Xarajat nomi', { bold: true, bg: '2563EB', color: 'FFFFFF', size: 16 }),
+      wCell('Kategoriya', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'center', size: 16 }),
+      wCell('Summa', { bold: true, bg: '2563EB', color: 'FFFFFF', align: 'right', size: 16 })
+    ], true)
+  ];
+
+  if (!state.expenses.length) {
+    expenseRows.push(wRow([wCell('Hozircha xarajatlar yo‘q.', { align: 'center', color: '6B7280' })]));
+  } else {
+    const sortedExpenses = [...state.expenses].sort((a, b) => b.date.localeCompare(a.date));
+    sortedExpenses.forEach((e, idx) => {
+      const bg = idx % 2 === 1 ? 'F9FAFB' : '';
+      expenseRows.push(wRow([
+        wCell(String(idx + 1), { align: 'center', bg, size: 16 }),
+        wCell(e.date, { align: 'center', bg, size: 16 }),
+        wCell(e.name, { bold: true, bg, size: 16 }),
+        wCell(catNames[e.category] || e.category, { align: 'center', bg, size: 16 }),
+        wCell(`−${fmtMoney(e.amount)} so‘m`, { align: 'right', bg, size: 16, bold: true, color: 'DC2626' })
+      ]));
+    });
+  }
+  body.push(wTable(expenseRows));
+
+  const docXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:body>
+    ${body.join('')}
+    <w:sectPr/>
+  </w:body>
+</w:document>`;
+
+  const contentTypes = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+</Types>`;
+
+  const rels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>`;
+
+  return createZip([
+    { name: '[Content_Types].xml', content: contentTypes },
+    { name: '_rels/.rels', content: rels },
+    { name: 'word/document.xml', content: docXml }
+  ]);
 }
 
 const STORAGE_KEY = 'makon.hostel.v2';
@@ -821,6 +1406,8 @@ const svgPaths = {
   logout:'M9 21H4V3h5m7 14 5-5-5-5m5 5H9', info:'M12 11v6m0-10h.01M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0',
   bolt:'m13 2-9 12h7l-1 8 10-12h-7l1-8', tax:'m3 10 9-7 9 7M4 10h16M5 10v9m7-9v9m7-9v9M3 21h18', box:'m12 3 9 5v9l-9 5-9-5V8l9-5m-9 5 9 5 9-5m-9 5v9',
   card:'M2 8h20M4 3h16a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m2 12h4',
+  lock:'M19 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2m-3 0V7a4 4 0 0 0-8 0v4',
+  send:'M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z'
 };
 const icon = (name, cls = '') => `<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${svgPaths[name] || svgPaths.building}"/></svg>`;
 
@@ -830,235 +1417,283 @@ try {
   const saved = localStorage.getItem(STORAGE_KEY);
   state = saved ? JSON.parse(saved) : (globalThis.__FORCE_SEED__ ? seedData() : emptyData());
   if (state.version !== 1 || !Array.isArray(state.residents) || !Array.isArray(state.payments) || !Array.isArray(state.expenses)) throw new Error('invalid');
+  if (!state.settings) state.settings = { monthlyRate: RATE, pin: '1234' };
+  if (!state.settings.monthlyRate) state.settings.monthlyRate = RATE;
+  if (!state.settings.pin) state.settings.pin = '1234';
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 } catch {
   state = globalThis.__FORCE_SEED__ ? seedData() : emptyData();
+  if (!state.settings) state.settings = { monthlyRate: RATE, pin: '1234' };
   storageAvailable = false;
 }
 let page = Object.keys(names).includes(location.hash.slice(1)) ? location.hash.slice(1) : 'dashboard';
 let selectedPeriod = 'last30';
 let customFrom = addDays(todayISO(), -29), customTo = todayISO();
-let query = '', blockFilter = 'all', statusFilter = 'all', categoryFilter = 'all';
-let toastTimer;
+let blockFilter = 'all', statusFilter = 'all', categoryFilter = 'all', query = '';
 
-function dateRange() {
-  const today = todayISO(), [year,month] = today.split('-').map(Number);
-  if (selectedPeriod === 'month') return {from:`${year}-${String(month).padStart(2,'0')}-01`,to:today};
-  if (selectedPeriod === 'previous') {
-    const end = addDays(`${year}-${String(month).padStart(2,'0')}-01`, -1);
-    return {from:`${end.slice(0,7)}-01`,to:end};
+const statusOf = (r) => residentStatus(state, r, todayISO());
+
+function mutate(action, successMessage) {
+  try {
+    action(state);
+    if (storageAvailable) localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    closeModal();
+    render();
+    if (successMessage) toast(successMessage);
+  } catch (error) {
+    const errorField = $('#form-error');
+    if (errorField) {
+      errorField.hidden = false;
+      errorField.textContent = error.message || 'Xatolik yuz berdi.';
+    } else {
+      toast(error.message || 'Xatolik yuz berdi.');
+    }
   }
-  if (selectedPeriod === 'year') return {from:`${year}-01-01`,to:today};
-  if (selectedPeriod === 'custom') return {from:customFrom,to:customTo};
-  return {from:addDays(today,-29),to:today};
-}
-let statusCache = new Map();
-let statusDate = todayISO();
-const statusOf = (resident) => {
-  if (!statusCache.has(resident.id)) statusCache.set(resident.id, residentStatus(state, resident, statusDate));
-  return statusCache.get(resident.id);
-};
-function statusBadge(r) {
-  const s = statusOf(r);
-  if (s.owed > 0) return `<span class="badge debt"><span></span>Qarzdor</span>`;
-  if (!r.active) return '<span class="badge neutral">Ketgan</span>';
-  if (s.status === 'soon') return `<span class="badge soon">${s.daysUntilDue} kun qoldi</span>`;
-  return '<span class="badge paid"><span></span>To‘langan</span>';
-}
-function periodControl() {
-  const opts = [['last30','Oxirgi 30 kun'],['month','Shu oy'],['previous','O‘tgan oy'],['year','Shu yil'],['custom','Sana tanlash']];
-  return `<label class="period-select">${icon('calendar')}<select id="period" aria-label="Hisobot davri">${opts.map(([value,text])=>`<option value="${value}" ${selectedPeriod===value?'selected':''}>${text}</option>`).join('')}</select></label>`;
-}
-function heading(title, subtitle, actions='') {
-  return `<div class="page-heading"><div><div class="eyebrow">MAKON · YOTOQXONA</div><h1>${title}</h1><p>${subtitle}</p></div><div class="heading-actions">${actions}</div></div>`;
-}
-const addButton = (action, label) => `<button class="btn primary" data-action="${action}">${icon('plus')}<span>${label}</span></button>`;
-const empty = (title, description, name='search') => `<div class="empty-state">${icon(name)}<h3>${title}</h3><p>${description}</p></div>`;
-function toast(message) {
-  clearTimeout(toastTimer);
-  $('#toast').innerHTML = `${icon('check')}<span>${escapeHTML(message)}</span>`;
-  $('#toast').classList.add('visible');
-  toastTimer = setTimeout(()=>$('#toast').classList.remove('visible'),3500);
-}
-function mutate(fn, success) {
-  const next = structuredClone(state);
-  const result = fn(next);
-  if (storageAvailable) localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
-  state = next;
-  closeModal();
-  render();
-  toast(success);
-  return result;
-}
-function go(next) {
-  page = next;
-  query = ''; blockFilter = 'all'; statusFilter = 'all'; categoryFilter = 'all';
-  try { history.replaceState(null,'',`#${page}`); } catch { /* Some phone file viewers disallow changing history. */ }
-  closeModal();
-  render();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-function render() {
-  statusDate = todayISO();
-  statusCache.clear();
-  const summary = getSummary(state,dateRange().from,dateRange().to,todayISO());
-  document.querySelectorAll('[data-nav]').forEach(el=>{el.classList.toggle('active',el.dataset.nav===page);if(el.dataset.nav===page)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current');});
-  $('#breadcrumb').textContent = names[page];
-  if ($('#nav-debtors')) $('#nav-debtors').textContent = summary.debtors;
-  if ($('#nav-vacancies')) $('#nav-vacancies').textContent = summary.vacant;
-  if ($('#top-date')) { const [y,m,d]=todayISO().split('-').map(Number); $('#top-date').textContent=`${d} ${monthNames[m-1]}, ${y}`; }
-  document.title = `${names[page]} · Makon`;
-  const views = {dashboard:renderDashboard,rooms:()=>renderRooms(false),vacancies:()=>renderRooms(true),residents:()=>renderResidents(false),debtors:()=>renderResidents(true),expenses:renderExpenses};
-  $('#app').innerHTML = views[page](summary);
-}
-function statCard(label,value,foot,name,featured=false) {
-  return `<div class="stat-card ${featured?'featured':''}"><div class="stat-label">${label}<span class="stat-icon">${icon(name)}</span></div><div class="stat-value">${money(value)} <small>so‘m</small></div><div class="stat-foot">${featured?'<span class="trend">'+icon('arrow')+'</span>':''}${foot}</div></div>`;
-}
-function chartMarkup() {
-  const {from,to}=dateRange(), totalDays=daysBetween(from,to)+1;
-  const count=Math.min(7,totalDays), buckets=[];
-  for(let i=0;i<count;i++) {
-    const start=addDays(from,Math.floor(totalDays*i/count)), end=addDays(from,Math.floor(totalDays*(i+1)/count)-1);
-    const income=state.payments.filter(p=>p.date>=start&&p.date<=end).reduce((sum,p)=>sum+p.amount,0);
-    const expense=state.expenses.filter(p=>p.date>=start&&p.date<=end).reduce((sum,p)=>sum+p.amount,0);
-    buckets.push({start,end,income,expense});
-  }
-  const max=Math.max(1,...buckets.flatMap(b=>[b.income,b.expense]));
-  return `<div class="chart-axis"><span>${compact(max)}</span><span>${compact(max/2)}</span><span>0</span></div><div class="bar-chart" role="img" aria-label="Tanlangan davrdagi tushum va xarajatlar diagrammasi">${buckets.map(b=>`<div class="chart-column"><div class="chart-bars" tabindex="0" aria-label="${fmtDate(b.start)} – ${fmtDate(b.end)}: tushum ${money(b.income)}, xarajat ${money(b.expense)} so‘m" title="${fmtDate(b.start)} – ${fmtDate(b.end)}&#10;Tushum: ${money(b.income)} so‘m&#10;Xarajat: ${money(b.expense)} so‘m"><div class="bar income" style="height:${Math.max(b.income?3:0,b.income/max*100)}%"></div><div class="bar expense" style="height:${Math.max(b.expense?3:0,b.expense/max*100)}%"></div></div><span class="chart-label">${fmtDate(b.start)}</span></div>`).join('')}</div>`;
-}
-function personRow(r, action='pay') {
-  const s=statusOf(r);
-  return `<div class="person-row"><button class="avatar ${s.owed?'amber':'sage'}" data-action="profile" data-id="${r.id}" aria-label="${escapeHTML(fullName(r))} ma’lumotlari">${initials(r)}</button><button class="person-info" data-action="profile" data-id="${r.id}"><span class="person-name">${escapeHTML(fullName(r))}</span><span class="person-meta">${roomName(r)}${!r.active?' · Ketgan':''}</span></button><div class="person-amount"><strong>${money(s.owed || RATE)} <small>so‘m</small></strong><span class="${s.owed?'red-text':'muted'}">${s.owed?'Qolgan qarz':`${s.daysUntilDue} kundan so‘ng`}</span></div><button class="btn ${s.owed?'secondary':'ghost'} small" data-action="${action}" data-id="${r.id}" aria-label="${escapeHTML(fullName(r))} uchun to‘lov">To‘lov ${icon('right')}</button></div>`;
-}
-function renderDashboard(s) {
-  const {from,to}=dateRange();
-  const debtList=state.residents.filter(r=>statusOf(r).owed>0).sort((a,b)=>statusOf(b).owed-statusOf(a).owed);
-  const soonList=state.residents.filter(r=>r.active&&statusOf(r).status==='soon').sort((a,b)=>statusOf(a).daysUntilDue-statusOf(b).daysUntilDue);
-  const activities=state.payments.filter(p=>p.date>=from&&p.date<=to).map(p=>({...p,type:'payment'})).concat(state.expenses.filter(e=>e.date>=from&&e.date<=to).map(e=>({...e,type:'expense'}))).sort((a,b)=>b.date.localeCompare(a.date)||b.id.localeCompare(a.id)).slice(0,5);
-  const pct=Math.round(s.occupied/CAPACITY*100);
-  return heading('Hammasi nazorat ostida.', 'Yotoqxonangizdagi bugungi holat va moliyaviy natijalar.',`${periodControl()}${addButton('payment-picker','To‘lov qabul qilish')}`)+
-  `<div class="stats-grid">${statCard('Yig‘ilgan to‘lov',s.collected,`${fmtDate(from)} – ${fmtDate(to)} oralig‘ida`,'wallet',true)}${statCard('Qolgan qarz',s.owed,`<span class="red-text">${s.debtors} ta boladan</span> olinishi kerak`,'clock')}${statCard('Jami xarajat',s.expenses,'Tanlangan davr uchun','receipt')}${statCard('Sof foyda',s.profit,'Tushum − xarajat','chart')}</div>
-  <div class="dashboard-grid"><section class="card finance-card"><div class="card-header"><div><h2 class="card-title">Moliyaviy holat</h2><p class="card-subtitle">${fmtDate(from,true)} — ${fmtDate(to,true)}</p></div><div class="legend"><span><i class="legend-dot green"></i>Tushum</span><span><i class="legend-dot pale"></i>Xarajat</span></div></div><div class="card-body"><div class="chart-total">${money(s.collected)} <small>so‘m</small><span>jami tushum</span></div><div class="chart-container">${chartMarkup()}</div></div></section>
-  <section class="card"><div class="card-header"><div><h2 class="card-title">Yotoqxona bandligi</h2><p class="card-subtitle">3 ta blok · 46 ta xona · 184 ta o‘rin</p></div><span class="stat-icon">${icon('building')}</span></div><div class="card-body occupancy-body"><div class="occupancy-total"><div class="occupancy-ring" style="--fill:${pct}%"><div class="occupancy-center"><strong>${pct}%</strong><span>band</span></div></div><div class="occupancy-key"><div><i class="legend-dot green"></i><span>Band o‘rinlar</span><strong>${s.occupied}</strong></div><div><i class="legend-dot pale"></i><span>Bo‘sh o‘rinlar</span><strong>${s.vacant}</strong></div><button class="section-link" data-nav="vacancies">Bo‘sh joylarni ko‘rish ${icon('right')}</button></div></div>${BLOCKS.map(b=>{const count=state.residents.filter(r=>r.active&&r.block===b.id).length;return `<div class="occupancy-block"><div class="block-row"><span><b>${b.id}</b> blok</span><span><strong>${count}</strong> / ${b.rooms*4} o‘rin</span></div><div class="progress-track"><div class="progress-fill" style="width:${count/(b.rooms*4)*100}%"></div></div></div>`;}).join('')}</div></section></div>
-  <div class="dashboard-grid payments-grid"><section class="card"><div class="card-header"><div><h2 class="card-title">To‘lov kutilmoqda <span class="count-pill">${s.debtors+s.dueSoon}</span></h2><p class="card-subtitle">Qarzdorlar va to‘loviga 5 kun qolgan bolalar</p></div><button class="section-link" data-nav="debtors">Barchasi ${icon('right')}</button></div><div class="payment-list">${[...debtList.slice(0,3),...soonList.slice(0,2)].map(r=>personRow(r)).join('')||empty('To‘lovlar joyida','Hozircha qarzdorlar va yaqin to‘lovlar yo‘q.','check')}</div>${s.dueSoon?`<button class="upcoming-note" data-action="notifications">${icon('clock')}<span><strong>${s.dueSoon} ta bolaning</strong> navbatdagi to‘lovi yaqinlashmoqda</span>${icon('right')}</button>`:''}</section>
-  <section class="card"><div class="card-header"><div><h2 class="card-title">So‘nggi amaliyotlar</h2><p class="card-subtitle">Tanlangan davrdagi kirim va chiqimlar</p></div><span class="stat-icon">${icon('receipt')}</span></div><div class="activity-list">${activities.map(p=>{const r=state.residents.find(r=>r.id===p.residentId);const cancelBtn=p.type==='payment'?`<button type="button" class="btn ghost small" data-action="delete-payment-confirm" data-id="${p.id}" data-resident-id="${p.residentId}" style="padding:3px 8px;font-size:10px;color:#dc2626;border-color:#fecaca;margin-left:8px;" title="To‘lovni bekor qilish">${icon('close')} Bekor qilish</button>`:`<button type="button" class="btn ghost small" data-action="delete-expense-confirm" data-id="${p.id}" style="padding:3px 8px;font-size:10px;color:#dc2626;border-color:#fecaca;margin-left:8px;" title="Xarajatni bekor qilish">${icon('close')} Bekor qilish</button>`;return `<div class="activity-item"><div class="activity-icon ${p.type==='payment'?'income':'outgoing'}">${icon(p.type==='payment'?'wallet':'receipt')}</div><div class="activity-details"><strong>${escapeHTML(p.type==='payment'?(r?fullName(r):'To‘lov'):p.name)}</strong><span>${p.type==='payment'?'To‘lov qabul qilindi':categoryName(p.category)} · ${fmtDate(p.date)}</span></div><div style="display:flex;align-items:center;"><div class="activity-amount ${p.type==='payment'?'green-text':''}">${p.type==='payment'?'+':'−'}${money(p.amount)}<small>so‘m</small></div>${cancelBtn}</div></div>`;}).join('')||empty('Amaliyotlar yo‘q','Bu davrda to‘lov yoki xarajat kiritilmagan.','receipt')}</div><div class="list-footer">${icon('info')} Barcha summalar O‘zbekiston so‘mida</div></section></div>
-  <div class="settings-note">${icon('info')} Barcha hisob-kitoblar telefoningiz xotirasida xavfsiz saqlanadi. <button data-action="demo-info">Sozlamalar va Zaxira</button></div>`;
-}
-function blockTabs() {
-  return `<div class="segmented" role="group" aria-label="Blokni tanlash">${[['all','Barcha bloklar'],...BLOCKS.map(b=>[b.id,`${b.id} blok`])].map(([v,l])=>`<button data-block="${v}" class="${blockFilter===v?'active':''}" aria-pressed="${blockFilter===v}">${l}</button>`).join('')}</div>`;
-}
-function renderRooms(vacancies) {
-  const all=roomList();
-  const selected=all.filter(r=>(blockFilter==='all'||r.block===blockFilter)&&(!vacancies||roomOccupants(state,r.block,r.room).length<4));
-  const occupied=state.residents.filter(r=>r.active).length;
-  const totalEmptyRooms=all.filter(r=>roomOccupants(state,r.block,r.room).length===0).length;
-  return heading(vacancies?'Yangi bolalar uchun joy bor.':'Har bir xona, bir joyda.',vacancies?'Bo‘sh o‘rinni tanlang va yangi bolani joylashtiring.':'Bloklar, xonalar va ularda yashayotgan bolalar.',addButton('add-resident','Bola qo‘shish'))+
-  `<div class="summary-strip"><div class="summary-item">${icon('building')}<div><span>Jami xonalar</span><strong>46 <small>ta</small></strong></div></div><div class="summary-item">${icon('users')}<div><span>Band o‘rinlar</span><strong>${occupied} <small>ta</small></strong></div></div><div class="summary-item">${icon('bed')}<div><span>Bo‘sh o‘rinlar</span><strong class="green-text">${CAPACITY-occupied} <small>ta</small></strong></div></div><div class="summary-item">${icon('building')}<div><span>To‘liq bo‘sh xona</span><strong>${totalEmptyRooms} <small>ta</small></strong></div></div></div><div class="toolbar">${blockTabs()}<span class="muted">${selected.length} ta xona</span></div><div class="room-grid">${selected.map(r=>{const people=roomOccupants(state,r.block,r.room),hasDebt=people.some(p=>statusOf(p).owed>0);return `<button class="room-card ${people.length<4?'has-vacancy':''}" data-action="room" data-block-id="${r.block}" data-room="${r.room}" aria-label="${r.block} blok ${r.room}-xona, ${4-people.length} ta bo‘sh o‘rin"><div class="room-card-top"><span class="room-number">${r.room.toString().padStart(2,'0')} <small>xona</small></span><span class="badge neutral">${r.block} blok</span></div><div class="room-beds">${Array.from({length:4},(_,i)=>`<span class="room-bed ${people[i]?'occupied':''}" title="${people[i]?escapeHTML(fullName(people[i])):'Bo‘sh o‘rin'}">${icon('bed')}</span>`).join('')}</div><div class="room-card-bottom"><span class="${people.length<4?'green-text':'muted'}">${people.length===4?'To‘liq band':`${4-people.length} ta bo‘sh joy`}</span><span>${hasDebt?'<i class="debt-dot" title="Qarzdor bor"></i>':''}${people.length}/4 ${icon('right')}</span></div></button>`;}).join('')||empty('Bo‘sh joy yo‘q','Bu blokdagi barcha o‘rinlar band.','bed')}</div><div class="settings-note">${icon('info')} Har bir blokda xona raqamlari 1 dan boshlanadi. Har bir xonada 4 ta o‘rin.</div>`;
-}
-function matchResident(r) {
-  const term=query.trim().toLowerCase();
-  return residentMatches(r,term);
-}
-function residentMatches(r,term) {
-  const digits=term.replace(/\D/g,'');
-  const isPhone=digits.length>0&&!/[^\d\s()+-]/.test(term);
-  return !term||`${fullName(r)} ${r.lastName} ${r.phone} ${r.block}-${r.room}`.toLowerCase().includes(term)||(isPhone&&r.phone.replace(/\D/g,'').includes(digits));
-}
-function renderResidents(debtors) {
-  const base=state.residents.filter(r=>debtors?statusOf(r).owed>0:statusFilter==='inactive'?!r.active:r.active);
-  const people=base.filter(r=>(blockFilter==='all'||r.block===blockFilter)&&matchResident(r)&&(debtors||['all','inactive'].includes(statusFilter)||statusOf(r).status===statusFilter)).sort((a,b)=>debtors?statusOf(b).owed-statusOf(a).owed:fullName(a).localeCompare(fullName(b)));
-  const sumOwed=state.residents.reduce((a,r)=>a+statusOf(r).owed,0), countOwed=state.residents.filter(r=>statusOf(r).owed>0).length;
-  return heading(debtors?'Qarzlar ham nazoratda.':'Bolalar ro‘yxati',debtors?'Qarzdor bolalarni toping, to‘lovni kiriting va qarzni yoping.':`${state.residents.filter(r=>r.active).length} ta bola · Barcha ma’lumotlar bir joyda`,debtors?addButton('payment-picker','To‘lov qabul qilish'):addButton('add-resident','Bola qo‘shish'))+
-  (debtors?`<div class="debt-overview"><div><span>Jami olinishi kerak</span><strong>${money(sumOwed)} <small>so‘m</small></strong></div><div class="debt-overview-count">${icon('users')}<strong>${countOwed}</strong><span>ta qarzdor bola</span></div><div class="debt-overview-note">${icon('info')}Qisman to‘lovdan qolgan summa<br>qarz sifatida saqlanadi.</div></div>`:'')+
-  `<section class="card"><div class="toolbar table-toolbar"><label class="search-field">${icon('search')}<input id="resident-query" type="search" placeholder="Ism, familiya yoki telefon..." value="${escapeHTML(query)}" aria-label="Bolani qidirish"></label><div class="filter-group"><select id="block-filter" class="filter-select" aria-label="Blok bo‘yicha saralash"><option value="all">Barcha bloklar</option>${BLOCKS.map(b=>`<option value="${b.id}" ${blockFilter===b.id?'selected':''}>${b.id} blok</option>`).join('')}</select>${debtors?'':`<select id="status-filter" class="filter-select" aria-label="To‘lov holati"><option value="all">Barcha holatlar</option>${[['paid','To‘langan'],['debt','Qarzdor'],['soon','To‘lovi yaqin'],['inactive','Ketgan bolalar']].map(([v,t])=>`<option value="${v}" ${statusFilter===v?'selected':''}>${t}</option>`).join('')}</select>`}</div></div><div class="table-wrap"><table class="data-table"><thead><tr><th class="hide-mobile">№</th><th>Ism, familiya</th><th class="hide-mobile">Telefon raqami</th><th class="hide-mobile">Xonasi</th><th>${debtors?'Qolgan qarz':'Holati'}</th><th class="hide-mobile">${debtors?'To‘lov muddati':'Keyingi to‘lov'}</th><th class="hide-mobile">Kelgan sana</th><th><span class="sr-only">Amallar</span></th></tr></thead><tbody>${people.map((r,i)=>{const s=statusOf(r);return `<tr><td class="hide-mobile muted">${String(i+1).padStart(2,'0')}</td><td><button class="table-person" data-action="profile" data-id="${r.id}"><span class="avatar ${s.owed?'amber':'sage'}">${initials(r)}</span><span><strong>${escapeHTML(fullName(r))}</strong><small>${roomName(r)}${!r.active?' · Ketgan':''}</small></span></button></td><td class="hide-mobile"><a class="phone-link" href="tel:${escapeHTML(r.phone.replace(/\s/g,''))}">${escapeHTML(r.phone)}</a></td><td class="hide-mobile"><span class="room-tag">${r.block}-${String(r.room).padStart(2,'0')}</span></td><td>${debtors?`<strong class="red-text">${money(s.owed)}</strong><small class="cell-sub">so‘m</small>`:statusBadge(r)}</td><td class="hide-mobile">${fmtDate(s.owed?s.cycleStart:s.nextDue)}${s.status==='soon'?'<small class="cell-sub amber-text">To‘lov yaqin</small>':''}</td><td class="hide-mobile muted">${fmtDate(r.joined,true)}</td><td><button class="btn ${debtors?'secondary':'ghost'} small table-action" data-action="${debtors?'pay':'profile'}" data-id="${r.id}" aria-label="${escapeHTML(fullName(r))}: ${debtors?'qarzni yopish':'ma’lumotlar'}"><span class="hide-mobile">${debtors?'Qarzni yopish':'Batafsil'}</span>${icon('right')}</button></td></tr>`;}).join('')}</tbody></table>${!people.length?empty('Bola topilmadi','Qidiruv yoki filtrni o‘zgartirib ko‘ring.'):''}</div><div class="list-footer"><span>${people.length} ta bola ko‘rsatilmoqda</span>${debtors?'<span>Qarzlar bugungi holat bo‘yicha</span>':'<span>Har 30 kunda · 800 000 so‘m</span>'}</div></section>`;
-}
-function categoryName(category) {return {utilities:'Kommunal xizmatlar',tax:'Soliq',other:'Boshqa xarajatlar'}[category]||'Boshqa xarajatlar';}
-function renderExpenses() {
-  const {from,to}=dateRange();
-  const periodExpenses=state.expenses.filter(e=>e.date>=from&&e.date<=to);
-  const expenses=periodExpenses.filter(e=>categoryFilter==='all'||e.category===categoryFilter).sort((a,b)=>b.date.localeCompare(a.date));
-  const total=periodExpenses.reduce((sum,e)=>sum+e.amount,0);
-  return heading('Xarajatlar aniq hisobda.', 'Kommunal xizmatlar, soliq va kundalik xarajatlarni kuzating.',`${periodControl()}${addButton('add-expense','Xarajat qo‘shish')}`)+
-  `<div class="expense-grid">${[['all','Jami xarajat','receipt'],['utilities','Kommunal xizmatlar','bolt'],['tax','Soliq','tax'],['other','Boshqa xarajatlar','box']].map(([c,n,i])=>`<button class="expense-card ${categoryFilter===c?'selected':''}" data-category="${c}"><span class="category-icon">${icon(i)}</span><span>${n}</span><strong>${money(c==='all'?total:periodExpenses.filter(e=>e.category===c).reduce((s,e)=>s+e.amount,0))} <small>so‘m</small></strong></button>`).join('')}</div><section class="card"><div class="card-header"><div><h2 class="card-title">${categoryFilter==='all'?'Barcha xarajatlar':categoryName(categoryFilter)}</h2><p class="card-subtitle">${fmtDate(from,true)} — ${fmtDate(to,true)}</p></div><span class="count-pill">${expenses.length} ta</span></div><div class="table-wrap"><table class="data-table"><thead><tr><th>Xarajat nomi</th><th class="hide-mobile">Turi</th><th>Sana</th><th class="align-right">Summa</th><th class="align-right">Amal</th></tr></thead><tbody>${expenses.map(e=>`<tr><td><div class="table-person"><span class="category-icon">${icon({utilities:'bolt',tax:'tax',other:'box'}[e.category])}</span><span><strong>${escapeHTML(e.name)}</strong><small>${categoryName(e.category)}</small></span></div></td><td class="hide-mobile"><span class="badge neutral">${categoryName(e.category)}</span></td><td class="muted">${fmtDate(e.date)}</td><td class="align-right"><strong>${money(e.amount)}</strong><small class="cell-sub">so‘m</small></td><td class="align-right"><button type="button" class="btn ghost small" data-action="delete-expense-confirm" data-id="${e.id}" style="padding:4px 8px;font-size:10px;color:#dc2626;border-color:#fecaca;" title="Xarajatni bekor qilish">${icon('close')} Bekor qilish</button></td></tr>`).join('')}</tbody></table>${!expenses.length?empty('Xarajatlar kiritilmagan','Yangi xarajat qo‘shing yoki boshqa davrni tanlang.','receipt'):''}</div><div class="list-footer"><span>${expenses.length} ta xarajat</span><strong>Jami: ${money(expenses.reduce((s,e)=>s+e.amount,0))} so‘m</strong></div></section>`;
 }
 
-function openModal(title,body,footer='',formId='') {
-  const modal=$('#modal');
-  if(modal.open)modal.close();
-  modal.innerHTML=`<div class="modal-header"><h2 id="modal-title" class="modal-title">${title}</h2><button class="close-btn" data-action="close-modal" aria-label="Yopish">${icon('close')}</button></div>${formId?`<form id="${formId}">`:''}<div class="modal-body">${body}<p class="form-error" id="form-error" role="alert" hidden></p></div>${footer?`<div class="modal-footer">${footer}</div>`:''}${formId?'</form>':''}`;
-  modal.setAttribute('aria-labelledby','modal-title');
-  modal.showModal();
-  document.body.classList.add('modal-open');
+function updateSidebarTariff() {
+  const el = $('#sidebar-tariff');
+  if (el) el.innerHTML = `${money(state.settings?.monthlyRate || RATE)} <small>so‘m</small>`;
 }
-function closeModal() {const modal=$('#modal');if(modal.open)modal.close();document.body.classList.remove('modal-open');}
-const cancelButton='<button type="button" class="btn secondary" data-action="close-modal">Bekor qilish</button>';
-function showRoom(block,room) {
-  const people=roomOccupants(state,block,Number(room));
-  openModal(`${block} blok · ${room}-xona`, `<div class="room-detail-heading"><span class="badge ${people.length<4?'paid':'neutral'}">${4-people.length} ta bo‘sh o‘rin</span><span class="muted">${people.length}/4 o‘rin band</span></div><div class="room-detail-grid">${Array.from({length:4},(_,i)=>{const r=people[i];return r?`<div class="resident-slot"><span class="slot-number">${i+1}-o‘rin</span><button data-action="profile" data-id="${r.id}" class="slot-person"><span class="avatar sage">${initials(r)}</span><strong>${escapeHTML(fullName(r))}</strong></button><a href="tel:${escapeHTML(r.phone.replace(/\s/g,''))}" class="phone-link">${escapeHTML(r.phone)}</a>${statusBadge(r)}<span class="person-meta">Kelgan: ${fmtDate(r.joined,true)}</span><button class="btn secondary small" data-action="pay" data-id="${r.id}">${icon('wallet')}To‘lov qilish</button></div>`:`<button class="free-slot" data-action="add-resident" data-block-id="${block}" data-room="${room}"><span class="slot-number">${i+1}-o‘rin</span>${icon('plus')}<strong>Bola qo‘shish</strong><span>Bo‘sh o‘rin</span></button>`;}).join('')}</div>`);
+
+/* ==========================================================================
+   PIN LOCK SCREEN LOGIC
+   ========================================================================== */
+let enteredPin = '';
+const isTestEnv = typeof globalThis !== 'undefined' && (globalThis.__FORCE_SEED__ || globalThis.__TEST_MODE__ || (typeof window !== 'undefined' && !window.navigator?.userAgent));
+
+function updatePinDots() {
+  const dots = document.querySelectorAll('#pin-dots .pin-dot');
+  dots.forEach((dot, idx) => {
+    if (idx < enteredPin.length) dot.classList.add('filled');
+    else dot.classList.remove('filled');
+  });
 }
-function showProfile(id) {
-  const r=state.residents.find(r=>r.id===id);if(!r)return;
-  const s=statusOf(r), payments=state.payments.filter(p=>p.residentId===id).sort((a,b)=>b.date.localeCompare(a.date));
-  openModal('Bola ma’lumotlari',`<div class="person-profile"><span class="avatar sage">${initials(r)}</span><div><h3>${escapeHTML(fullName(r))}</h3><p>${roomName(r)}</p></div>${statusBadge(r)}</div><div class="detail-list"><div class="detail-item"><span>Telefon raqami</span><a href="tel:${escapeHTML(r.phone.replace(/\s/g,''))}">${escapeHTML(r.phone)}</a></div><div class="detail-item"><span>Kelgan sana</span><strong>${fmtDate(r.joined,true)}</strong></div><div class="detail-item"><span>${r.active?'Keyingi to‘lov':'Ketgan sana'}</span><strong>${fmtDate(r.active?s.nextDue:r.leftAt,true)}</strong></div><div class="detail-item"><span>30 kunlik to‘lov</span><strong>${money(RATE)} so‘m</strong></div><div class="detail-item"><span>Jami to‘langan</span><strong class="green-text">${money(s.totalPaid)} so‘m</strong></div></div><div class="payment-summary ${s.owed?'has-debt':''}"><span>Qolgan qarz</span><strong>${money(s.owed)} <small>so‘m</small></strong></div><h3 class="small-heading">To‘lov tarixi <span class="count-pill">${payments.length}</span></h3><div class="payment-history">${payments.map(p=>`<div class="detail-item" style="display:flex;justify-content:space-between;align-items:center;"><div><span>${fmtDate(p.date,true)} <small>${p.method==='card'?'Karta orqali':'Naqd pul'}</small></span></div><div style="display:flex;align-items:center;gap:10px;"><strong class="green-text">+${money(p.amount)} so‘m</strong><button type="button" class="btn ghost small" data-action="delete-payment-confirm" data-id="${p.id}" data-resident-id="${r.id}" style="padding:4px 8px;font-size:10px;color:#dc2626;border-color:#fecaca;" title="To‘lovni bekor qilish">${icon('close')} Bekor qilish</button></div></div>`).join('')||'<p class="muted">Hali to‘lov qilinmagan.</p>'}</div>`, `${r.active?`<button class="btn danger" data-action="checkout" data-id="${r.id}">${icon('logout')}Ketgan deb belgilash</button>`:'<span class="muted">Bola yotoqxonadan ketgan</span>'}${r.active||s.owed?`<button class="btn primary" data-action="pay" data-id="${r.id}">${icon('wallet')}${s.owed?'Qarzni yopish':'To‘lov qilish'}</button>`:''}`);
+
+function handlePinDigit(digit) {
+  if (enteredPin.length >= 4) return;
+  enteredPin += digit;
+  updatePinDots();
+  const pinError = $('#pin-error');
+  if (pinError) pinError.textContent = '';
+
+  if (enteredPin.length === 4) {
+    const correctPin = state.settings?.pin || '1234';
+    if (enteredPin === correctPin) {
+      unlockApp();
+    } else {
+      const dotsContainer = $('#pin-dots');
+      if (dotsContainer) dotsContainer.classList.add('error', 'shake');
+      if (pinError) pinError.textContent = 'Parol noto‘g‘ri! Qayta urining.';
+      setTimeout(() => {
+        enteredPin = '';
+        updatePinDots();
+        if (dotsContainer) dotsContainer.classList.remove('error', 'shake');
+      }, 500);
+    }
+  }
 }
-function showAddResident(block='A',room='') {
-  const availableRooms=roomList().filter(r=>roomOccupants(state,r.block,r.room).length<4);
-  if(!availableRooms.length){toast('Barcha o‘rinlar band.');return;}
-  const preferred=availableRooms.find(r=>r.block===block&&r.room===Number(room))||availableRooms.find(r=>r.block===block)||availableRooms[0];
-  openModal('Yangi bola qo‘shish', `<p class="modal-description">Bola ma’lumotlarini kiriting va bo‘sh o‘rinni tanlang.</p><div class="form-grid"><label class="field"><span>Ismi</span><input name="firstName" placeholder="Masalan, Azizbek" required maxlength="50" autocomplete="given-name"></label><label class="field"><span>Familiyasi</span><input name="lastName" placeholder="Masalan, Karimov" required maxlength="50" autocomplete="family-name"></label><label class="field full"><span>Telefon raqami</span><input name="phone" type="tel" value="+998 " placeholder="+998 90 123 45 67" required autocomplete="tel" maxlength="22"></label><label class="field full"><span>Xona va blok</span><select name="roomChoice">${availableRooms.map(r=>`<option value="${r.block}-${r.room}" ${r.id===preferred.id?'selected':''}>${r.block} blok · ${r.room}-xona — ${4-roomOccupants(state,r.block,r.room).length} ta bo‘sh joy</option>`).join('')}</select></label><label class="field"><span>Kelgan sana</span><input type="date" name="joined" value="${todayISO()}" max="${todayISO()}" required></label><label class="field"><span>Hozir bergan puli (so‘m)</span><input type="number" name="initialPayment" inputmode="numeric" value="0" min="0" step="1000" required></label><label class="field full"><span>To‘lov usuli</span><select name="method"><option value="cash">Naqd pul</option><option value="card">Karta orqali</option></select></label></div><div class="hint">${icon('info')} To‘lov kelgan kundan hisoblanadi: har 30 kun uchun 800 000 so‘m. To‘lanmagan summa qarz bo‘lib qoladi.</div>`,`${cancelButton}<button type="submit" class="btn primary">${icon('plus')}Bolani saqlash</button>`,'resident-form');
+
+function handlePinDelete() {
+  if (enteredPin.length > 0) {
+    enteredPin = enteredPin.slice(0, -1);
+    updatePinDots();
+    const pinError = $('#pin-error');
+    if (pinError) pinError.textContent = '';
+  }
 }
-function showPaymentPicker(term='') {
-  openModal('To‘lovni kim uchun qabul qilamiz?',`<label class="search-field modal-search">${icon('search')}<input id="payment-search" type="search" placeholder="Ism, familiya yoki telefon..." value="${escapeHTML(term)}" aria-label="To‘lov uchun bolani qidirish" autofocus></label><div id="payment-results" class="search-results"></div><p class="hint">Bolani tanlang. To‘liq yoki qisman to‘lov qabul qilish mumkin.</p>`);
-  updateSearchResults(term,'pay');
+
+function unlockApp() {
+  const screen = $('#pin-lock-screen');
+  if (screen) screen.classList.add('unlocked');
+  enteredPin = '';
+  updatePinDots();
+  const pinError = $('#pin-error');
+  if (pinError) pinError.textContent = '';
 }
-function updateSearchResults(term,action) {
-  const normalized=term.toLowerCase().trim();
-  const candidates=state.residents.filter(r=>(r.active||statusOf(r).owed>0)&&residentMatches(r,normalized)).sort((a,b)=>statusOf(b).owed-statusOf(a).owed).slice(0,12);
-  const target=action==='pay'?$('#payment-results'):$('#global-results');
-  target.innerHTML=candidates.map(r=>`<button class="search-result" data-action="${action}" data-id="${r.id}"><span class="avatar sage">${initials(r)}</span><span class="person-info"><span class="person-name">${escapeHTML(fullName(r))}</span><span class="person-meta">${roomName(r)} · ${escapeHTML(r.phone)}</span></span>${statusBadge(r)}${icon('right')}</button>`).join('')||empty('Bola topilmadi','Ism yoki telefon raqamini tekshirib ko‘ring.');
+
+function lockApp() {
+  const screen = $('#pin-lock-screen');
+  if (screen) screen.classList.remove('unlocked');
+  enteredPin = '';
+  updatePinDots();
+  const pinError = $('#pin-error');
+  if (pinError) pinError.textContent = '';
 }
-function showPay(id) {
-  const r=state.residents.find(r=>r.id===id);if(!r)return;
-  const s=statusOf(r), available=r.active?Math.max(0,s.totalCharged+RATE-s.totalPaid):s.owed, due=s.owed||Math.min(RATE,available);
-  if(available===0){openModal('To‘lovlar to‘liq qoplangan',`<div class="alert success">${icon('check')}<span><strong>${escapeHTML(fullName(r))}</strong>ning joriy va keyingi davr to‘lovi qoplangan.</span></div><div class="detail-item"><span>Navbatdagi to‘lov</span><strong>${fmtDate(s.nextDue,true)}</strong></div>`,`<button class="btn primary" data-action="close-modal">Tushunarli</button>`);return;}
-  openModal('To‘lov qabul qilish',`<input type="hidden" name="residentId" value="${r.id}"><div class="person-profile compact-profile"><span class="avatar sage">${initials(r)}</span><div><h3>${escapeHTML(fullName(r))}</h3><p>${roomName(r)}</p></div></div><div class="payment-summary ${s.owed?'has-debt':''}"><span>${s.owed?'Qolgan qarz':'Keyingi 30 kun uchun'}</span><strong>${money(due)} <small>so‘m</small></strong></div><label class="field full money-input"><span>Qabul qilingan summa</span><div><input type="number" name="amount" id="payment-amount" value="${due}" min="1" max="${available}" step="1" inputmode="numeric" required><span>so‘m</span></div></label><div class="quick-amounts">${[...new Set([200000,400000,due])].filter(a=>a<=available).map(a=>`<button type="button" data-amount="${a}">${money(a)}${a===due?' · To‘liq':''}</button>`).join('')}</div><div id="payment-preview" class="hint"></div><div class="form-grid"><label class="field"><span>To‘lov usuli</span><select name="method"><option value="cash">Naqd pul</option><option value="card">Karta orqali</option></select></label><label class="field"><span>To‘lov sanasi</span><input name="date" type="date" value="${todayISO()}" min="${r.joined}" max="${todayISO()}" required></label></div>`,`${cancelButton}<button type="submit" class="btn primary">${icon('check')}To‘lovni saqlash</button>`,'payment-form');
-  updatePaymentPreview();
+
+if (isTestEnv) {
+  unlockApp();
 }
-function updatePaymentPreview() {
-  const form=$('#payment-form');if(!form)return;
-  const r=state.residents.find(r=>r.id===form.elements.residentId.value), owed=statusOf(r).owed, value=Number(form.elements.amount.value);
-  $('#payment-preview').innerHTML=icon('info')+(value<owed?`Qisman to‘lov. Qoladigan qarz: <strong>${money(owed-value)} so‘m.</strong>`:owed&&value===owed?'To‘lovdan so‘ng qarz to‘liq yopiladi.':`<span>${owed?'Qarz yopiladi. Ortiqcha summa':'Bu summa'} keyingi davr uchun avans bo‘lib saqlanadi.</span>`);
+
+/* ==========================================================================
+   UZBEK CALENDAR MODAL
+   ========================================================================== */
+const UZ_MONTHS = ['Yanvar', 'Fevral', 'Mart', 'Aprel', 'May', 'Iyun', 'Iyul', 'Avgust', 'Sentabr', 'Oktabr', 'Noyabr', 'Dekabr'];
+const UZ_WEEKDAYS = ['Du', 'Se', 'Cho', 'Pa', 'Ju', 'Sha', 'Ya'];
+let activeDateInput = null;
+let calYear = 2026, calMonth = 10, calSelected = todayISO();
+
+function openUzbekDatePicker(targetInput) {
+  activeDateInput = targetInput;
+  const currentVal = targetInput.value || todayISO();
+  const parts = currentVal.split('-').map(Number);
+  if (parts.length === 3 && !isNaN(parts[0])) {
+    calYear = parts[0];
+    calMonth = parts[1] - 1;
+    calSelected = currentVal;
+  } else {
+    const today = todayISO().split('-').map(Number);
+    calYear = today[0];
+    calMonth = today[1] - 1;
+    calSelected = todayISO();
+  }
+  renderUzbekCalendar();
+  const dialog = $('#uz-calendar-modal');
+  if (dialog && typeof dialog.showModal === 'function') {
+    dialog.showModal();
+  }
 }
-function showCheckout(id) {
-  const r=state.residents.find(r=>r.id===id);if(!r)return;
-  const owed=statusOf(r).owed;
-  openModal('Bola yotoqxonadan ketdimi?',`<input type="hidden" name="residentId" value="${r.id}"><div class="person-profile"><span class="avatar sage">${initials(r)}</span><div><h3>${escapeHTML(fullName(r))}</h3><p>${roomName(r)}</p></div></div><p>Bolaning o‘rni bo‘shaydi va yangi to‘lovlar hisoblanmaydi. To‘lov tarixi saqlanadi.</p>${owed?`<div class="alert warning">${icon('info')}<span><strong>${money(owed)} so‘m qarz mavjud.</strong> Qarz o‘chirilmaydi, uni “Qarzdorlar” bo‘limidan keyin ham yopish mumkin.</span></div>`:''}<p class="muted">Ketgan sana: ${fmtDate(todayISO(),true)}</p>`,`${cancelButton}<button type="submit" class="btn danger">Ketgan deb belgilash</button>`,'checkout-form');
+
+function closeUzbekCalendar() {
+  const dialog = $('#uz-calendar-modal');
+  if (dialog && typeof dialog.close === 'function') {
+    dialog.close();
+  }
 }
-function showAddExpense() {
-  openModal('Xarajat qo‘shish',`<p class="modal-description">Xarajat saqlangach, moliyaviy hisobotga qo‘shiladi.</p><div class="form-grid"><label class="field full"><span>Xarajat nomi</span><input name="name" placeholder="Masalan, elektr energiyasi" required maxlength="100"></label><label class="field full"><span>Summa (so‘m)</span><input name="amount" type="number" min="1" step="1" inputmode="numeric" placeholder="0" required></label><label class="field"><span>Xarajat turi</span><select name="category"><option value="utilities">Kommunal xizmatlar</option><option value="tax">Soliq</option><option value="other">Boshqa xarajatlar</option></select></label><label class="field"><span>Sana</span><input name="date" type="date" max="${todayISO()}" value="${todayISO()}" required></label></div>`,`${cancelButton}<button type="submit" class="btn primary">${icon('check')}Xarajatni saqlash</button>`,'expense-form');
+
+function renderUzbekCalendar() {
+  const dialog = $('#uz-calendar-modal');
+  if (!dialog) return;
+  const firstDayIndex = (new Date(calYear, calMonth, 1).getDay() + 6) % 7;
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const today = todayISO();
+  const maxDate = activeDateInput?.max || '';
+  const minDate = activeDateInput?.min || '';
+
+  let cellsHtml = '';
+  for (let i = 0; i < firstDayIndex; i++) {
+    cellsHtml += '<div class="uz-day-cell disabled"></div>';
+  }
+  for (let day = 1; day <= daysInMonth; day++) {
+    const iso = `${calYear}-${String(calMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    const isSelected = iso === calSelected;
+    const isToday = iso === today;
+    const isDisabled = (maxDate && iso > maxDate) || (minDate && iso < minDate);
+    cellsHtml += `<button type="button" class="uz-day-cell ${isSelected ? 'selected' : ''} ${isToday ? 'today' : ''}" data-cal-date="${iso}" ${isDisabled ? 'disabled' : ''}>${day}</button>`;
+  }
+
+  dialog.innerHTML = `
+    <div class="uz-calendar-header">
+      <button type="button" class="uz-cal-nav" data-cal-nav="prev" title="Oldingi oy">‹</button>
+      <h3>${UZ_MONTHS[calMonth]} ${calYear}</h3>
+      <button type="button" class="uz-cal-nav" data-cal-nav="next" title="Keyingi oy">›</button>
+    </div>
+    <div class="uz-calendar-body">
+      <div class="uz-weekdays-row">
+        ${UZ_WEEKDAYS.map(w => `<span>${w}</span>`).join('')}
+      </div>
+      <div class="uz-days-grid">
+        ${cellsHtml}
+      </div>
+    </div>
+    <div class="uz-calendar-footer">
+      <button type="button" class="btn ghost small" data-cal-action="cancel">Bekor qilish</button>
+      <button type="button" class="btn secondary small" data-cal-action="today">Bugun</button>
+      <button type="button" class="btn primary small" data-cal-action="confirm">Tanlash</button>
+    </div>
+  `;
 }
-function showNotifications() {
-  const soon=state.residents.filter(r=>r.active&&statusOf(r).status==='soon').sort((a,b)=>statusOf(a).daysUntilDue-statusOf(b).daysUntilDue);
-  openModal('Yaqinlashayotgan to‘lovlar',`<p class="modal-description">30 kunlik davrning 25-kunidan boshlab eslatma chiqadi. ${soon.length} ta bolaning to‘lovi yaqin.</p><div class="notification-list">${soon.map(r=>personRow(r)).join('')||empty('Yaqin to‘lovlar yo‘q','To‘lovga 5 kun qolganda bolalar shu yerda ko‘rinadi.','check')}</div>`);
+
+function applySelectedDate(val) {
+  if (activeDateInput) {
+    activeDateInput.value = val;
+    try {
+      const Ev = (typeof window !== 'undefined' && window.Event) ? window.Event : Event;
+      activeDateInput.dispatchEvent(new Ev('input', { bubbles: true }));
+      activeDateInput.dispatchEvent(new Ev('change', { bubbles: true }));
+    } catch {}
+  }
+  closeUzbekCalendar();
 }
-function showCustomDates() {
-  openModal('Hisobot davrini tanlash',`<div class="form-grid"><label class="field"><span>Boshlanish sanasi</span><input name="from" type="date" value="${customFrom}" max="${todayISO()}" required></label><label class="field"><span>Tugash sanasi</span><input name="to" type="date" value="${customTo}" max="${todayISO()}" required></label></div><p class="hint">Tushum, xarajat va foyda shu davr uchun hisoblanadi. Qolgan qarz va bandlik bugungi holatni ko‘rsatadi.</p>`,`${cancelButton}<button type="submit" class="btn primary">Qo‘llash</button>`,'period-form');
-}
-function exportBackup() {
+
+/* ==========================================================================
+   TELEGRAM SHARING LOGIC (.json & .docx)
+   ========================================================================== */
+async function sendBackupToTelegram() {
   try {
     const dataStr = JSON.stringify(state, null, 2);
+    const fileName = `makon-zaxira-${todayISO()}.json`;
     const blob = new Blob([dataStr], { type: 'application/json' });
+    const file = new File([blob], fileName, { type: 'application/json' });
+
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({
+          files: [file],
+          title: 'Makon — Zaxira nusxasi',
+          text: `Makon yotoqxona tizimi zaxira nusxasi (${todayISO()}).`
+        });
+        toast('Zaxira fayli yuborildi.');
+        return;
+      } catch (shareErr) {
+        if (shareErr.name === 'AbortError') return;
+      }
+    }
+
+    // Fallback: download and prompt
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `makon-zaxira-${todayISO()}.json`;
+    a.download = fileName;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    toast('Zaxira nusxasi yuklab olindi.');
+    toast('Zaxira fayli yuklandi. Telegram ochilmoqda...');
+    setTimeout(() => {
+      try { window.open('tg://msg', '_blank'); } catch {}
+    }, 400);
   } catch {
-    toast('Zaxira olishda xatolik yuz berdi.');
+    toast('Zaxira yuborishda xatolik yuz berdi.');
+  }
+}
+
+async function sendReportToTelegram() {
+  try {
+    const docxBytes = generateDocxReport(state, todayISO());
+    const fileName = `makon-hisobot-${todayISO()}.docx`;
+    const blob = new Blob([docxBytes], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+    const file = new File([blob], fileName, { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+
+    if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({
+          files: [file],
+          title: 'Makon — To‘liq hisobot',
+          text: `Makon yotoqxona to‘liq hisoboti (${todayISO()}).`
+        });
+        toast('Hisobot fayli yuborildi.');
+        return;
+      } catch (shareErr) {
+        if (shareErr.name === 'AbortError') return;
+      }
+    }
+
+    // Fallback: download and prompt
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    toast('Hisobot (.docx) yuklandi. Telegram ochilmoqda...');
+    setTimeout(() => {
+      try { window.open('tg://msg', '_blank'); } catch {}
+    }, 400);
+  } catch (err) {
+    toast('Hisobot yaratishda xatolik: ' + (err?.message || 'Xatolik'));
   }
 }
 
@@ -1069,6 +1704,7 @@ function importBackup(file) {
     try {
       const incoming = JSON.parse(e.target.result);
       validateState(incoming);
+      if (!incoming.settings) incoming.settings = { monthlyRate: RATE, pin: '1234' };
       if (storageAvailable) localStorage.setItem(STORAGE_KEY, JSON.stringify(incoming));
       state = incoming;
       closeModal();
@@ -1081,92 +1717,954 @@ function importBackup(file) {
   reader.readAsText(file);
 }
 
-function showDemoInfo() {
-  openModal('Tizim va Zaxira (Sozlamalar)', `<div class="demo-brand">${icon('building')}<h3>Makon <span class="badge paid">Offline</span></h3></div><p>Telefonda internetsiz ishlaydigan mustaqil yotoqxona boshqaruvi tizimi.</p><div class="detail-list"><div class="detail-item"><span>Yotoqxona o‘rinlari</span><strong>184 ta (A: 14, B: 14, C: 18 xona)</strong></div><div class="detail-item"><span>Oylik to‘lov</span><strong>800 000 so‘m / 30 kun</strong></div><div class="detail-item"><span>Ma’lumotlar xavfsizligi</span><strong>Qurilmaning ichki xotirasida</strong></div></div><div style="margin-top:16px;padding:14px;background:#edf5ff;border:1px solid #dbe9fc;border-radius:10px;"><h4 style="font-size:12px;font-weight:700;color:#1e40af;margin-bottom:6px;">Zaxira nusxa olish va tiklash</h4><p style="font-size:10px;color:#3b82f6;line-height:1.6;margin-bottom:12px;">Telefon almashtirganda yoki ma’lumotlarni saqlab qo‘yish uchun zaxira faylini yuklab oling va Telegram yoki xotirangizga tashlab qo‘ying.</p><div style="display:flex;gap:8px;flex-wrap:wrap;"><button type="button" class="btn secondary" data-action="export-backup" style="flex:1;min-height:38px;font-size:11px;">${icon('receipt')} Zaxirani saqlash</button><label class="btn secondary" style="flex:1;min-height:38px;font-size:11px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;">${icon('card')} Zaxiradan tiklash<input type="file" id="import-backup-input" accept=".json" style="display:none;"></label></div></div><div style="margin-top:14px;padding:12px;border:1px solid #e1e9f4;border-radius:10px;background:#f8fbff;"><h4 style="font-size:11px;font-weight:700;color:#475569;margin-bottom:6px;">Baza holatini boshqarish</h4><div style="display:flex;gap:8px;flex-wrap:wrap;"><button type="button" class="btn ghost small" data-action="clear-confirm" style="color:#b91c1c;border-color:#fecaca;">Bazani tozalash (Bo‘sh holat)</button></div></div>`, `<button class="btn primary" data-action="close-modal">Yopish</button>`);
+function render() {
+  const dates = dateRange();
+  const s = getSummary(state, dates.from, dates.to, todayISO());
+  updateSidebar(s);
+  updateSidebarTariff();
+  $('#breadcrumb').textContent = names[page];
+  $('#top-date').textContent = fmtDate(todayISO(), true);
+  document.querySelectorAll('.side-nav button, .mobile-nav button').forEach(b => {
+    const match = b.dataset.nav === page;
+    b.classList.toggle('active', match);
+    if (match) b.setAttribute('aria-current', 'page');
+    else b.removeAttribute('aria-current');
+  });
+  const views = {
+    dashboard: renderDashboard,
+    rooms: renderRooms,
+    residents: renderResidents,
+    vacancies: renderVacancies,
+    debtors: renderDebtors,
+    expenses: renderExpenses,
+  };
+  $('#app').innerHTML = (views[page] || renderDashboard)(s, dates);
 }
 
-document.addEventListener('click',(event)=>{
-  const target=event.target.closest('button, [data-action]');if(!target)return;
-  if(target.dataset.nav){go(target.dataset.nav);return;}
-  if(target.dataset.block){blockFilter=target.dataset.block;render();return;}
-  if(target.dataset.category){categoryFilter=target.dataset.category;render();return;}
-  if(target.dataset.amount){$('#payment-amount').value=target.dataset.amount;updatePaymentPreview();return;}
-  const {action,id}=target.dataset;
-  const handlers={
-    'close-modal':closeModal,'room':()=>showRoom(target.dataset.blockId,target.dataset.room),
-    'profile':()=>showProfile(id),'add-resident':()=>showAddResident(target.dataset.blockId||'A',target.dataset.room||''),
-    'payment-picker':()=>showPaymentPicker(),'pay':()=>showPay(id),'checkout':()=>showCheckout(id),
-    'add-expense':showAddExpense,'notifications':showNotifications,'demo-info':showDemoInfo,'settings-info':showDemoInfo,
-    'export-backup':exportBackup,
-    'delete-payment-confirm':()=>{
-      const p=state.payments.find(p=>p.id===id);if(!p)return;
-      const r=state.residents.find(r=>r.id===p.residentId);
-      openModal('To‘lovni bekor qilish',`<p>Rostdan ham <strong>${escapeHTML(r?fullName(r):'Bola')}</strong> uchun kiritilgan <strong>${money(p.amount)} so‘m</strong> to‘lovni bekor qilmoqchimisiz?</p><p class="hint">To‘lov bekor qilinadi va bolaning qarzdorlik hisob-kitobi qayta tiklanadi.</p>`,`${cancelButton}<button class="btn danger" data-action="delete-payment" data-id="${p.id}" data-resident-id="${p.residentId}">Ha, to‘lovni bekor qilish</button>`);
+function updateSidebar(s) {
+  $('#nav-vacancies').textContent = s.vacant;
+  $('#nav-debtors').textContent = s.debtors;
+}
+
+function dateRange() {
+  const today = todayISO();
+  if (selectedPeriod === 'today') return { from: today, to: today, label: 'Bugun' };
+  if (selectedPeriod === 'thisMonth') return { from: `${today.slice(0, 7)}-01`, to: today, label: 'Shu oy' };
+  if (selectedPeriod === 'last30') return { from: addDays(today, -29), to: today, label: 'So‘nggi 30 kun' };
+  return { from: customFrom, to: customTo, label: `${fmtDate(customFrom, true)} — ${fmtDate(customTo, true)}` };
+}
+
+function go(target) {
+  page = target;
+  location.hash = `#${page}`;
+  try { history.replaceState(null, '', `#${page}`); } catch {}
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  render();
+}
+
+function toast(message) {
+  const el = $('#toast');
+  if (!el) return;
+  el.textContent = message;
+  el.classList.add('visible');
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => el.classList.remove('visible'), 2600);
+}
+
+const statusBadge = (r) => {
+  const st = statusOf(r);
+  if (!r.active) return '<span class="badge left">Ketgan</span>';
+  if (st.status === 'debt') return '<span class="badge debt">Qarzdor</span>';
+  if (st.status === 'soon') return `<span class="badge soon">${st.daysUntilDue === 0 ? 'Bugun to‘lov' : `${st.daysUntilDue} kun qoldi`}</span>`;
+  return '<span class="badge paid">To‘langan</span>';
+};
+
+const empty = (title, message, iconName = 'bed') => `
+  <div class="empty-state">
+    <span class="empty-icon">${icon(iconName)}</span>
+    <h3>${title}</h3>
+    <p>${message}</p>
+  </div>`;
+
+const personRow = (r) => {
+  const st = statusOf(r);
+  return `
+    <div class="person-row">
+      <span class="avatar sage">${initials(r)}</span>
+      <div class="person-info">
+        <strong>${escapeHTML(fullName(r))}</strong>
+        <span>${roomName(r)} · ${escapeHTML(r.phone)}</span>
+      </div>
+      <div class="person-amount">
+        <strong class="${st.owed ? 'red-text' : 'green-text'}">${st.owed ? `${money(st.owed)} so‘m qarz` : 'To‘langan'}</strong>
+        <small>${st.nextDue ? `Keyingi to‘lov: ${fmtDate(st.nextDue)}` : 'Chiqarilgan'}</small>
+      </div>
+      <button class="btn secondary small" data-action="pay" data-id="${r.id}">To‘lov</button>
+    </div>`;
+};
+
+const statCard = (title, amount, sub, iconName, featured = false) => `
+  <div class="stat-card ${featured ? 'featured' : ''}">
+    <div class="stat-card-top">
+      <span class="stat-title">${title}</span>
+      <span class="stat-icon">${icon(iconName)}</span>
+    </div>
+    <div class="stat-amount stat-value">${money(amount)} <small>so‘m</small></div>
+    <div class="stat-sub">${sub}</div>
+  </div>`;
+
+function renderDashboard(s, { from, to }) {
+  const pct = Math.round((s.occupied / CAPACITY) * 100);
+  const debtList = state.residents.filter(r => r.active && statusOf(r).status === 'debt');
+  const soonList = state.residents.filter(r => r.active && statusOf(r).status === 'soon');
+  const periodPayments = state.payments.filter(p => p.date >= from && p.date <= to && p.date <= todayISO()).map(p => ({ ...p, type: 'payment' }));
+  const periodExpenses = state.expenses.filter(e => e.date >= from && e.date <= to && e.date <= todayISO()).map(e => ({ ...e, type: 'expense' }));
+  const activities = [...periodPayments, ...periodExpenses].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 10);
+
+  return `
+    <div class="page-heading">
+      <div>
+        <h1>Boshqaruv paneli</h1>
+        <p>Yotoqxonaning barcha asosiy ko‘rsatkichlari bitta joyda</p>
+      </div>
+      <div class="heading-actions">
+        <label class="period-select">
+          ${icon('calendar')}
+          <select id="period" aria-label="Hisobot davri">
+            <option value="today" ${selectedPeriod === 'today' ? 'selected' : ''}>Bugun</option>
+            <option value="last30" ${selectedPeriod === 'last30' ? 'selected' : ''}>So‘nggi 30 kun</option>
+            <option value="thisMonth" ${selectedPeriod === 'thisMonth' ? 'selected' : ''}>Shu oy</option>
+            <option value="custom" ${selectedPeriod === 'custom' ? 'selected' : ''}>Boshqa davr...</option>
+          </select>
+        </label>
+        <button class="btn secondary" data-action="add-expense">${icon('plus')}Xarajat qo‘shish</button>
+        <button class="btn primary" data-action="payment-picker">${icon('wallet')}To‘lov qabul qilish</button>
+      </div>
+    </div>
+    <div class="stats-grid">
+      ${statCard('Yig‘ilgan to‘lov', s.collected, `${fmtDate(from)} – ${fmtDate(to)} oralig‘ida`, 'wallet', true)}
+      ${statCard('Qolgan qarz', s.owed, `<span class="red-text">${s.debtors} ta boladan</span> olinishi kerak`, 'clock')}
+      ${statCard('Jami xarajat', s.expenses, 'Tanlangan davr uchun', 'receipt')}
+      ${statCard('Sof foyda', s.profit, 'Tushum − xarajat', 'chart')}
+    </div>
+    <div class="dashboard-grid">
+      <section class="card finance-card">
+        <div class="card-header">
+          <div><h2 class="card-title">Moliyaviy holat</h2><p class="card-subtitle">${fmtDate(from, true)} — ${fmtDate(to, true)}</p></div>
+          <div class="legend"><span><i class="legend-dot green"></i>Tushum</span><span><i class="legend-dot pale"></i>Xarajat</span></div>
+        </div>
+        <div class="card-body">
+          <div class="chart-total">${money(s.collected)} <small>so‘m</small><span>jami tushum</span></div>
+          <div class="chart-container">${chartMarkup()}</div>
+        </div>
+      </section>
+      <section class="card">
+        <div class="card-header">
+          <div><h2 class="card-title">Yotoqxona bandligi</h2><p class="card-subtitle">3 ta blok · 46 ta xona · 184 ta o‘rin</p></div>
+          <span class="stat-icon">${icon('building')}</span>
+        </div>
+        <div class="card-body occupancy-body">
+          <div class="occupancy-total">
+            <div class="occupancy-ring" style="--fill:${pct}%"><div class="occupancy-center"><strong>${pct}%</strong><span>band</span></div></div>
+            <div class="occupancy-key">
+              <div><i class="legend-dot green"></i><span>Band o‘rinlar</span><strong>${s.occupied}</strong></div>
+              <div><i class="legend-dot pale"></i><span>Bo‘sh o‘rinlar</span><strong>${s.vacant}</strong></div>
+              <button class="section-link" data-nav="vacancies">Bo‘sh joylarni ko‘rish ${icon('right')}</button>
+            </div>
+          </div>
+          ${BLOCKS.map(b => {
+            const count = state.residents.filter(r => r.active && r.block === b.id).length;
+            return `
+              <div class="occupancy-block">
+                <div class="block-row"><span><b>${b.id}</b> blok</span><span><strong>${count}</strong> / ${b.rooms * 4} o‘rin</span></div>
+                <div class="progress-track"><div class="progress-fill" style="width:${(count / (b.rooms * 4)) * 100}%"></div></div>
+              </div>`;
+          }).join('')}
+        </div>
+      </section>
+    </div>
+    <div class="dashboard-grid payments-grid">
+      <section class="card">
+        <div class="card-header">
+          <div><h2 class="card-title">To‘lov kutilmoqda <span class="count-pill">${s.debtors + s.dueSoon}</span></h2><p class="card-subtitle">Qarzdorlar va to‘loviga 5 kun qolgan bolalar</p></div>
+          <button class="section-link" data-nav="debtors">Barchasi ${icon('right')}</button>
+        </div>
+        <div class="payment-list">
+          ${[...debtList.slice(0, 3), ...soonList.slice(0, 2)].map(r => personRow(r)).join('') || empty('To‘lovlar joyida', 'Hozircha qarzdorlar va yaqin to‘lovlar yo‘q.', 'check')}
+        </div>
+        ${s.dueSoon ? `<button class="upcoming-note" data-action="notifications">${icon('clock')}<span><strong>${s.dueSoon} ta bolaning</strong> navbatdagi to‘lovi yaqinlashmoqda</span>${icon('right')}</button>` : ''}
+      </section>
+      <section class="card">
+        <div class="card-header">
+          <div><h2 class="card-title">So‘nggi amaliyotlar</h2><p class="card-subtitle">Tanlangan davrdagi kirim va chiqimlar</p></div>
+          <span class="stat-icon">${icon('receipt')}</span>
+        </div>
+        <div class="activity-list">
+          ${activities.map(p => {
+            const r = state.residents.find(r => r.id === p.residentId);
+            const cancelBtn = p.type === 'payment'
+              ? `<button type="button" class="btn ghost small" data-action="delete-payment-confirm" data-id="${p.id}" data-resident-id="${p.residentId}" style="padding:3px 8px;font-size:10px;color:#dc2626;border-color:#fecaca;margin-left:8px;" title="To‘lovni bekor qilish">${icon('close')} Bekor qilish</button>`
+              : `<button type="button" class="btn ghost small" data-action="delete-expense-confirm" data-id="${p.id}" style="padding:3px 8px;font-size:10px;color:#dc2626;border-color:#fecaca;margin-left:8px;" title="Xarajatni bekor qilish">${icon('close')} Bekor qilish</button>`;
+            return `
+              <div class="activity-item">
+                <div class="activity-icon ${p.type === 'payment' ? 'income' : 'outgoing'}">${icon(p.type === 'payment' ? 'wallet' : 'receipt')}</div>
+                <div class="activity-details">
+                  <strong>${escapeHTML(p.type === 'payment' ? (r ? fullName(r) : 'To‘lov') : p.name)}</strong>
+                  <span>${p.type === 'payment' ? 'To‘lov qabul qilindi' : categoryName(p.category)} · ${fmtDate(p.date)}</span>
+                </div>
+                <div style="display:flex;align-items:center;">
+                  <div class="activity-amount ${p.type === 'payment' ? 'green-text' : ''}">${p.type === 'payment' ? '+' : '−'}${money(p.amount)}<small>so‘m</small></div>
+                  ${cancelBtn}
+                </div>
+              </div>`;
+          }).join('') || empty('Amaliyotlar yo‘q', 'Bu davrda to‘lov yoki xarajat kiritilmagan.', 'receipt')}
+        </div>
+        <div class="list-footer">${icon('info')} Barcha summalar O‘zbekiston so‘mida ko‘rsatilgan</div>
+      </section>
+    </div>`;
+}
+
+function chartMarkup() {
+  const { from, to } = dateRange(), totalDays = daysBetween(from, to) + 1;
+  const count = Math.min(7, totalDays), buckets = [];
+  for (let i = 0; i < count; i++) {
+    const start = addDays(from, Math.floor(totalDays * i / count)), end = addDays(from, Math.floor(totalDays * (i + 1) / count) - 1);
+    const income = state.payments.filter(p => p.date >= start && p.date <= end).reduce((sum, p) => sum + p.amount, 0);
+    const expense = state.expenses.filter(p => p.date >= start && p.date <= end).reduce((sum, p) => sum + p.amount, 0);
+    buckets.push({ start, end, income, expense });
+  }
+  const max = Math.max(1, ...buckets.flatMap(b => [b.income, b.expense]));
+  return `<div class="chart-axis"><span>${compact(max)}</span><span>${compact(max / 2)}</span><span>0</span></div><div class="bar-chart" role="img" aria-label="Tanlangan davrdagi tushum va xarajatlar diagrammasi">${buckets.map(b => `<div class="chart-column"><div class="chart-bars" tabindex="0" aria-label="${fmtDate(b.start)} – ${fmtDate(b.end)}: tushum ${money(b.income)}, xarajat ${money(b.expense)} so‘m" title="${fmtDate(b.start)} – ${fmtDate(b.end)}&#10;Tushum: ${money(b.income)} so‘m&#10;Xarajat: ${money(b.expense)} so‘m"><div class="bar income" style="height:${Math.max(b.income ? 3 : 0, (b.income / max) * 100)}%"></div><div class="bar expense" style="height:${Math.max(b.expense ? 3 : 0, (b.expense / max) * 100)}%"></div></div><span class="chart-label">${fmtDate(b.start)}</span></div>`).join('')}</div>`;
+}
+
+function renderRooms() {
+  const rooms = roomList().filter(r => blockFilter === 'all' || r.block === blockFilter);
+  return `
+    <div class="page-heading">
+      <div><h1>Xonalar va o‘rinlar</h1><p>3 ta blok bo‘yicha xonalar holati va bandligi</p></div>
+      <div class="pill-filter">
+        ${['all', 'A', 'B', 'C'].map(b => `<button class="${blockFilter === b ? 'active' : ''}" data-block="${b}">${b === 'all' ? 'Barcha bloklar' : `${b} blok`}</button>`).join('')}
+      </div>
+    </div>
+    <div class="room-grid">
+      ${rooms.map(room => {
+        const occ = roomOccupants(state, room.block, room.room);
+        const free = 4 - occ.length;
+        return `
+          <div class="room-card ${free === 0 ? 'full' : free === 4 ? 'empty' : 'partial'}" data-action="room" data-block-id="${room.block}" data-room="${room.room}">
+            <div class="room-header">
+              <div><span class="room-block-label">${room.block} blok</span><h3 class="room-title">${room.room}-xona</h3></div>
+              <span class="room-pill ${free === 0 ? 'red' : 'green'}">${free === 0 ? 'To‘liq band' : `${free} ta bo‘sh`}</span>
+            </div>
+            <div class="bed-dots">${[0, 1, 2, 3].map(i => `<span class="bed-dot ${i < occ.length ? 'occupied' : 'vacant'}"></span>`).join('')}</div>
+            <div class="room-occupants">${occ.map(r => `<span>${escapeHTML(fullName(r))}</span>`).join('') || '<span class="muted">Hozircha hech kim yo‘q</span>'}</div>
+          </div>`;
+      }).join('')}
+    </div>`;
+}
+
+function renderResidents() {
+  const list = state.residents.filter(r => {
+    const st = statusOf(r);
+    const matchesStatus = statusFilter === 'all' || (statusFilter === 'active' && r.active) || (statusFilter === 'debt' && r.active && st.owed > 0) || (statusFilter === 'inactive' && !r.active);
+    const matchesBlock = blockFilter === 'all' || r.block === blockFilter;
+    const matchesQuery = !query || fullName(r).toLowerCase().includes(query.toLowerCase()) || r.phone.includes(query);
+    return matchesStatus && matchesBlock && matchesQuery;
+  });
+
+  return `
+    <div class="page-heading">
+      <div><h1>Bolalar ro‘yxati <span class="count-pill">${list.length}</span></h1><p>Yotoqxonada yashovchi va ilgari yashagan barcha bolalar</p></div>
+      <button class="btn primary" data-action="add-resident">${icon('plus')}Yangi bola qo‘shish</button>
+    </div>
+    <div class="filter-bar">
+      <label class="search-field">${icon('search')}<input type="search" id="resident-query" placeholder="Ism, familiya yoki telefon..." value="${escapeHTML(query)}" aria-label="Bolalarni qidirish"></label>
+      <div class="filter-controls">
+        <select id="status-filter" aria-label="Holat bo‘yicha saralash">
+          <option value="all" ${statusFilter === 'all' ? 'selected' : ''}>Barcha holatlar</option>
+          <option value="active" ${statusFilter === 'active' ? 'selected' : ''}>Hozir yashayotganlar</option>
+          <option value="debt" ${statusFilter === 'debt' ? 'selected' : ''}>Qarzdorlar</option>
+          <option value="inactive" ${statusFilter === 'inactive' ? 'selected' : ''}>Chiqib ketganlar</option>
+        </select>
+        <select id="block-filter" aria-label="Blok bo‘yicha saralash">
+          <option value="all" ${blockFilter === 'all' ? 'selected' : ''}>Barcha bloklar</option>
+          <option value="A" ${blockFilter === 'A' ? 'selected' : ''}>A blok</option>
+          <option value="B" ${blockFilter === 'B' ? 'selected' : ''}>B blok</option>
+          <option value="C" ${blockFilter === 'C' ? 'selected' : ''}>C blok</option>
+        </select>
+      </div>
+    </div>
+    <div class="table-card">
+      <table class="data-table">
+        <thead><tr><th>Bola</th><th>Xona</th><th>Telefon</th><th>Kelgan sana</th><th>Keyingi to‘lov</th><th>Qarz</th><th>Holat</th><th></th></tr></thead>
+        <tbody>
+          ${list.map(r => {
+            const st = statusOf(r);
+            return `
+              <tr data-action="profile" data-id="${r.id}">
+                <td><div class="cell-person"><span class="avatar sage">${initials(r)}</span><strong>${escapeHTML(fullName(r))}</strong></div></td>
+                <td><span class="room-chip">${roomName(r)}</span></td>
+                <td><a href="tel:${escapeHTML(r.phone.replace(/\s/g, ''))}" class="phone-link">${escapeHTML(r.phone)}</a></td>
+                <td>${fmtDate(r.joined)}</td>
+                <td>${fmtDate(r.active ? st.nextDue : r.leftAt)}</td>
+                <td><strong class="${st.owed ? 'red-text' : 'muted'}">${st.owed ? `${money(st.owed)} so‘m` : '—'}</strong></td>
+                <td>${statusBadge(r)}</td>
+                <td><button class="row-link" data-action="profile" data-id="${r.id}">${icon('right')}</button></td>
+              </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+      ${!list.length ? empty('Bolalar topilmadi', 'Filtr bo‘yicha hech qanday ma’lumot chiqmadi.', 'users') : ''}
+    </div>`;
+}
+
+function renderVacancies() {
+  const rooms = roomList().map(r => ({ ...r, occupants: roomOccupants(state, r.block, r.room) })).filter(r => r.occupants.length < 4 && (blockFilter === 'all' || r.block === blockFilter));
+  const totalFree = rooms.reduce((sum, r) => sum + (4 - r.occupants.length), 0);
+  return `
+    <div class="page-heading">
+      <div><h1>Bo‘sh joylar <span class="count-pill">${totalFree} ta o‘rin</span></h1><p>Yangi bolalarni joylashtirish mumkin bo‘lgan xonalar</p></div>
+      <div class="pill-filter">
+        ${['all', 'A', 'B', 'C'].map(b => `<button class="${blockFilter === b ? 'active' : ''}" data-block="${b}">${b === 'all' ? 'Barcha bloklar' : `${b} blok`}</button>`).join('')}
+      </div>
+    </div>
+    <div class="room-grid">
+      ${rooms.map(room => {
+        const free = 4 - room.occupants.length;
+        return `
+          <div class="room-card partial" data-action="room" data-block-id="${room.block}" data-room="${room.room}">
+            <div class="room-header">
+              <div><span class="room-block-label">${room.block} blok</span><h3 class="room-title">${room.room}-xona</h3></div>
+              <span class="room-pill green">${free} ta bo‘sh joy</span>
+            </div>
+            <div class="bed-dots">${[0, 1, 2, 3].map(i => `<span class="bed-dot ${i < room.occupants.length ? 'occupied' : 'vacant'}"></span>`).join('')}</div>
+            <div class="room-occupants">${room.occupants.map(r => `<span>${escapeHTML(fullName(r))}</span>`).join('') || '<span class="muted">Hozircha bo‘sh xona</span>'}</div>
+            <button class="btn secondary small full-width" data-action="add-resident" data-block-id="${room.block}" data-room="${room.room}">${icon('plus')}Shu xonaga bola qo‘shish</button>
+          </div>`;
+      }).join('')}
+    </div>
+    ${!rooms.length ? empty('Bo‘sh joylar qolmadi', 'Barcha bloklardagi xonalar to‘liq band.', 'check') : ''}`;
+}
+
+function renderDebtors() {
+  const debtors = state.residents.filter(r => statusOf(r).owed > 0);
+  const totalDebt = debtors.reduce((sum, r) => sum + statusOf(r).owed, 0);
+  return `
+    <div class="page-heading">
+      <div><h1>Qarzdorlar ro‘yxati <span class="count-pill">${debtors.length} ta bola</span></h1><p>Jami undirilishi kerak bo‘lgan qarz: <strong class="red-text">${money(totalDebt)} so‘m</strong></p></div>
+      <button class="btn primary" data-action="payment-picker">${icon('wallet')}To‘lov qabul qilish</button>
+    </div>
+    <div class="table-card">
+      <table class="data-table">
+        <thead><tr><th>Bola</th><th>Xona</th><th>Telefon</th><th>Oxirgi to‘lov</th><th>Qarz summasi</th><th></th></tr></thead>
+        <tbody>
+          ${debtors.map(r => {
+            const st = statusOf(r);
+            return `
+              <tr>
+                <td><div class="cell-person"><span class="avatar sage">${initials(r)}</span><div><strong>${escapeHTML(fullName(r))}</strong>${!r.active ? '<small class="muted"> (ketgan)</small>' : ''}</div></div></td>
+                <td><span class="room-chip">${roomName(r)}</span></td>
+                <td><a href="tel:${escapeHTML(r.phone.replace(/\s/g, ''))}" class="phone-link">${escapeHTML(r.phone)}</a></td>
+                <td>${fmtDate(st.cycleStart)}</td>
+                <td><strong class="red-text">${money(st.owed)} so‘m</strong></td>
+                <td><button class="btn secondary small" data-action="pay" data-id="${r.id}">${icon('wallet')}Qarzni yopish</button></td>
+              </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+      ${!debtors.length ? empty('Qarzdorlar yo‘q', 'Barcha to‘lovlar o‘z vaqtida amalga oshirilgan.', 'check') : ''}
+    </div>`;
+}
+
+function renderExpenses() {
+  const filtered = state.expenses.filter(e => categoryFilter === 'all' || e.category === categoryFilter).sort((a, b) => b.date.localeCompare(a.date));
+  const total = filtered.reduce((sum, e) => sum + e.amount, 0);
+  return `
+    <div class="page-heading">
+      <div><h1>Xarajatlar daftari</h1><p>Yotoqxona ehtiyojlari uchun sarflangan mablag‘lar: <strong>${money(total)} so‘m</strong></p></div>
+      <button class="btn primary" data-action="add-expense">${icon('plus')}Yangi xarajat</button>
+    </div>
+    <div class="pill-filter">
+      ${[['all', 'Barchasi'], ['utilities', 'Kommunal'], ['tax', 'Soliq'], ['other', 'Boshqa']].map(([k, label]) => `<button class="${categoryFilter === k ? 'active' : ''}" data-category="${k}">${label}</button>`).join('')}
+    </div>
+    <div class="table-card">
+      <table class="data-table">
+        <thead><tr><th>Xarajat nomi</th><th>Turi</th><th>Sana</th><th>Summasi</th><th></th></tr></thead>
+        <tbody>
+          ${filtered.map(e => `
+            <tr>
+              <td><strong>${escapeHTML(e.name)}</strong></td>
+              <td><span class="tag ${e.category}">${categoryName(e.category)}</span></td>
+              <td>${fmtDate(e.date)}</td>
+              <td><strong class="red-text">−${money(e.amount)} so‘m</strong></td>
+              <td style="text-align:right;"><button type="button" class="btn ghost small" data-action="delete-expense-confirm" data-id="${e.id}" style="padding:4px 8px;font-size:11px;color:#dc2626;border-color:#fecaca;" title="Xarajatni bekor qilish">${icon('close')} Bekor qilish</button></td>
+            </tr>`).join('')}
+        </tbody>
+      </table>
+      ${!filtered.length ? empty('Xarajatlar yo‘q', 'Bu toifada hali xarajat kiritilmagan.', 'receipt') : ''}
+    </div>`;
+}
+
+const categoryName = (c) => ({ utilities: 'Kommunal xizmat', tax: 'Soliq to‘lovi', other: 'Boshqa xarajat' }[c] || 'Xarajat');
+
+const cancelButton = '<button type="button" class="btn ghost" data-action="close-modal">Bekor qilish</button>';
+
+function openModal(title, bodyHTML, footerHTML = '', formId = '') {
+  const modal = $('#modal');
+  modal.innerHTML = `
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h2 class="modal-title">${title}</h2>
+        <button class="modal-close" data-action="close-modal" aria-label="Yopish">${icon('close')}</button>
+      </div>
+      ${formId ? `<form id="${formId}">` : ''}
+      <div class="modal-body">${bodyHTML}<div id="form-error" class="alert danger" hidden></div></div>
+      ${footerHTML ? `<div class="modal-footer">${footerHTML}</div>` : ''}
+      ${formId ? '</form>' : ''}
+    </div>`;
+  modal.showModal();
+  document.body.classList.add('modal-open');
+}
+
+function closeModal() {
+  const modal = $('#modal');
+  if (modal.open) modal.close();
+  document.body.classList.remove('modal-open');
+}
+
+function showRoom(block, roomNumber) {
+  const room = Number(roomNumber);
+  const occupants = roomOccupants(state, block, room);
+  const free = 4 - occupants.length;
+  openModal(`${block} blok · ${room}-xona`, `
+    <div class="room-modal-summary">
+      <div><strong>${occupants.length} ta yashovchi</strong><span>${free} ta bo‘sh joy mavjud</span></div>
+      ${free > 0 ? `<button class="btn primary small" data-action="add-resident" data-block-id="${block}" data-room="${room}">${icon('plus')}Bola qo‘shish</button>` : ''}
+    </div>
+    <div class="resident-slot-list">
+      ${occupants.map((r, i) => `
+        <div class="resident-slot">
+          <span class="slot-number">${i + 1}</span>
+          <span class="avatar sage">${initials(r)}</span>
+          <div class="slot-info">
+            <button class="slot-person" data-action="profile" data-id="${r.id}">${escapeHTML(fullName(r))}</button>
+            <span class="person-meta">${fmtDate(r.joined)} da kelgan</span>
+          </div>
+          ${statusBadge(r)}
+          <a href="tel:${escapeHTML(r.phone.replace(/\s/g, ''))}" class="phone-link">${escapeHTML(r.phone)}</a>
+        </div>`).join('')}
+      ${Array.from({ length: free }, (_, i) => `
+        <button class="free-slot" data-action="add-resident" data-block-id="${block}" data-room="${room}">
+          <span>${occupants.length + i + 1}</span>
+          <span>Bo‘sh joy · Bola joylashtirish uchun bosing</span>
+        </button>`).join('')}
+    </div>`);
+}
+
+function showProfile(id) {
+  const r = state.residents.find(r => r.id === id);
+  if (!r) return;
+  const s = statusOf(r);
+  const payments = state.payments.filter(p => p.residentId === r.id).sort((a, b) => b.date.localeCompare(a.date));
+  const currentRate = state.settings?.monthlyRate || RATE;
+  openModal('Bola ma’lumotlari', `
+    <div class="person-profile">
+      <span class="avatar sage">${initials(r)}</span>
+      <div><h3>${escapeHTML(fullName(r))}</h3><p>${roomName(r)}</p></div>
+      ${statusBadge(r)}
+    </div>
+    <div class="detail-list">
+      <div class="detail-item"><span>Telefon raqami</span><a href="tel:${escapeHTML(r.phone.replace(/\s/g, ''))}">${escapeHTML(r.phone)}</a></div>
+      <div class="detail-item"><span>Kelgan sana</span><strong>${fmtDate(r.joined, true)}</strong></div>
+      <div class="detail-item"><span>${r.active ? 'Keyingi to‘lov' : 'Ketgan sana'}</span><strong>${fmtDate(r.active ? s.nextDue : r.leftAt, true)}</strong></div>
+      <div class="detail-item"><span>30 kunlik to‘lov</span><strong>${money(currentRate)} so‘m</strong></div>
+      <div class="detail-item"><span>Jami to‘langan</span><strong class="green-text">${money(s.totalPaid)} so‘m</strong></div>
+    </div>
+    <div class="payment-summary ${s.owed ? 'has-debt' : ''}">
+      <span>Qolgan qarz</span><strong>${money(s.owed)} <small>so‘m</small></strong>
+    </div>
+    <h3 class="small-heading">To‘lov tarixi <span class="count-pill">${payments.length}</span></h3>
+    <div class="payment-history">
+      ${payments.map(p => `
+        <div class="detail-item" style="display:flex;justify-content:space-between;align-items:center;">
+          <div><span>${fmtDate(p.date, true)} <small>${p.method === 'card' ? 'Karta orqali' : 'Naqd pul'}</small></span></div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <strong class="green-text">+${money(p.amount)} so‘m</strong>
+            <button type="button" class="btn ghost small" data-action="delete-payment-confirm" data-id="${p.id}" data-resident-id="${r.id}" style="padding:4px 8px;font-size:10px;color:#dc2626;border-color:#fecaca;" title="To‘lovni bekor qilish">${icon('close')} Bekor qilish</button>
+          </div>
+        </div>`).join('') || '<p class="muted">Hali to‘lov qilinmagan.</p>'}
+    </div>`, `
+    ${r.active ? `<button class="btn danger" data-action="checkout" data-id="${r.id}">${icon('logout')}Ketgan deb belgilash</button>` : '<span class="muted">Bola yotoqxonadan ketgan</span>'}
+    ${r.active || s.owed ? `<button class="btn primary" data-action="pay" data-id="${r.id}">${icon('wallet')}${s.owed ? 'Qarzni yopish' : 'To‘lov qilish'}</button>` : ''}`);
+}
+
+function showAddResident(block = 'A', room = '') {
+  const availableRooms = roomList().filter(r => roomOccupants(state, r.block, r.room).length < 4);
+  if (!availableRooms.length) { toast('Barcha o‘rinlar band.'); return; }
+  const preferred = availableRooms.find(r => r.block === block && r.room === Number(room)) || availableRooms.find(r => r.block === block) || availableRooms[0];
+  const currentRate = state.settings?.monthlyRate || RATE;
+  openModal('Yangi bola qo‘shish', `
+    <p class="modal-description">Bola ma’lumotlarini kiriting va bo‘sh o‘rinni tanlang.</p>
+    <div class="form-grid">
+      <label class="field"><span>Ismi</span><input name="firstName" placeholder="Masalan, Azizbek" required maxlength="50" autocomplete="given-name"></label>
+      <label class="field"><span>Familiyasi</span><input name="lastName" placeholder="Masalan, Karimov" required maxlength="50" autocomplete="family-name"></label>
+      <label class="field full"><span>Telefon raqami</span><input name="phone" type="tel" value="+998 " placeholder="+998 90 123 45 67" required autocomplete="tel" maxlength="22"></label>
+      <label class="field full"><span>Xona va blok</span>
+        <select name="roomChoice">${availableRooms.map(r => `<option value="${r.block}-${r.room}" ${r.id === preferred.id ? 'selected' : ''}>${r.block} blok · ${r.room}-xona — ${4 - roomOccupants(state, r.block, r.room).length} ta bo‘sh joy</option>`).join('')}</select>
+      </label>
+      <label class="field"><span>Kelgan sana</span><input type="text" readonly inputmode="none" name="joined" value="${todayISO()}" max="${todayISO()}" required data-uz-date="true" style="cursor:pointer;background:#fff;"></label>
+      <label class="field"><span>Hozir bergan puli (so‘m)</span><input type="number" name="initialPayment" inputmode="numeric" value="0" min="0" step="1000" required></label>
+      <label class="field full"><span>To‘lov usuli</span><select name="method"><option value="cash">Naqd pul</option><option value="card">Karta orqali</option></select></label>
+    </div>
+    <div class="hint">${icon('info')} To‘lov kelgan kundan hisoblanadi: har 30 kun uchun ${money(currentRate)} so‘m. To‘lanmagan summa qarz bo‘lib qoladi.</div>
+  `, `${cancelButton}<button type="submit" class="btn primary">${icon('plus')}Bolani saqlash</button>`, 'resident-form');
+}
+
+function showPaymentPicker(term = '') {
+  openModal('To‘lovni kim uchun qabul qilamiz?', `
+    <label class="search-field modal-search">${icon('search')}<input id="payment-search" type="search" placeholder="Ism, familiya yoki telefon..." value="${escapeHTML(term)}" aria-label="To‘lov uchun bolani qidirish" autofocus></label>
+    <div id="payment-results" class="search-results"></div>
+    <p class="hint">Bolani tanlang va kiritilayotgan to‘lov summasini yozing.</p>`);
+  updateSearchResults(term, 'pay');
+}
+
+function residentMatches(r, term) {
+  const digits = term.replace(/\D/g, '');
+  const isPhone = digits.length > 0 && !/[^\d\s()+-]/.test(term);
+  return !term || `${fullName(r)} ${r.lastName} ${r.phone} ${r.block}-${r.room}`.toLowerCase().includes(term) || (isPhone && r.phone.replace(/\D/g, '').includes(digits));
+}
+
+function updateSearchResults(term, action) {
+  const target = action === 'pay' ? $('#payment-results') : $('#global-results');
+  if (!target) return;
+  const t = term.trim().toLowerCase();
+  const list = state.residents.filter(r => residentMatches(r, t)).slice(0, 8);
+  target.innerHTML = list.map(r => {
+    const s = statusOf(r);
+    return `
+      <div class="search-result" data-action="${action}" data-id="${r.id}">
+        <span class="avatar sage">${initials(r)}</span>
+        <div><strong>${escapeHTML(fullName(r))}</strong><small>${roomName(r)} · ${escapeHTML(r.phone)}</small></div>
+        <strong class="${s.owed ? 'red-text' : 'green-text'}">${s.owed ? `${money(s.owed)} so‘m qarz` : 'Qarzi yo‘q'}</strong>
+        ${icon('right')}
+      </div>`;
+  }).join('') || '<div class="muted" style="padding:16px 0;">Mos keluvchi bola topilmadi.</div>';
+}
+
+function showPay(id) {
+  const r = state.residents.find(r => r.id === id);
+  if (!r) return;
+  const s = statusOf(r);
+  const currentRate = state.settings?.monthlyRate || RATE;
+  const available = Math.max(0, s.totalCharged + (r.active ? currentRate : 0) - s.totalPaid);
+  const due = s.owed || currentRate;
+  openModal('To‘lov qabul qilish', `
+    <input type="hidden" name="residentId" value="${r.id}">
+    <div class="person-profile">
+      <span class="avatar sage">${initials(r)}</span>
+      <div><h3>${escapeHTML(fullName(r))}</h3><p>${roomName(r)} · Kelgan: ${fmtDate(r.joined, true)}</p></div>
+      ${statusBadge(r)}
+    </div>
+    <label class="field full">
+      <span>To‘lov summasi</span>
+      <div class="currency-input"><input id="payment-amount" name="amount" type="number" value="${due}" min="1" max="${available}" step="1" inputmode="numeric" required><span>so‘m</span></div>
+    </label>
+    <div class="quick-amounts">
+      ${[...new Set([200000, 400000, due])].filter(a => a <= available).map(a => `<button type="button" data-amount="${a}">${money(a)}${a === due ? ' · To‘liq' : ''}</button>`).join('')}
+    </div>
+    <div id="payment-preview" class="hint"></div>
+    <div class="form-grid">
+      <label class="field"><span>To‘lov usuli</span><select name="method"><option value="cash">Naqd pul</option><option value="card">Karta orqali</option></select></label>
+      <label class="field"><span>To‘lov sanasi</span><input name="date" type="text" readonly inputmode="none" value="${todayISO()}" min="${r.joined}" max="${todayISO()}" required data-uz-date="true" style="cursor:pointer;background:#fff;"></label>
+    </div>
+  `, `${cancelButton}<button type="submit" class="btn primary">${icon('check')}To‘lovni saqlash</button>`, 'payment-form');
+  updatePaymentPreview();
+}
+
+function updatePaymentPreview() {
+  const form = $('#payment-form');
+  if (!form) return;
+  const r = state.residents.find(r => r.id === form.elements.residentId.value);
+  const owed = statusOf(r).owed;
+  const value = Number(form.elements.amount.value);
+  $('#payment-preview').innerHTML = icon('info') + (value < owed ? `Qisman to‘lov. Qoladigan qarz: <strong>${money(owed - value)} so‘m.</strong>` : owed && value === owed ? 'To‘lovdan so‘ng qarz to‘liq yopiladi.' : `<span>${owed ? 'Qarz yopiladi. Ortiqcha summa' : 'Bu summa'} keyingi davr uchun avans bo‘lib saqlanadi.</span>`);
+}
+
+function showCheckout(id) {
+  const r = state.residents.find(r => r.id === id);
+  if (!r) return;
+  const owed = statusOf(r).owed;
+  openModal('Bola yotoqxonadan ketdimi?', `
+    <input type="hidden" name="residentId" value="${r.id}">
+    <div class="person-profile"><span class="avatar sage">${initials(r)}</span><div><h3>${escapeHTML(fullName(r))}</h3><p>${roomName(r)}</p></div></div>
+    <p>Bolaning o‘rni bo‘shaydi va yangi to‘lovlar hisoblanmaydi. To‘lov tarixi saqlanadi.</p>
+    ${owed ? `<div class="alert warning">${icon('info')}<span><strong>${money(owed)} so‘m qarz mavjud.</strong> Qarz o‘chirilmaydi, uni “Qarzdorlar” bo‘limidan keyin ham yopish mumkin.</span></div>` : ''}
+    <p class="muted">Ketgan sana: ${fmtDate(todayISO(), true)}</p>
+  `, `${cancelButton}<button type="submit" class="btn danger">Ketgan deb belgilash</button>`, 'checkout-form');
+}
+
+function showAddExpense() {
+  openModal('Xarajat qo‘shish', `
+    <p class="modal-description">Xarajat saqlangach, moliyaviy hisobotga qo‘shiladi.</p>
+    <div class="form-grid">
+      <label class="field full"><span>Xarajat nomi</span><input name="name" placeholder="Masalan, elektr energiyasi" required maxlength="100"></label>
+      <label class="field full"><span>Summa (so‘m)</span><input name="amount" type="number" min="1" step="1" inputmode="numeric" placeholder="0" required></label>
+      <label class="field"><span>Xarajat turi</span><select name="category"><option value="utilities">Kommunal xizmatlar</option><option value="tax">Soliq</option><option value="other">Boshqa xarajatlar</option></select></label>
+      <label class="field"><span>Sana</span><input name="date" type="text" readonly inputmode="none" max="${todayISO()}" value="${todayISO()}" required data-uz-date="true" style="cursor:pointer;background:#fff;"></label>
+    </div>
+  `, `${cancelButton}<button type="submit" class="btn primary">${icon('check')}Xarajatni saqlash</button>`, 'expense-form');
+}
+
+function showNotifications() {
+  const soon = state.residents.filter(r => r.active && statusOf(r).status === 'soon').sort((a, b) => statusOf(a).daysUntilDue - statusOf(b).daysUntilDue);
+  openModal('Yaqinlashayotgan to‘lovlar', `
+    <p class="modal-description">30 kunlik davrning 25-kunidan boshlab eslatma chiqadi. ${soon.length} ta bolaning to‘lovi yaqin.</p>
+    <div class="notification-list">${soon.map(r => personRow(r)).join('') || empty('Yaqin to‘lovlar yo‘q', 'To‘lovga 5 kun qolganda bolalar shu yerda ko‘rinadi.', 'check')}</div>
+  `);
+}
+
+function showCustomDates() {
+  openModal('Hisobot davrini tanlash', `
+    <div class="form-grid">
+      <label class="field"><span>Boshlanish sanasi</span><input name="from" type="text" readonly inputmode="none" value="${customFrom}" max="${todayISO()}" required data-uz-date="true" style="cursor:pointer;background:#fff;"></label>
+      <label class="field"><span>Tugash sanasi</span><input name="to" type="text" readonly inputmode="none" value="${customTo}" max="${todayISO()}" required data-uz-date="true" style="cursor:pointer;background:#fff;"></label>
+    </div>
+    <p class="hint">Tushum, xarajat va foyda shu davr uchun hisoblanadi. Qolgan qarz va bandlik bugungi holatni ko‘rsatadi.</p>
+  `, `${cancelButton}<button type="submit" class="btn primary">Qo‘llash</button>`, 'period-form');
+}
+
+function showDemoInfo() {
+  const currentRate = state.settings?.monthlyRate || RATE;
+  const currentPin = state.settings?.pin || '1234';
+  openModal('Tizim va Zaxira (Sozlamalar)', `
+    <div class="demo-brand">${icon('building')}<h3>Makon <span class="badge paid">Offline</span></h3></div>
+    <p>Telefonda internetsiz ishlaydigan mustaqil yotoqxona boshqaruvi tizimi.</p>
+    <div class="detail-list">
+      <div class="detail-item"><span>Yotoqxona o‘rinlari</span><strong>184 ta (A: 14, B: 14, C: 18 xona)</strong></div>
+      <div class="detail-item"><span>Standart oylik to‘lov</span><strong>${money(currentRate)} so‘m / 30 kun</strong></div>
+      <div class="detail-item"><span>Kirish paroli</span><strong>${escapeHTML(currentPin)}</strong></div>
+      <div class="detail-item"><span>Ma’lumotlar xavfsizligi</span><strong>Qurilmaning ichki xotirasida</strong></div>
+    </div>
+
+    <!-- Oylik to'lov sozlamasi -->
+    <div style="margin-top:14px;padding:12px;border:1px solid #dbe9fc;border-radius:10px;background:#f8fbff;">
+      <h4 style="font-size:12px;font-weight:700;color:#1e40af;margin-bottom:4px;">Standart oylik to‘lov miqdori</h4>
+      <p style="font-size:10px;color:#475569;margin-bottom:8px;">Har bir bola uchun standart 30 kunlik to‘lov summasi.</p>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input type="number" id="settings-monthly-rate" value="${currentRate}" min="10000" step="10000" style="flex:1;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px;font-weight:600;">
+        <button type="button" class="btn primary small" data-action="save-rate" style="white-space:nowrap;padding:8px 14px;">Saqlash</button>
+      </div>
+    </div>
+
+    <!-- Telegramga yuborish va zaxira -->
+    <div style="margin-top:14px;padding:14px;background:#edf5ff;border:1px solid #dbe9fc;border-radius:10px;">
+      <h4 style="font-size:12px;font-weight:700;color:#1e40af;margin-bottom:6px;">Telegramga yuborish va zaxira</h4>
+      <p style="font-size:10px;color:#3b82f6;line-height:1.5;margin-bottom:12px;">Ma’lumotlaringiz xavfsiz saqlanishi va hisobotlarni Word (.docx) shaklida ko‘rish uchun Telegramga yuboring.</p>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <button type="button" class="btn primary" data-action="telegram-backup" style="min-height:40px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:8px;">${icon('send')} Telegramga zaxirani yuborish (.json)</button>
+        <button type="button" class="btn primary" data-action="telegram-report" style="min-height:40px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:8px;background:#1d4ed8;">${icon('receipt')} Telegramga hisobot yuborish (.docx)</button>
+        <label class="btn secondary" style="min-height:36px;font-size:11px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;">${icon('card')} Zaxiradan tiklash (.json)<input type="file" id="import-backup-input" accept=".json" style="display:none;"></label>
+      </div>
+    </div>
+
+    <!-- Kirish paroli sozlamasi -->
+    <div style="margin-top:14px;padding:12px;border:1px solid #dbe9fc;border-radius:10px;background:#f8fbff;">
+      <h4 style="font-size:12px;font-weight:700;color:#1e40af;margin-bottom:4px;">Ilovaga kirish paroli</h4>
+      <p style="font-size:10px;color:#475569;margin-bottom:8px;">Ilova ochilganda so‘raladigan 4 xonali PIN kod (Standart: 1234).</p>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <input type="text" id="settings-pin" value="${escapeHTML(currentPin)}" maxlength="4" style="flex:1;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;font-size:13px;font-weight:600;letter-spacing:4px;text-align:center;">
+        <button type="button" class="btn primary small" data-action="save-pin" style="white-space:nowrap;padding:8px 14px;">Saqlash</button>
+      </div>
+    </div>
+
+    <!-- Ma'lumotlarni tozalash -->
+    <div style="margin-top:14px;padding:12px;border:1px solid #e1e9f4;border-radius:10px;background:#f8fbff;">
+      <h4 style="font-size:11px;font-weight:700;color:#475569;margin-bottom:6px;">Baza holatini boshqarish</h4>
+      <button type="button" class="btn ghost small" data-action="clear-confirm" style="color:#b91c1c;border-color:#fecaca;">Ma’lumotlarni tozalash</button>
+    </div>
+  `, `<button class="btn primary" data-action="close-modal">Yopish</button>`);
+}
+
+document.addEventListener('click', (event) => {
+  // Calendar modal interaction
+  const calDateBtn = event.target.closest('[data-cal-date]');
+  if (calDateBtn) {
+    calSelected = calDateBtn.dataset.calDate;
+    document.querySelectorAll('#uz-calendar-modal .uz-day-cell').forEach(c => c.classList.remove('selected'));
+    calDateBtn.classList.add('selected');
+    return;
+  }
+  const calNav = event.target.closest('[data-cal-nav]');
+  if (calNav) {
+    if (calNav.dataset.calNav === 'prev') {
+      calMonth--;
+      if (calMonth < 0) { calMonth = 11; calYear--; }
+    } else {
+      calMonth++;
+      if (calMonth > 11) { calMonth = 0; calYear++; }
+    }
+    renderUzbekCalendar();
+    return;
+  }
+  const calAction = event.target.closest('[data-cal-action]');
+  if (calAction) {
+    const act = calAction.dataset.calAction;
+    if (act === 'cancel') closeUzbekCalendar();
+    else if (act === 'today') applySelectedDate(todayISO());
+    else if (act === 'confirm') applySelectedDate(calSelected);
+    return;
+  }
+
+  // Intercept date inputs
+  const dateInput = event.target.closest('input[type="date"], [data-uz-date]');
+  if (dateInput) {
+    event.preventDefault();
+    try { dateInput.blur(); } catch {}
+    openUzbekDatePicker(dateInput);
+    return;
+  }
+
+  // PIN keypad interaction
+  const pinBtn = event.target.closest('[data-pin]');
+  if (pinBtn) {
+    const val = pinBtn.dataset.pin;
+    if (val === 'delete') handlePinDelete();
+    else if (/^\d$/.test(val)) handlePinDigit(val);
+    return;
+  }
+
+  const target = event.target.closest('button, [data-action]');
+  if (!target) return;
+  if (target.dataset.nav) { go(target.dataset.nav); return; }
+  if (target.dataset.block) { blockFilter = target.dataset.block; render(); return; }
+  if (target.dataset.category) { categoryFilter = target.dataset.category; render(); return; }
+  if (target.dataset.amount) { $('#payment-amount').value = target.dataset.amount; updatePaymentPreview(); return; }
+
+  const { action, id } = target.dataset;
+  const handlers = {
+    'close-modal': closeModal,
+    'room': () => showRoom(target.dataset.blockId, target.dataset.room),
+    'profile': () => showProfile(id),
+    'add-resident': () => showAddResident(target.dataset.blockId || 'A', target.dataset.room || ''),
+    'payment-picker': () => showPaymentPicker(),
+    'pay': () => showPay(id),
+    'checkout': () => showCheckout(id),
+    'add-expense': showAddExpense,
+    'notifications': showNotifications,
+    'demo-info': showDemoInfo,
+    'settings-info': showDemoInfo,
+    'telegram-backup': sendBackupToTelegram,
+    'telegram-report': sendReportToTelegram,
+    'lock-app': lockApp,
+    'save-rate': () => {
+      const input = $('#settings-monthly-rate');
+      const val = Number(input?.value);
+      if (!Number.isSafeInteger(val) || val <= 0) {
+        toast('Oylik to‘lov summasini to‘g‘ri kiriting.');
+        return;
+      }
+      mutate(next => {
+        if (!next.settings) next.settings = {};
+        next.settings.monthlyRate = val;
+      }, `Standart oylik to‘lov saqlandi: ${money(val)} so‘m.`);
+      updateSidebarTariff();
+      showDemoInfo();
     },
-    'delete-payment':()=>{
-      const residentId=target.dataset.residentId;
-      mutate(next=>deletePayment(next,id),'To‘lov muvaffaqiyatli bekor qilindi.');
-      if(residentId&&state.residents.some(r=>r.id===residentId))showProfile(residentId);
+    'save-pin': () => {
+      const input = $('#settings-pin');
+      const val = String(input?.value || '').trim();
+      if (!/^\d{4}$/.test(val)) {
+        toast('Parol 4 ta raqamdan iborat bo‘lishi kerak.');
+        return;
+      }
+      mutate(next => {
+        if (!next.settings) next.settings = {};
+        next.settings.pin = val;
+      }, `Yangi parol saqlandi: ${val}`);
+      showDemoInfo();
     },
-    'delete-expense-confirm':()=>{
-      const e=state.expenses.find(e=>e.id===id);if(!e)return;
-      openModal('Xarajatni bekor qilish',`<p>Rostdan ham <strong>${escapeHTML(e.name)}</strong> (<strong>${money(e.amount)} so‘m</strong>) xarajatini bekor qilmoqchimisiz?</p><p class="hint">Ushbu summa xarajatlar ro‘yxatidan va moliyaviy hisobotdan chiqarib tashlanadi.</p>`,`${cancelButton}<button class="btn danger" data-action="delete-expense" data-id="${e.id}">Ha, xarajatni bekor qilish</button>`);
+    'delete-payment-confirm': () => {
+      const p = state.payments.find(p => p.id === id);
+      if (!p) return;
+      const r = state.residents.find(r => r.id === p.residentId);
+      openModal('To‘lovni bekor qilish', `
+        <p>Rostdan ham <strong>${escapeHTML(r ? fullName(r) : 'Bola')}</strong> uchun kiritilgan <strong>${money(p.amount)} so‘m</strong> to‘lovni bekor qilmoqchimisiz?</p>
+        <p class="hint">To‘lov bekor qilinadi va bolaning qarzdorlik hisob-kitobi qayta tiklanadi.</p>
+      `, `${cancelButton}<button class="btn danger" data-action="delete-payment" data-id="${p.id}" data-resident-id="${p.residentId}">Ha, to‘lovni bekor qilish</button>`);
     },
-    'delete-expense':()=>{
-      mutate(next=>deleteExpense(next,id),'Xarajat muvaffaqiyatli bekor qilindi.');
+    'delete-payment': () => {
+      const residentId = target.dataset.residentId;
+      mutate(next => deletePayment(next, id), 'To‘lov muvaffaqiyatli bekor qilindi.');
+      if (residentId && state.residents.some(r => r.id === residentId)) showProfile(residentId);
     },
-    'global-search':()=>{openModal('Bolani qidirish',`<label class="search-field modal-search">${icon('search')}<input id="global-search" type="search" placeholder="Ism, familiya yoki telefon..." aria-label="Bolani qidirish" autofocus></label><div id="global-results" class="search-results"></div>`);updateSearchResults('','profile');},
-    'clear-confirm':()=>openModal('Bazani tozalash',`<p>Barcha bolalar, to‘lovlar va xarajatlar o‘chirilib, <strong>toza bo‘sh baza</strong> yaratiladi.</p><p>Xonalar va o‘rinlar saqlanadi.</p><p><strong>Eslatma:</strong> Agar kerakli ma’lumotlaringiz bo‘lsa, oldin "Zaxirani saqlash" tugmasi orqali nusxa oling.</p>`,`${cancelButton}<button class="btn danger" data-action="clear-database">Ha, bazani tozalash</button>`),
-    'clear-database':()=>{try{const next=emptyData();if(storageAvailable)localStorage.setItem(STORAGE_KEY,JSON.stringify(next));state=next;closeModal();go('dashboard');toast('Baza tozalandi.');}catch{toast('Xatolik yuz berdi.');}},
-    'reset-confirm':()=>openModal('Demoni qayta boshlash',`<p>Shu brauzerda kiritilgan bolalar, to‘lovlar va xarajatlar o‘chib, namunaviy ma’lumotlar qayta tiklanadi.</p><p><strong>Bu amalni ortga qaytarib bo‘lmaydi.</strong></p>`,`${cancelButton}<button class="btn danger" data-action="reset-demo">Ha, qayta boshlash</button>`),
-    'reset-demo':()=>{try{const next=seedData();localStorage.setItem(STORAGE_KEY,JSON.stringify(next));state=next;storageAvailable=true;closeModal();go('dashboard');toast('Demo qayta boshlandi.');}catch{toast('Brauzerda saqlash imkoni yo‘q.');}}
+    'delete-expense-confirm': () => {
+      const e = state.expenses.find(e => e.id === id);
+      if (!e) return;
+      openModal('Xarajatni bekor qilish', `
+        <p>Rostdan ham <strong>${escapeHTML(e.name)}</strong> (<strong>${money(e.amount)} so‘m</strong>) xarajatini bekor qilmoqchimisiz?</p>
+        <p class="hint">Ushbu summa xarajatlar ro‘yxatidan va moliyaviy hisobotdan chiqarib tashlanadi.</p>
+      `, `${cancelButton}<button class="btn danger" data-action="delete-expense" data-id="${e.id}">Ha, xarajatni bekor qilish</button>`);
+    },
+    'delete-expense': () => {
+      mutate(next => deleteExpense(next, id), 'Xarajat muvaffaqiyatli bekor qilindi.');
+    },
+    'global-search': () => {
+      openModal('Bolani qidirish', `
+        <label class="search-field modal-search">${icon('search')}<input id="global-search" type="search" placeholder="Ism, familiya yoki telefon..." aria-label="Bolani qidirish" autofocus></label>
+        <div id="global-results" class="search-results"></div>`);
+      updateSearchResults('', 'profile');
+    },
+    'clear-confirm': () => openModal('Ma’lumotlarni tozalash', `
+      <p>Barcha bolalar, to‘lovlar va xarajatlar o‘chirilib, <strong>toza bo‘sh baza</strong> yaratiladi.</p>
+      <p>Xonalar va o‘rinlar saqlanadi.</p>
+      <p><strong>Eslatma:</strong> Agar kerakli ma’lumotlaringiz bo‘lsa, oldin "Telegramga zaxirani yuborish" orqali nusxa oling.</p>
+    `, `${cancelButton}<button class="btn danger" data-action="clear-database">Ha, ma’lumotlarni tozalash</button>`),
+    'clear-database': () => {
+      try {
+        const next = emptyData();
+        next.settings = { ...state.settings };
+        if (storageAvailable) localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+        state = next;
+        closeModal();
+        go('dashboard');
+        toast('Baza tozalandi.');
+      } catch {
+        toast('Xatolik yuz berdi.');
+      }
+    },
+    'reset-confirm': () => openModal('Demoni qayta boshlash', `
+      <p>Shu brauzerda kiritilgan bolalar, to‘lovlar va xarajatlar o‘chib, namunaviy ma’lumotlar qayta tiklanadi.</p>
+      <p><strong>Bu amalni ortga qaytarib bo‘lmaydi.</strong></p>
+    `, `${cancelButton}<button class="btn danger" data-action="reset-demo">Ha, qayta boshlash</button>`),
+    'reset-demo': () => {
+      try {
+        const next = seedData();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+        state = next;
+        storageAvailable = true;
+        closeModal();
+        go('dashboard');
+        toast('Demo qayta boshlandi.');
+      } catch {
+        toast('Brauzerda saqlash imkoni yo‘q.');
+      }
+    }
   };
-  if(handlers[action])handlers[action]();
+  if (handlers[action]) handlers[action]();
 });
-document.addEventListener('change',(event)=>{
-  if(event.target.id==='import-backup-input'&&event.target.files?.[0]){
+
+document.addEventListener('keydown', (event) => {
+  const screen = $('#pin-lock-screen');
+  if (screen && !screen.classList.contains('unlocked')) {
+    if (/^\d$/.test(event.key)) {
+      handlePinDigit(event.key);
+    } else if (event.key === 'Backspace') {
+      handlePinDelete();
+    }
+  }
+});
+
+document.addEventListener('change', (event) => {
+  if (event.target.id === 'import-backup-input' && event.target.files?.[0]) {
     importBackup(event.target.files[0]);
     return;
   }
-  if(event.target.id==='period'){
-    if(event.target.value==='custom'){showCustomDates();event.target.value=selectedPeriod;}
-    else {selectedPeriod=event.target.value;render();}
+  if (event.target.id === 'period') {
+    if (event.target.value === 'custom') {
+      showCustomDates();
+      event.target.value = selectedPeriod;
+    } else {
+      selectedPeriod = event.target.value;
+      render();
+    }
   }
-  if(event.target.id==='block-filter'){blockFilter=event.target.value;render();}
-  if(event.target.id==='status-filter'){statusFilter=event.target.value;render();}
+  if (event.target.id === 'block-filter') { blockFilter = event.target.value; render(); }
+  if (event.target.id === 'status-filter') { statusFilter = event.target.value; render(); }
 });
-document.addEventListener('input',(event)=>{
-  if(event.target.id==='resident-query'){
-    const pos=event.target.selectionStart;query=event.target.value;render();const input=$('#resident-query');input.focus();try{input.setSelectionRange(pos,pos);}catch{}
+
+document.addEventListener('input', (event) => {
+  if (event.target.id === 'resident-query') {
+    const pos = event.target.selectionStart;
+    query = event.target.value;
+    render();
+    const input = $('#resident-query');
+    input.focus();
+    try { input.setSelectionRange(pos, pos); } catch {}
   }
-  if(event.target.id==='payment-search')updateSearchResults(event.target.value,'pay');
-  if(event.target.id==='global-search')updateSearchResults(event.target.value,'profile');
-  if(event.target.id==='payment-amount')updatePaymentPreview();
+  if (event.target.id === 'payment-search') updateSearchResults(event.target.value, 'pay');
+  if (event.target.id === 'global-search') updateSearchResults(event.target.value, 'profile');
+  if (event.target.id === 'payment-amount') updatePaymentPreview();
 });
-document.addEventListener('submit',(event)=>{
-  event.preventDefault();const form=event.target,data=Object.fromEntries(new FormData(form));
+
+document.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const form = event.target, data = Object.fromEntries(new FormData(form));
   try {
-    if(form.id==='resident-form'){
-      const [block,room]=data.roomChoice.split('-'),initial=Number(data.initialPayment);
-      if(!Number.isSafeInteger(initial)||initial<0)throw new Error('Boshlang‘ich to‘lovni to‘g‘ri kiriting.');
-      mutate(next=>{const r=addResident(next,{firstName:data.firstName,lastName:data.lastName,phone:data.phone,block,room:Number(room),joined:data.joined},todayISO());if(initial>0)recordPayment(next,r.id,initial,data.method,todayISO());},'Yangi bola qo‘shildi.');
+    if (form.id === 'resident-form') {
+      const [block, room] = data.roomChoice.split('-'), initial = Number(data.initialPayment);
+      if (!Number.isSafeInteger(initial) || initial < 0) throw new Error('Boshlang‘ich to‘lovni to‘g‘ri kiriting.');
+      mutate(next => {
+        const r = addResident(next, { firstName: data.firstName, lastName: data.lastName, phone: data.phone, block, room: Number(room), joined: data.joined }, todayISO());
+        if (initial > 0) recordPayment(next, r.id, initial, data.method, todayISO());
+      }, 'Yangi bola qo‘shildi.');
     }
-    if(form.id==='payment-form')mutate(next=>recordPayment(next,data.residentId,Number(data.amount),data.method,data.date),'To‘lov saqlandi. Hisob-kitob yangilandi.');
-    if(form.id==='checkout-form')mutate(next=>checkoutResident(next,data.residentId,todayISO()),'Bola ketgan deb belgilandi. O‘rin bo‘shadi.');
-    if(form.id==='expense-form')mutate(next=>addExpense(next,{...data,amount:Number(data.amount)}),'Xarajat saqlandi.');
-    if(form.id==='period-form'){
-      if(data.from>data.to)throw new Error('Boshlanish sanasi tugash sanasidan keyin bo‘lmasin.');
-      if(data.to>todayISO())throw new Error('Kelajakdagi sanani tanlamang.');
-      customFrom=data.from;customTo=data.to;selectedPeriod='custom';closeModal();render();
+    if (form.id === 'payment-form') mutate(next => recordPayment(next, data.residentId, Number(data.amount), data.method, data.date), 'To‘lov saqlandi. Hisob-kitob yangilandi.');
+    if (form.id === 'checkout-form') mutate(next => checkoutResident(next, data.residentId, todayISO()), 'Bola ketgan deb belgilandi. O‘rin bo‘shadi.');
+    if (form.id === 'expense-form') mutate(next => addExpense(next, { ...data, amount: Number(data.amount) }), 'Xarajat saqlandi.');
+    if (form.id === 'period-form') {
+      if (data.from > data.to) throw new Error('Boshlanish sanasi tugash sanasidan keyin bo‘lmasin.');
+      if (data.to > todayISO()) throw new Error('Kelajakdagi sanani tanlamang.');
+      customFrom = data.from;
+      customTo = data.to;
+      selectedPeriod = 'custom';
+      closeModal();
+      render();
     }
-  }catch(error){const field=$('#form-error');if(field){field.hidden=false;field.textContent=error.message||'Saqlashda xatolik yuz berdi.';}}
+  } catch (error) {
+    const field = $('#form-error');
+    if (field) { field.hidden = false; field.textContent = error.message || 'Saqlashda xatolik yuz berdi.'; }
+  }
 });
-$('#modal').addEventListener('click',event=>{if(event.target===$('#modal')){const box=$('#modal').getBoundingClientRect();if(event.clientX<box.left||event.clientX>box.right||event.clientY<box.top||event.clientY>box.bottom)closeModal();}});
-$('#modal').addEventListener('close',()=>document.body.classList.remove('modal-open'));
-window.addEventListener('hashchange',()=>{const next=location.hash.slice(1);if(names[next])go(next);});
-window.addEventListener('storage',event=>{if(event.key===STORAGE_KEY&&event.newValue){try{const incoming=JSON.parse(event.newValue);if(incoming.version===1&&Array.isArray(incoming.residents)&&Array.isArray(incoming.payments)&&Array.isArray(incoming.expenses)){state=incoming;closeModal();render();toast('Ma’lumotlar boshqa oynadan yangilandi.');}}catch{}}});
+
+$('#modal').addEventListener('click', event => {
+  if (event.target === $('#modal')) {
+    const box = $('#modal').getBoundingClientRect();
+    if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) closeModal();
+  }
+});
+$('#modal').addEventListener('close', () => document.body.classList.remove('modal-open'));
+
+const uzCalModal = $('#uz-calendar-modal');
+if (uzCalModal) {
+  uzCalModal.addEventListener('click', event => {
+    if (event.target === uzCalModal) {
+      const box = uzCalModal.getBoundingClientRect();
+      if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) closeUzbekCalendar();
+    }
+  });
+}
+
+window.addEventListener('hashchange', () => {
+  const next = location.hash.slice(1);
+  if (names[next]) go(next);
+});
+
+window.addEventListener('storage', event => {
+  if (event.key === STORAGE_KEY && event.newValue) {
+    try {
+      const incoming = JSON.parse(event.newValue);
+      if (incoming.version === 1 && Array.isArray(incoming.residents) && Array.isArray(incoming.payments) && Array.isArray(incoming.expenses)) {
+        state = incoming;
+        closeModal();
+        render();
+        toast('Ma’lumotlar boshqa oynadan yangilandi.');
+      }
+    } catch {}
+  }
+});
+
 render();
-if(!storageAvailable)setTimeout(()=>toast('Saqlash o‘chiq: ma’lumotlar faqat shu seansda qoladi.'),800);
+if (!storageAvailable) setTimeout(() => toast('Saqlash o‘chiq: ma’lumotlar faqat shu seansda qoladi.'), 800);
 
 })();
 </script>
