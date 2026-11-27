@@ -499,23 +499,24 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   position: fixed;
   inset: 0;
   z-index: 99999;
-  background: linear-gradient(135deg, #10243e 0%, #1e3a8a 50%, #0f172a 100%);
+  background: radial-gradient(circle at 50% 20%, #173663 0%, #0d1e37 55%, #07101e 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  backdrop-filter: blur(8px);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  padding: 16px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s;
 }
 .pin-lock-screen.unlocked {
   opacity: 0;
-  transform: scale(1.04);
+  transform: scale(1.03);
   pointer-events: none;
   visibility: hidden;
 }
 .pin-card {
   width: 100%;
-  max-width: 320px;
+  max-width: 280px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -526,61 +527,61 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 }
 .pin-logo img {
-  width: 54px;
-  height: 54px;
-  border-radius: 14px;
-  margin-bottom: 10px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  margin-bottom: 5px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 .pin-logo h2 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 800;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.4px;
   margin: 0;
   color: #ffffff;
 }
 .pin-subtitle {
-  font-size: 10px;
+  font-size: 8px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 1.8px;
   color: #93c5fd;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 .pin-prompt {
-  font-size: 13px;
-  color: #e2e8f0;
-  margin-bottom: 18px;
+  font-size: 12px;
+  color: #cbd5e1;
+  margin-bottom: 8px;
   font-weight: 500;
 }
 .pin-dots {
   display: flex;
-  gap: 16px;
-  margin-bottom: 8px;
+  gap: 12px;
+  margin-bottom: 2px;
 }
 .pin-dot {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  background: transparent;
-  transition: all 0.2s ease;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.18s ease;
 }
 .pin-dot.filled {
   background: #38bdf8;
   border-color: #38bdf8;
-  box-shadow: 0 0 12px rgba(56, 189, 248, 0.7);
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
   transform: scale(1.15);
 }
 .pin-dots.error .pin-dot {
   border-color: #ef4444;
   background: #ef4444;
-  box-shadow: 0 0 12px rgba(239, 68, 68, 0.7);
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.8);
 }
 .pin-dots.shake {
-  animation: pin-shake 0.4s ease;
+  animation: pin-shake 0.35s ease;
 }
 @keyframes pin-shake {
   0%, 100% { transform: translateX(0); }
@@ -588,36 +589,44 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
   40%, 80% { transform: translateX(8px); }
 }
 .pin-error {
-  min-height: 20px;
-  font-size: 12px;
+  height: 18px;
+  line-height: 18px;
+  font-size: 11px;
   font-weight: 600;
   color: #f87171;
-  margin-bottom: 14px;
+  margin: 2px 0 6px;
 }
 .pin-keypad {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 10px;
   width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
 }
 .pin-btn {
   aspect-ratio: 1;
+  max-width: 64px;
+  width: 100%;
+  margin: 0 auto;
   border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.13);
   background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: #ffffff;
-  font-size: 22px;
+  font-size: 23px;
   font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.12s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 .pin-btn:active {
-  background: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.25);
   transform: scale(0.92);
 }
 .pin-btn.pin-empty {
@@ -1598,6 +1607,445 @@ function generateDocxReport(state, today = todayISO()) {
   ]);
 }
 
+// ==========================================================================
+// PURE JS PDF BUILDER & GENERATORS (PDF 1.4)
+// ==========================================================================
+
+function latinize(str) {
+  if (!str && str !== 0) return '';
+  const cyrToLat = {
+    'А':'A','Б':'B','В':'V','Г':'G','Д':'D','Е':'E','Ё':'Yo','Ж':'J','З':'Z','И':'I','Й':'Y','К':'K',
+    'Л':'L','М':'M','Н':'N','О':'O','П':'P','Р':'R','С':'S','Т':'T','У':'U','Ф':'F','Х':'X','Ц':'Ts',
+    'Ч':'Ch','Ш':'Sh','Ъ':"'",'Ь':'','Э':'E','Ю':'Yu','Я':'Ya','Ў':"O'",'Қ':'Q','Ғ':"G'",'Ҳ':'H',
+    'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'yo','ж':'j','з':'z','и':'i','й':'y','к':'k',
+    'л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'x','ц':'ts',
+    'ч':'ch','ш':'sh','ъ':"'",'ь':'','э':'e','ю':'yu','я':'ya','ў':"o'",'қ':'q','ғ':"g'",'ҳ':'h'
+  };
+  return String(str)
+    .replace(/[А-Яа-яЁёЎўҚқҒғҲҳ]/g, c => cyrToLat[c] || c)
+    .replace(/[‘’`]/g, "'")
+    .replace(/[“”]/g, '"')
+    .replace(/[–—]/g, '-');
+}
+
+class PdfBuilder {
+  constructor() {
+    this.width = 595.28;
+    this.height = 841.89;
+    this.pages = [];
+    this.currentPage = null;
+    this.addPage();
+  }
+
+  addPage() {
+    this.currentPage = { ops: [] };
+    this.pages.push(this.currentPage);
+    return this.currentPage;
+  }
+
+  toPdfY(y) {
+    return this.height - y;
+  }
+
+  rect(x, y, w, h, fill = null, stroke = null, lineWidth = 1) {
+    const yBottom = this.toPdfY(y + h);
+    let s = 'q\n';
+    if (lineWidth) s += `${lineWidth.toFixed(2)} w\n`;
+    if (fill) s += `${fill[0].toFixed(3)} ${fill[1].toFixed(3)} ${fill[2].toFixed(3)} rg\n`;
+    if (stroke) s += `${stroke[0].toFixed(3)} ${stroke[1].toFixed(3)} ${stroke[2].toFixed(3)} RG\n`;
+    s += `${x.toFixed(2)} ${yBottom.toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)} re\n`;
+    if (fill && stroke) s += 'B\n';
+    else if (fill) s += 'f\n';
+    else if (stroke) s += 'S\n';
+    s += 'Q\n';
+    this.currentPage.ops.push(s);
+  }
+
+  line(x1, y1, x2, y2, stroke = [0, 0, 0], lineWidth = 1) {
+    const py1 = this.toPdfY(y1);
+    const py2 = this.toPdfY(y2);
+    let s = `q\n${lineWidth.toFixed(2)} w\n${stroke[0].toFixed(3)} ${stroke[1].toFixed(3)} ${stroke[2].toFixed(3)} RG\n`;
+    s += `${x1.toFixed(2)} ${py1.toFixed(2)} m ${x2.toFixed(2)} ${py2.toFixed(2)} l S\nQ\n`;
+    this.currentPage.ops.push(s);
+  }
+
+  text(str, x, y, options = {}) {
+    if (str === null || str === undefined || str === '') return;
+    const raw = latinize(String(str));
+    const font = options.font === 'bold' ? '/F2' : (options.font === 'oblique' ? '/F3' : '/F1');
+    const size = options.size || 10;
+    const color = options.color || [0.1, 0.15, 0.2];
+    const align = options.align || 'left';
+
+    const charW = (options.font === 'bold' ? 0.56 : 0.52) * size;
+    const textWidth = raw.length * charW;
+    let drawX = x;
+    if (align === 'right') drawX = x - textWidth;
+    else if (align === 'center') drawX = x - (textWidth / 2);
+
+    const pdfY = this.toPdfY(y + size * 0.78);
+    const escaped = raw.replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
+    const op = `BT\n${font} ${size.toFixed(2)} Tf\n${color[0].toFixed(3)} ${color[1].toFixed(3)} ${color[2].toFixed(3)} rg\n1 0 0 1 ${drawX.toFixed(2)} ${pdfY.toFixed(2)} Tm\n(${escaped}) Tj\nET\n`;
+    this.currentPage.ops.push(op);
+  }
+
+  build(footerTitle = 'Makon - Yotoqxona boshqaruvi tizimi') {
+    const totalPages = this.pages.length;
+    for (let i = 0; i < totalPages; i++) {
+      this.currentPage = this.pages[i];
+      this.line(40, 804, 555, 804, [0.85, 0.88, 0.92], 0.5);
+      this.text(footerTitle, 40, 810, { font: 'regular', size: 7.5, color: [0.5, 0.55, 0.6] });
+      this.text(`Sahifa ${i + 1} / ${totalPages}`, 555, 810, { font: 'regular', size: 7.5, color: [0.5, 0.55, 0.6], align: 'right' });
+    }
+
+    const encoder = new TextEncoder();
+    const chunks = [];
+    let offset = 0;
+    const xrefOffsets = [];
+
+    function append(str) {
+      const b = encoder.encode(str);
+      chunks.push(b);
+      offset += b.length;
+    }
+
+    append('%PDF-1.4\n%âãÏÓ\n');
+    xrefOffsets[1] = offset;
+    append('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
+
+    const pageObjStart = 7;
+    const kids = [];
+    for (let i = 0; i < totalPages; i++) {
+      kids.push(`${pageObjStart + i * 2} 0 R`);
+    }
+    xrefOffsets[2] = offset;
+    append(`2 0 obj\n<< /Type /Pages /Kids [${kids.join(' ')}] /Count ${totalPages} >>\nendobj\n`);
+
+    xrefOffsets[3] = offset;
+    append('3 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>\nendobj\n');
+    xrefOffsets[4] = offset;
+    append('4 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>\nendobj\n');
+    xrefOffsets[5] = offset;
+    append('5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding >>\nendobj\n');
+    xrefOffsets[6] = offset;
+    append('6 0 obj\n[/PDF /Text /ImageB /ImageC /ImageI]\nendobj\n');
+
+    for (let i = 0; i < totalPages; i++) {
+      const pageObjNum = pageObjStart + i * 2;
+      const contentObjNum = pageObjNum + 1;
+      const contentStr = this.pages[i].ops.join('');
+      const contentBytes = encoder.encode(contentStr);
+
+      xrefOffsets[pageObjNum] = offset;
+      append(`${pageObjNum} 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${this.width.toFixed(2)} ${this.height.toFixed(2)}] /Contents ${contentObjNum} 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> /ProcSet 6 0 R >> >>\nendobj\n`);
+
+      xrefOffsets[contentObjNum] = offset;
+      append(`${contentObjNum} 0 obj\n<< /Length ${contentBytes.length} >>\nstream\n`);
+      chunks.push(contentBytes);
+      offset += contentBytes.length;
+      append('\nendstream\nendobj\n');
+    }
+
+    const startXref = offset;
+    const totalObjs = pageObjStart + totalPages * 2;
+    append(`xref\n0 ${totalObjs}\n0000000000 65535 f \n`);
+    for (let i = 1; i < totalObjs; i++) {
+      const pos = String(xrefOffsets[i]).padStart(10, '0');
+      append(`${pos} 00000 n \n`);
+    }
+
+    append(`trailer\n<< /Size ${totalObjs} /Root 1 0 R >>\nstartxref\n${startXref}\n%%EOF\n`);
+
+    const totalLen = chunks.reduce((acc, c) => acc + c.length, 0);
+    const result = new Uint8Array(totalLen);
+    let cur = 0;
+    for (const c of chunks) {
+      result.set(c, cur);
+      cur += c.length;
+    }
+    return result;
+  }
+}
+
+function generateDebtorsPdf(state, today = todayISO()) {
+  const currentRate = state?.settings?.monthlyRate || RATE;
+  const debtors = state.residents
+    .map(r => ({ resident: r, status: residentStatus(state, r, today) }))
+    .filter(item => item.status.owed > 0)
+    .sort((a, b) => b.status.owed - a.status.owed);
+
+  const totalDebt = debtors.reduce((sum, d) => sum + d.status.owed, 0);
+  const pdf = new PdfBuilder();
+
+  function drawHeader(isFirst = false) {
+    if (isFirst) {
+      pdf.rect(40, 36, 515, 52, [0.08, 0.28, 0.65]);
+      pdf.text('MAKON', 52, 47, { font: 'bold', size: 17, color: [1, 1, 1] });
+      pdf.text('YOTOQXONA BOSHQARUVI TIZIMI', 52, 68, { font: 'regular', size: 7.5, color: [0.75, 0.88, 1.0] });
+      pdf.text('QARZDORLAR RO\'YXATI', 543, 49, { font: 'bold', size: 12.5, color: [1, 1, 1], align: 'right' });
+      pdf.text(`Sana: ${today}`, 543, 67, { font: 'regular', size: 8, color: [0.85, 0.92, 1.0], align: 'right' });
+    } else {
+      pdf.rect(40, 36, 515, 26, [0.08, 0.28, 0.65]);
+      pdf.text('MAKON - QARZDORLAR RO\'YXATI', 50, 43, { font: 'bold', size: 9.5, color: [1, 1, 1] });
+      pdf.text(`Sana: ${today}`, 545, 44, { font: 'regular', size: 7.5, color: [0.85, 0.92, 1.0], align: 'right' });
+    }
+  }
+
+  function drawTableHeader(y) {
+    pdf.rect(40, y, 515, 20, [0.1, 0.24, 0.48]);
+    pdf.text('T/r', 54, y + 5, { font: 'bold', size: 8, color: [1, 1, 1], align: 'center' });
+    pdf.text('Blok', 86, y + 5, { font: 'bold', size: 8, color: [1, 1, 1], align: 'center' });
+    pdf.text('Xona', 130, y + 5, { font: 'bold', size: 8, color: [1, 1, 1], align: 'center' });
+    pdf.text('Ism va familiya', 160, y + 5, { font: 'bold', size: 8, color: [1, 1, 1] });
+    pdf.text('Telefon raqami', 390, y + 5, { font: 'bold', size: 8, color: [1, 1, 1], align: 'center' });
+    pdf.text('Qarzdorlik', 545, y + 5, { font: 'bold', size: 8, color: [1, 1, 1], align: 'right' });
+    return y + 20;
+  }
+
+  drawHeader(true);
+
+  // Summary badges
+  pdf.rect(40, 96, 160, 34, [0.96, 0.97, 0.99], [0.85, 0.89, 0.94], 0.7);
+  pdf.text('JAMI QARZDORLAR', 48, 102, { font: 'regular', size: 6.5, color: [0.4, 0.45, 0.5] });
+  pdf.text(`${debtors.length} nafar bola`, 48, 114, { font: 'bold', size: 10.5, color: [0.08, 0.15, 0.3] });
+
+  pdf.rect(210, 96, 185, 34, [0.99, 0.95, 0.95], [0.98, 0.8, 0.8], 0.7);
+  pdf.text('UMUMIY QARZDORLIK', 218, 102, { font: 'regular', size: 6.5, color: [0.7, 0.2, 0.2] });
+  pdf.text(`${fmtMoney(totalDebt)} so'm`, 218, 114, { font: 'bold', size: 10.5, color: [0.8, 0.1, 0.1] });
+
+  pdf.rect(405, 96, 150, 34, [0.96, 0.97, 0.99], [0.85, 0.89, 0.94], 0.7);
+  pdf.text('STANDART OYLIK NARX', 413, 102, { font: 'regular', size: 6.5, color: [0.4, 0.45, 0.5] });
+  pdf.text(`${fmtMoney(currentRate)} so'm`, 413, 114, { font: 'bold', size: 10.5, color: [0.08, 0.15, 0.3] });
+
+  let curY = drawTableHeader(138);
+
+  if (debtors.length === 0) {
+    pdf.rect(40, curY, 515, 28, [0.98, 0.99, 0.98], [0.85, 0.9, 0.85], 0.5);
+    pdf.text('Hozirgi kunda qarzdorlar mavjud emas. Barcha to\'lovlar o\'z vaqtida amalga oshirilgan.', 297, curY + 9, { font: 'regular', size: 8.5, color: [0.15, 0.5, 0.2], align: 'center' });
+    curY += 28;
+  } else {
+    debtors.forEach((d, idx) => {
+      if (curY > 770) {
+        pdf.addPage();
+        drawHeader(false);
+        curY = drawTableHeader(68);
+      }
+      const bg = idx % 2 === 0 ? [1, 1, 1] : [0.97, 0.98, 0.99];
+      const r = d.resident;
+      pdf.rect(40, curY, 515, 18, bg, [0.88, 0.91, 0.95], 0.5);
+      pdf.text(String(idx + 1), 54, curY + 4.5, { font: 'regular', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      pdf.text(`${r.block} blok`, 86, curY + 4.5, { font: 'bold', size: 7.5, color: [0.1, 0.2, 0.4], align: 'center' });
+      pdf.text(String(r.room), 130, curY + 4.5, { font: 'regular', size: 7.5, color: [0.1, 0.15, 0.2], align: 'center' });
+      pdf.text(`${r.lastName} ${r.firstName}`, 160, curY + 4.5, { font: 'bold', size: 8, color: [0.08, 0.12, 0.2] });
+      pdf.text(r.phone || '-', 390, curY + 4.5, { font: 'regular', size: 7.5, color: [0.2, 0.3, 0.4], align: 'center' });
+      pdf.text(`${fmtMoney(d.status.owed)} so'm`, 545, curY + 4.5, { font: 'bold', size: 8, color: [0.75, 0.1, 0.1], align: 'right' });
+      curY += 18;
+    });
+
+    if (curY > 760) {
+      pdf.addPage();
+      drawHeader(false);
+      curY = 68;
+    }
+    pdf.rect(40, curY, 515, 20, [0.94, 0.96, 0.99], [0.75, 0.82, 0.9], 0.7);
+    pdf.text('JAMI QARZDORLIK SUMMASI:', 430, curY + 5.5, { font: 'bold', size: 8.5, color: [0.1, 0.2, 0.4], align: 'right' });
+    pdf.text(`${fmtMoney(totalDebt)} so'm`, 545, curY + 5.5, { font: 'bold', size: 9, color: [0.8, 0.1, 0.1], align: 'right' });
+    curY += 26;
+
+    if (curY < 740) {
+      curY += 16;
+      pdf.text('Hisobotni tuzdi: ________________________ (Imzo)', 50, curY, { font: 'regular', size: 8, color: [0.3, 0.35, 0.4] });
+      pdf.text('Rahbar: ________________________ (Imzo)', 350, curY, { font: 'regular', size: 8, color: [0.3, 0.35, 0.4] });
+    }
+  }
+
+  return pdf.build('Makon - Qarzdorlar hisoboti');
+}
+
+function generateReportPdf(state, today = todayISO()) {
+  const currentRate = state?.settings?.monthlyRate || RATE;
+  const summary = getSummary(state, `${today.slice(0, 7)}-01`, today, today);
+  const totalPaid = state.payments.reduce((sum, p) => sum + p.amount, 0);
+  const totalExpenses = state.expenses.reduce((sum, e) => sum + e.amount, 0);
+  const netProfit = totalPaid - totalExpenses;
+  const occupiedCount = state.residents.filter(r => r.active).length;
+  const occupancyPct = Math.round((occupiedCount / CAPACITY) * 100);
+
+  const pdf = new PdfBuilder();
+
+  function drawHeader(isFirst = false) {
+    if (isFirst) {
+      pdf.rect(40, 36, 515, 52, [0.08, 0.28, 0.65]);
+      pdf.text('MAKON', 52, 47, { font: 'bold', size: 17, color: [1, 1, 1] });
+      pdf.text('YOTOQXONA BOSHQARUVI TIZIMI', 52, 68, { font: 'regular', size: 7.5, color: [0.75, 0.88, 1.0] });
+      pdf.text('UMUMIY HISOBOT', 543, 49, { font: 'bold', size: 13, color: [1, 1, 1], align: 'right' });
+      pdf.text(`Sana: ${today}`, 543, 67, { font: 'regular', size: 8, color: [0.85, 0.92, 1.0], align: 'right' });
+    } else {
+      pdf.rect(40, 36, 515, 26, [0.08, 0.28, 0.65]);
+      pdf.text('MAKON - UMUMIY HISOBOT', 50, 43, { font: 'bold', size: 9.5, color: [1, 1, 1] });
+      pdf.text(`Sana: ${today}`, 545, 44, { font: 'regular', size: 7.5, color: [0.85, 0.92, 1.0], align: 'right' });
+    }
+  }
+
+  drawHeader(true);
+
+  // 4 Financial KPI Cards
+  const kpiW = 122;
+  const kpiGap = 9;
+
+  // 1: Total Paid
+  pdf.rect(40, 96, kpiW, 40, [0.94, 0.99, 0.95], [0.7, 0.9, 0.75], 0.7);
+  pdf.text('JAMI TUSHUM', 46, 102, { font: 'regular', size: 6.5, color: [0.15, 0.5, 0.2] });
+  pdf.text(`${fmtMoney(totalPaid)} so'm`, 46, 116, { font: 'bold', size: 9.5, color: [0.1, 0.55, 0.2] });
+
+  // 2: Total Expenses
+  pdf.rect(40 + kpiW + kpiGap, 96, kpiW, 40, [0.99, 0.95, 0.95], [0.95, 0.75, 0.75], 0.7);
+  pdf.text('JAMI XARAJAT', 40 + kpiW + kpiGap + 6, 102, { font: 'regular', size: 6.5, color: [0.7, 0.2, 0.2] });
+  pdf.text(`${fmtMoney(totalExpenses)} so'm`, 40 + kpiW + kpiGap + 6, 116, { font: 'bold', size: 9.5, color: [0.8, 0.15, 0.15] });
+
+  // 3: Net Profit
+  pdf.rect(40 + (kpiW + kpiGap) * 2, 96, kpiW, 40, [0.94, 0.97, 1.0], [0.7, 0.82, 0.98], 0.7);
+  pdf.text('SOF FOYDA', 40 + (kpiW + kpiGap) * 2 + 6, 102, { font: 'regular', size: 6.5, color: [0.1, 0.35, 0.7] });
+  pdf.text(`${fmtMoney(netProfit)} so'm`, 40 + (kpiW + kpiGap) * 2 + 6, 116, { font: 'bold', size: 9.5, color: netProfit >= 0 ? [0.1, 0.35, 0.7] : [0.8, 0.1, 0.1] });
+
+  // 4: Debt
+  pdf.rect(40 + (kpiW + kpiGap) * 3, 96, kpiW, 40, [0.99, 0.97, 0.93], [0.95, 0.85, 0.65], 0.7);
+  pdf.text('QOLGAN QARZ', 40 + (kpiW + kpiGap) * 3 + 6, 102, { font: 'regular', size: 6.5, color: [0.7, 0.45, 0.1] });
+  pdf.text(`${fmtMoney(summary.owed)} so'm`, 40 + (kpiW + kpiGap) * 3 + 6, 116, { font: 'bold', size: 9.5, color: summary.owed > 0 ? [0.8, 0.1, 0.1] : [0.2, 0.5, 0.2] });
+
+  // Occupancy Row
+  pdf.rect(40, 142, 515, 26, [0.97, 0.98, 0.99], [0.85, 0.89, 0.94], 0.5);
+  pdf.text(`Band o'rinlar: ${occupiedCount} ta (${occupancyPct}%)   |   Bo'sh o'rinlar: ${CAPACITY - occupiedCount} ta   |   Jami sig'im: ${CAPACITY} o'rin`, 52, 151, { font: 'bold', size: 8, color: [0.15, 0.25, 0.4] });
+  pdf.text(`Standart tarif: ${fmtMoney(currentRate)} so'm/oy`, 543, 151, { font: 'regular', size: 8, color: [0.35, 0.4, 0.5], align: 'right' });
+
+  let curY = 180;
+
+  // Section 1: Qarzdorlar
+  const debtors = state.residents
+    .map(r => ({ resident: r, status: residentStatus(state, r, today) }))
+    .filter(item => item.status.owed > 0)
+    .sort((a, b) => b.status.owed - a.status.owed);
+
+  pdf.rect(40, curY, 515, 18, [0.1, 0.24, 0.48]);
+  pdf.text(`QARZDOR BOLALAR (${debtors.length} nafar)`, 48, curY + 4.5, { font: 'bold', size: 8.5, color: [1, 1, 1] });
+  pdf.text(`Jami qarz: ${fmtMoney(summary.owed)} so'm`, 545, curY + 4.5, { font: 'bold', size: 8.5, color: [1, 0.9, 0.9], align: 'right' });
+  curY += 18;
+
+  if (debtors.length === 0) {
+    pdf.rect(40, curY, 515, 20, [1, 1, 1], [0.88, 0.91, 0.95], 0.5);
+    pdf.text('Qarzdorlar yo\'q. Barcha to\'lovlar o\'z vaqtida amalga oshirilgan.', 297, curY + 6, { font: 'regular', size: 8, color: [0.2, 0.5, 0.2], align: 'center' });
+    curY += 24;
+  } else {
+    const shownDebtors = debtors.slice(0, 12);
+    shownDebtors.forEach((d, idx) => {
+      if (curY > 770) {
+        pdf.addPage();
+        drawHeader(false);
+        curY = 70;
+      }
+      const bg = idx % 2 === 0 ? [1, 1, 1] : [0.97, 0.98, 0.99];
+      const r = d.resident;
+      pdf.rect(40, curY, 515, 17, bg, [0.88, 0.91, 0.95], 0.5);
+      pdf.text(String(idx + 1), 54, curY + 4, { font: 'regular', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      pdf.text(`${r.block} blok, ${r.room}-xona`, 100, curY + 4, { font: 'regular', size: 7.5, color: [0.1, 0.2, 0.4] });
+      pdf.text(`${r.lastName} ${r.firstName}`, 210, curY + 4, { font: 'bold', size: 8, color: [0.08, 0.12, 0.2] });
+      pdf.text(r.phone || '-', 380, curY + 4, { font: 'regular', size: 7.5, color: [0.2, 0.3, 0.4], align: 'center' });
+      pdf.text(`${fmtMoney(d.status.owed)} so'm`, 545, curY + 4, { font: 'bold', size: 8, color: [0.75, 0.1, 0.1], align: 'right' });
+      curY += 17;
+    });
+    if (debtors.length > shownDebtors.length) {
+      pdf.rect(40, curY, 515, 16, [0.96, 0.97, 0.99], [0.88, 0.91, 0.95], 0.5);
+      pdf.text(`... va yana ${debtors.length - shownDebtors.length} ta qarzdor (Qarzdorlar ro'yxati alohida faylda)`, 297, curY + 4, { font: 'oblique', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      curY += 16;
+    }
+    curY += 8;
+  }
+
+  // Section 2: Oxirgi to'lovlar
+  if (curY > 730) {
+    pdf.addPage();
+    drawHeader(false);
+    curY = 70;
+  }
+  const recentPayments = [...state.payments].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 12);
+  pdf.rect(40, curY, 515, 18, [0.1, 0.24, 0.48]);
+  pdf.text(`OXIRGI QABUL QILINGAN TO'LOVLAR (${state.payments.length} tadan namunalar)`, 48, curY + 4.5, { font: 'bold', size: 8.5, color: [1, 1, 1] });
+  curY += 18;
+
+  if (recentPayments.length === 0) {
+    pdf.rect(40, curY, 515, 20, [1, 1, 1], [0.88, 0.91, 0.95], 0.5);
+    pdf.text('To\'lovlar tarixi bo\'sh.', 297, curY + 6, { font: 'regular', size: 8, color: [0.5, 0.55, 0.6], align: 'center' });
+    curY += 24;
+  } else {
+    recentPayments.forEach((p, idx) => {
+      if (curY > 770) {
+        pdf.addPage();
+        drawHeader(false);
+        curY = 70;
+      }
+      const bg = idx % 2 === 0 ? [1, 1, 1] : [0.97, 0.98, 0.99];
+      const resident = state.residents.find(r => r.id === p.residentId);
+      const name = resident ? `${resident.lastName} ${resident.firstName}` : 'Noma\'lum';
+      const room = resident ? `${resident.block}-${resident.room}` : '-';
+      pdf.rect(40, curY, 515, 17, bg, [0.88, 0.91, 0.95], 0.5);
+      pdf.text(String(idx + 1), 54, curY + 4, { font: 'regular', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      pdf.text(p.date, 95, curY + 4, { font: 'regular', size: 7.5, color: [0.3, 0.35, 0.4], align: 'center' });
+      pdf.text(room, 145, curY + 4, { font: 'regular', size: 7.5, color: [0.2, 0.3, 0.4], align: 'center' });
+      pdf.text(name, 185, curY + 4, { font: 'bold', size: 8, color: [0.08, 0.12, 0.2] });
+      pdf.text(p.method === 'card' ? 'Karta' : 'Naqd pul', 380, curY + 4, { font: 'regular', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      pdf.text(`+${fmtMoney(p.amount)} so'm`, 545, curY + 4, { font: 'bold', size: 8, color: [0.1, 0.55, 0.2], align: 'right' });
+      curY += 17;
+    });
+    curY += 8;
+  }
+
+  // Section 3: Oxirgi xarajatlar
+  if (curY > 730) {
+    pdf.addPage();
+    drawHeader(false);
+    curY = 70;
+  }
+  const recentExpenses = [...state.expenses].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 10);
+  pdf.rect(40, curY, 515, 18, [0.1, 0.24, 0.48]);
+  pdf.text(`OXIRGI XARAJATLAR (${state.expenses.length} tadan namunalar)`, 48, curY + 4.5, { font: 'bold', size: 8.5, color: [1, 1, 1] });
+  curY += 18;
+
+  if (recentExpenses.length === 0) {
+    pdf.rect(40, curY, 515, 20, [1, 1, 1], [0.88, 0.91, 0.95], 0.5);
+    pdf.text('Xarajatlar tarixi bo\'sh.', 297, curY + 6, { font: 'regular', size: 8, color: [0.5, 0.55, 0.6], align: 'center' });
+    curY += 24;
+  } else {
+    const catMap = { utilities: 'Kommunal', tax: 'Soliq', other: 'Xo\'jalik' };
+    recentExpenses.forEach((e, idx) => {
+      if (curY > 770) {
+        pdf.addPage();
+        drawHeader(false);
+        curY = 70;
+      }
+      const bg = idx % 2 === 0 ? [1, 1, 1] : [0.97, 0.98, 0.99];
+      pdf.rect(40, curY, 515, 17, bg, [0.88, 0.91, 0.95], 0.5);
+      pdf.text(String(idx + 1), 54, curY + 4, { font: 'regular', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      pdf.text(e.date, 95, curY + 4, { font: 'regular', size: 7.5, color: [0.3, 0.35, 0.4], align: 'center' });
+      pdf.text(e.name, 150, curY + 4, { font: 'bold', size: 8, color: [0.08, 0.12, 0.2] });
+      pdf.text(catMap[e.category] || 'Boshqa', 380, curY + 4, { font: 'regular', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      pdf.text(`-${fmtMoney(e.amount)} so'm`, 545, curY + 4, { font: 'bold', size: 8, color: [0.8, 0.15, 0.15], align: 'right' });
+      curY += 17;
+    });
+    curY += 16;
+  }
+
+  // Signatures
+  if (curY > 750) {
+    pdf.addPage();
+    drawHeader(false);
+    curY = 70;
+  }
+  pdf.text('Hisobotni tuzdi: ________________________ (Imzo)', 50, curY + 10, { font: 'regular', size: 8, color: [0.3, 0.35, 0.4] });
+  pdf.text('Rahbar: ________________________ (Imzo)', 350, curY + 10, { font: 'regular', size: 8, color: [0.3, 0.35, 0.4] });
+
+  return pdf.build('Makon - Umumiy moliyaviy hisobot');
+}
+
 const STORAGE_KEY = 'makon.hostel.v2';
 const $ = (selector) => document.querySelector(selector);
 const escapeHTML = (value = '') => String(value).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -1778,7 +2226,7 @@ function renderResidents(debtors) {
   const base=state.residents.filter(r=>debtors?statusOf(r).owed>0:statusFilter==='inactive'?!r.active:r.active);
   const people=base.filter(r=>(blockFilter==='all'||r.block===blockFilter)&&matchResident(r)&&(debtors||['all','inactive'].includes(statusFilter)||statusOf(r).status===statusFilter)).sort((a,b)=>debtors?statusOf(b).owed-statusOf(a).owed:fullName(a).localeCompare(fullName(b)));
   const sumOwed=state.residents.reduce((a,r)=>a+statusOf(r).owed,0), countOwed=state.residents.filter(r=>statusOf(r).owed>0).length;
-  return heading(debtors?'Qarzlar ham nazoratda.':'Bolalar ro‘yxati',debtors?'Qarzdor bolalarni toping, to‘lovni kiriting va qarzni yoping.':`${state.residents.filter(r=>r.active).length} ta bola · Barcha ma’lumotlar bir joyda`,debtors?addButton('payment-picker','To‘lov qabul qilish'):addButton('add-resident','Bola qo‘shish'))+
+  return heading(debtors?'Qarzlar ham nazoratda.':'Bolalar ro‘yxati',debtors?'Qarzdor bolalarni toping, to‘lovni kiriting va qarzni yoping.':`${state.residents.filter(r=>r.active).length} ta bola · Barcha ma’lumotlar bir joyda`,debtors?`<div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="btn secondary" data-action="telegram-debtors" style="display:flex;align-items:center;gap:6px;">${icon('debt')}<span>Qarzdorlar (PDF)</span></button>${addButton('payment-picker','To‘lov qabul qilish')}</div>`:addButton('add-resident','Bola qo‘shish'))+
   (debtors?`<div class="debt-overview"><div><span>Jami olinishi kerak</span><strong>${money(sumOwed)} <small>so‘m</small></strong></div><div class="debt-overview-count">${icon('users')}<strong>${countOwed}</strong><span>ta qarzdor bola</span></div><div class="debt-overview-note">${icon('info')}Qisman to‘lovdan qolgan summa<br>qarz sifatida saqlanadi.</div></div>`:'')+
   `<section class="card"><div class="toolbar table-toolbar"><label class="search-field">${icon('search')}<input id="resident-query" type="search" placeholder="Ism, familiya yoki telefon..." value="${escapeHTML(query)}" aria-label="Bolani qidirish"></label><div class="filter-group"><select id="block-filter" class="filter-select" aria-label="Blok bo‘yicha saralash"><option value="all">Barcha bloklar</option>${BLOCKS.map(b=>`<option value="${b.id}" ${blockFilter===b.id?'selected':''}>${b.id} blok</option>`).join('')}</select>${debtors?'':`<select id="status-filter" class="filter-select" aria-label="To‘lov holati"><option value="all">Barcha holatlar</option>${[['paid','To‘langan'],['debt','Qarzdor'],['soon','To‘lovi yaqin'],['inactive','Ketgan bolalar']].map(([v,t])=>`<option value="${v}" ${statusFilter===v?'selected':''}>${t}</option>`).join('')}</select>`}</div></div><div class="table-wrap"><table class="data-table"><thead><tr><th class="hide-mobile">№</th><th>Ism, familiya</th><th class="hide-mobile">Telefon raqami</th><th class="hide-mobile">Xonasi</th><th>${debtors?'Qolgan qarz':'Holati'}</th><th class="hide-mobile">${debtors?'To‘lov muddati':'Keyingi to‘lov'}</th><th class="hide-mobile">Kelgan sana</th><th><span class="sr-only">Amallar</span></th></tr></thead><tbody>${people.map((r,i)=>{const s=statusOf(r);return `<tr><td class="hide-mobile muted">${String(i+1).padStart(2,'0')}</td><td><button class="table-person" data-action="profile" data-id="${r.id}"><span class="avatar ${s.owed?'amber':'sage'}">${initials(r)}</span><span><strong>${escapeHTML(fullName(r))}</strong><small>${roomName(r)}${!r.active?' · Ketgan':''}</small></span></button></td><td class="hide-mobile"><a class="phone-link" href="tel:${escapeHTML(r.phone.replace(/\s/g,''))}">${escapeHTML(r.phone)}</a></td><td class="hide-mobile"><span class="room-tag">${r.block}-${String(r.room).padStart(2,'0')}</span></td><td>${debtors?`<strong class="red-text">${money(s.owed)}</strong><small class="cell-sub">so‘m</small>`:statusBadge(r)}</td><td class="hide-mobile">${fmtDate(s.owed?s.cycleStart:s.nextDue)}${s.status==='soon'?'<small class="cell-sub amber-text">To‘lov yaqin</small>':''}</td><td class="hide-mobile muted">${fmtDate(r.joined,true)}</td><td><button class="btn ${debtors?'secondary':'ghost'} small table-action" data-action="${debtors?'pay':'profile'}" data-id="${r.id}" aria-label="${escapeHTML(fullName(r))}: ${debtors?'qarzni yopish':'ma’lumotlar'}"><span class="hide-mobile">${debtors?'Qarzni yopish':'Batafsil'}</span>${icon('right')}</button></td></tr>`;}).join('')}</tbody></table>${!people.length?empty('Bola topilmadi','Qidiruv yoki filtrni o‘zgartirib ko‘ring.'):''}</div><div class="list-footer"><span>${people.length} ta bola ko‘rsatilmoqda</span>${debtors?'<span>Qarzlar bugungi holat bo‘yicha</span>':`<span>Har 30 kunda · ${money(state.settings?.monthlyRate || RATE)} so‘m</span>`}</div></section>`;
 }
@@ -1927,19 +2375,81 @@ async function sendBackupToTelegram() {
   toast('Telegram ochilmoqda...');
 }
 
-async function sendReportToTelegram() {
-  const docxBytes = generateDocxReport(state, todayISO());
-  const fileName = `makon-hisobot-${todayISO()}.docx`;
-  const summaryText = buildTelegramSummaryText();
+async function sendDebtorsToTelegram() {
+  const pdfBytes = generateDebtorsPdf(state, todayISO());
+  const fileName = `makon-qarzdorlar-${todayISO()}.pdf`;
+  const debtors = state.residents
+    .map(r => ({ resident: r, status: residentStatus(state, r, todayISO()) }))
+    .filter(item => item.status.owed > 0);
+  const totalDebt = debtors.reduce((sum, d) => sum + d.status.owed, 0);
+  const summaryText = `⚠️ MAKON — QARZDORLAR RO‘YXATI\n📅 Sana: ${todayISO()}\n━━━━━━━━━━━━━━━━━━\n👥 Qarzdorlar soni: ${debtors.length} nafar bola\n💸 Jami qarz summasi: ${money(totalDebt)} so‘m\n━━━━━━━━━━━━━━━━━━\n(To‘liq jadval ilova qilingan PDF faylda)`;
 
   const Filesystem = window.Capacitor?.Plugins?.Filesystem;
   const Share = window.Capacitor?.Plugins?.Share;
   if (Filesystem && Share) {
     try {
-      const base64 = uint8ToBase64(docxBytes);
+      const base64 = uint8ToBase64(pdfBytes);
       const writeRes = await Filesystem.writeFile({ path: fileName, data: base64, directory: 'CACHE' });
       await Share.share({
-        title: 'Makon — Hisobot (.docx)',
+        title: 'Makon — Qarzdorlar ro‘yxati (.pdf)',
+        text: summaryText,
+        url: writeRes.uri,
+        files: [writeRes.uri],
+        dialogTitle: 'Telegram orqali qarzdorlar ro‘yxatini yuboring'
+      });
+      toast('Qarzdorlar ro‘yxati yuborildi.');
+      return;
+    } catch (e) {
+      if (e?.message?.includes('canceled') || e?.name === 'AbortError') return;
+    }
+  }
+
+  if (typeof navigator !== 'undefined' && navigator.share && navigator.canShare) {
+    try {
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const file = new File([blob], fileName, { type: 'application/pdf' });
+      if (navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: 'Makon — Qarzdorlar ro‘yxati',
+          text: summaryText,
+          files: [file]
+        });
+        toast('Qarzdorlar ro‘yxati yuborildi.');
+        return;
+      }
+    } catch (e) {
+      if (e?.name === 'AbortError') return;
+    }
+  }
+
+  try {
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch {}
+  window.open(`https://t.me/share/url?url=&text=${encodeURIComponent(summaryText)}`, '_blank');
+  toast('Telegram ochilmoqda...');
+}
+
+async function sendReportToTelegram() {
+  const pdfBytes = generateReportPdf(state, todayISO());
+  const fileName = `makon-hisobot-${todayISO()}.pdf`;
+  const summaryText = buildTelegramSummaryText() + `\n\n(To‘liq hisobot ilova qilingan PDF faylda)`;
+
+  const Filesystem = window.Capacitor?.Plugins?.Filesystem;
+  const Share = window.Capacitor?.Plugins?.Share;
+  if (Filesystem && Share) {
+    try {
+      const base64 = uint8ToBase64(pdfBytes);
+      const writeRes = await Filesystem.writeFile({ path: fileName, data: base64, directory: 'CACHE' });
+      await Share.share({
+        title: 'Makon — Hisobot (.pdf)',
         text: summaryText,
         url: writeRes.uri,
         files: [writeRes.uri],
@@ -1954,8 +2464,8 @@ async function sendReportToTelegram() {
 
   if (typeof navigator !== 'undefined' && navigator.share && navigator.canShare) {
     try {
-      const blob = new Blob([docxBytes], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-      const file = new File([blob], fileName, { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const file = new File([blob], fileName, { type: 'application/pdf' });
       if (navigator.canShare({ files: [file] })) {
         await navigator.share({
           title: 'Makon — Hisobot',
@@ -1970,6 +2480,17 @@ async function sendReportToTelegram() {
     }
   }
 
+  try {
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch {}
   window.open(`https://t.me/share/url?url=&text=${encodeURIComponent(summaryText)}`, '_blank');
   toast('Telegram ochilmoqda...');
 }
@@ -2017,11 +2538,12 @@ function showDemoInfo() {
     </div>
 
     <div style="margin-top:14px;padding:14px;background:#edf5ff;border:1px solid #dbe9fc;border-radius:10px;">
-      <h4 style="font-size:12px;font-weight:700;color:#1e40af;margin-bottom:6px;">Telegramga yuborish va zaxira</h4>
-      <p style="font-size:10px;color:#3b82f6;line-height:1.5;margin-bottom:12px;">Ma’lumotlaringiz xavfsiz saqlanishi va hisobotlarni Word (.docx) shaklida ko‘rish uchun Telegramga yuboring.</p>
+      <h4 style="font-size:12px;font-weight:700;color:#1e40af;margin-bottom:6px;">Telegramga yuborish va hisobotlar</h4>
+      <p style="font-size:10px;color:#3b82f6;line-height:1.5;margin-bottom:12px;">Ma’lumotlaringiz xavfsiz saqlanishi va hisobotlarni chiroyli PDF shaklida ko‘rish uchun Telegramga yuboring.</p>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <button type="button" class="btn primary" data-action="telegram-backup" style="min-height:38px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:8px;">${icon('send')} Telegramga zaxirani yuborish (.json)</button>
-        <button type="button" class="btn primary" data-action="telegram-report" style="min-height:38px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:8px;background:#1d4ed8;">${icon('receipt')} Telegramga hisobot yuborish (.docx)</button>
+        <button type="button" class="btn primary" data-action="telegram-debtors" style="min-height:38px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:8px;background:#dc2626;">${icon('debt')} Qarzdorlar ro‘yxatini yuborish (.pdf)</button>
+        <button type="button" class="btn primary" data-action="telegram-report" style="min-height:38px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:8px;background:#1d4ed8;">${icon('receipt')} Telegramga hisobot yuborish (.pdf)</button>
+        <button type="button" class="btn primary" data-action="telegram-backup" style="min-height:38px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:8px;background:#059669;">${icon('send')} Telegramga zaxirani yuborish (.json)</button>
         <label class="btn secondary" style="min-height:36px;font-size:11px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;">${icon('card')} Zaxiradan tiklash (.json)<input type="file" id="import-backup-input" accept=".json" style="display:none;"></label>
       </div>
     </div>
@@ -2246,6 +2768,7 @@ document.addEventListener('click',(event)=>{
     'notifications':showNotifications,
     'demo-info':showDemoInfo,
     'settings-info':showDemoInfo,
+    'telegram-debtors':sendDebtorsToTelegram,
     'telegram-backup':sendBackupToTelegram,
     'telegram-report':sendReportToTelegram,
     'lock-app':lockApp,

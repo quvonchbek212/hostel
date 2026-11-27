@@ -293,6 +293,16 @@ test('actual app DOM: navigation, payments, residents, expenses, date reports an
       } finally { second.restore(); }
     });
 
+    await t.test('Settings and Debtors view include Telegram PDF export buttons', () => {
+      nav('debtors');
+      assert.ok(find('[data-action="telegram-debtors"]'));
+      click('[data-action="demo-info"]');
+      assert.ok(find('[data-action="telegram-debtors"]'));
+      assert.ok(find('[data-action="telegram-report"]'));
+      assert.ok(find('[data-action="telegram-backup"]'));
+      click('#modal [data-action="close-modal"]');
+    });
+
     await t.test('clean database button is named Malumotlarni tozalash and resets records', () => {
       click('[data-action="demo-info"]');
       click('[data-action="clear-confirm"]');

@@ -528,3 +528,442 @@ export function generateDocxReport(state, today = todayISO()) {
     { name: 'word/document.xml', content: docXml }
   ]);
 }
+
+// ==========================================================================
+// PURE JS PDF BUILDER & GENERATORS (PDF 1.4)
+// ==========================================================================
+
+export function latinize(str) {
+  if (!str && str !== 0) return '';
+  const cyrToLat = {
+    'А':'A','Б':'B','В':'V','Г':'G','Д':'D','Е':'E','Ё':'Yo','Ж':'J','З':'Z','И':'I','Й':'Y','К':'K',
+    'Л':'L','М':'M','Н':'N','О':'O','П':'P','Р':'R','С':'S','Т':'T','У':'U','Ф':'F','Х':'X','Ц':'Ts',
+    'Ч':'Ch','Ш':'Sh','Ъ':"'",'Ь':'','Э':'E','Ю':'Yu','Я':'Ya','Ў':"O'",'Қ':'Q','Ғ':"G'",'Ҳ':'H',
+    'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'yo','ж':'j','з':'z','и':'i','й':'y','к':'k',
+    'л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'x','ц':'ts',
+    'ч':'ch','ш':'sh','ъ':"'",'ь':'','э':'e','ю':'yu','я':'ya','ў':"o'",'қ':'q','ғ':"g'",'ҳ':'h'
+  };
+  return String(str)
+    .replace(/[А-Яа-яЁёЎўҚқҒғҲҳ]/g, c => cyrToLat[c] || c)
+    .replace(/[‘’`]/g, "'")
+    .replace(/[“”]/g, '"')
+    .replace(/[–—]/g, '-');
+}
+
+export class PdfBuilder {
+  constructor() {
+    this.width = 595.28;
+    this.height = 841.89;
+    this.pages = [];
+    this.currentPage = null;
+    this.addPage();
+  }
+
+  addPage() {
+    this.currentPage = { ops: [] };
+    this.pages.push(this.currentPage);
+    return this.currentPage;
+  }
+
+  toPdfY(y) {
+    return this.height - y;
+  }
+
+  rect(x, y, w, h, fill = null, stroke = null, lineWidth = 1) {
+    const yBottom = this.toPdfY(y + h);
+    let s = 'q\n';
+    if (lineWidth) s += `${lineWidth.toFixed(2)} w\n`;
+    if (fill) s += `${fill[0].toFixed(3)} ${fill[1].toFixed(3)} ${fill[2].toFixed(3)} rg\n`;
+    if (stroke) s += `${stroke[0].toFixed(3)} ${stroke[1].toFixed(3)} ${stroke[2].toFixed(3)} RG\n`;
+    s += `${x.toFixed(2)} ${yBottom.toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)} re\n`;
+    if (fill && stroke) s += 'B\n';
+    else if (fill) s += 'f\n';
+    else if (stroke) s += 'S\n';
+    s += 'Q\n';
+    this.currentPage.ops.push(s);
+  }
+
+  line(x1, y1, x2, y2, stroke = [0, 0, 0], lineWidth = 1) {
+    const py1 = this.toPdfY(y1);
+    const py2 = this.toPdfY(y2);
+    let s = `q\n${lineWidth.toFixed(2)} w\n${stroke[0].toFixed(3)} ${stroke[1].toFixed(3)} ${stroke[2].toFixed(3)} RG\n`;
+    s += `${x1.toFixed(2)} ${py1.toFixed(2)} m ${x2.toFixed(2)} ${py2.toFixed(2)} l S\nQ\n`;
+    this.currentPage.ops.push(s);
+  }
+
+  text(str, x, y, options = {}) {
+    if (str === null || str === undefined || str === '') return;
+    const raw = latinize(String(str));
+    const font = options.font === 'bold' ? '/F2' : (options.font === 'oblique' ? '/F3' : '/F1');
+    const size = options.size || 10;
+    const color = options.color || [0.1, 0.15, 0.2];
+    const align = options.align || 'left';
+
+    const charW = (options.font === 'bold' ? 0.56 : 0.52) * size;
+    const textWidth = raw.length * charW;
+    let drawX = x;
+    if (align === 'right') drawX = x - textWidth;
+    else if (align === 'center') drawX = x - (textWidth / 2);
+
+    const pdfY = this.toPdfY(y + size * 0.78);
+    const escaped = raw.replace(/\\/g, '\\\\').replace(/\(/g, '\\(').replace(/\)/g, '\\)');
+    const op = `BT\n${font} ${size.toFixed(2)} Tf\n${color[0].toFixed(3)} ${color[1].toFixed(3)} ${color[2].toFixed(3)} rg\n1 0 0 1 ${drawX.toFixed(2)} ${pdfY.toFixed(2)} Tm\n(${escaped}) Tj\nET\n`;
+    this.currentPage.ops.push(op);
+  }
+
+  build(footerTitle = 'Makon - Yotoqxona boshqaruvi tizimi') {
+    const totalPages = this.pages.length;
+    for (let i = 0; i < totalPages; i++) {
+      this.currentPage = this.pages[i];
+      this.line(40, 804, 555, 804, [0.85, 0.88, 0.92], 0.5);
+      this.text(footerTitle, 40, 810, { font: 'regular', size: 7.5, color: [0.5, 0.55, 0.6] });
+      this.text(`Sahifa ${i + 1} / ${totalPages}`, 555, 810, { font: 'regular', size: 7.5, color: [0.5, 0.55, 0.6], align: 'right' });
+    }
+
+    const encoder = new TextEncoder();
+    const chunks = [];
+    let offset = 0;
+    const xrefOffsets = [];
+
+    function append(str) {
+      const b = encoder.encode(str);
+      chunks.push(b);
+      offset += b.length;
+    }
+
+    append('%PDF-1.4\n%âãÏÓ\n');
+    xrefOffsets[1] = offset;
+    append('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
+
+    const pageObjStart = 7;
+    const kids = [];
+    for (let i = 0; i < totalPages; i++) {
+      kids.push(`${pageObjStart + i * 2} 0 R`);
+    }
+    xrefOffsets[2] = offset;
+    append(`2 0 obj\n<< /Type /Pages /Kids [${kids.join(' ')}] /Count ${totalPages} >>\nendobj\n`);
+
+    xrefOffsets[3] = offset;
+    append('3 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>\nendobj\n');
+    xrefOffsets[4] = offset;
+    append('4 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>\nendobj\n');
+    xrefOffsets[5] = offset;
+    append('5 0 obj\n<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Oblique /Encoding /WinAnsiEncoding >>\nendobj\n');
+    xrefOffsets[6] = offset;
+    append('6 0 obj\n[/PDF /Text /ImageB /ImageC /ImageI]\nendobj\n');
+
+    for (let i = 0; i < totalPages; i++) {
+      const pageObjNum = pageObjStart + i * 2;
+      const contentObjNum = pageObjNum + 1;
+      const contentStr = this.pages[i].ops.join('');
+      const contentBytes = encoder.encode(contentStr);
+
+      xrefOffsets[pageObjNum] = offset;
+      append(`${pageObjNum} 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${this.width.toFixed(2)} ${this.height.toFixed(2)}] /Contents ${contentObjNum} 0 R /Resources << /Font << /F1 3 0 R /F2 4 0 R /F3 5 0 R >> /ProcSet 6 0 R >> >>\nendobj\n`);
+
+      xrefOffsets[contentObjNum] = offset;
+      append(`${contentObjNum} 0 obj\n<< /Length ${contentBytes.length} >>\nstream\n`);
+      chunks.push(contentBytes);
+      offset += contentBytes.length;
+      append('\nendstream\nendobj\n');
+    }
+
+    const startXref = offset;
+    const totalObjs = pageObjStart + totalPages * 2;
+    append(`xref\n0 ${totalObjs}\n0000000000 65535 f \n`);
+    for (let i = 1; i < totalObjs; i++) {
+      const pos = String(xrefOffsets[i]).padStart(10, '0');
+      append(`${pos} 00000 n \n`);
+    }
+
+    append(`trailer\n<< /Size ${totalObjs} /Root 1 0 R >>\nstartxref\n${startXref}\n%%EOF\n`);
+
+    const totalLen = chunks.reduce((acc, c) => acc + c.length, 0);
+    const result = new Uint8Array(totalLen);
+    let cur = 0;
+    for (const c of chunks) {
+      result.set(c, cur);
+      cur += c.length;
+    }
+    return result;
+  }
+}
+
+export function generateDebtorsPdf(state, today = todayISO()) {
+  const currentRate = state?.settings?.monthlyRate || RATE;
+  const debtors = state.residents
+    .map(r => ({ resident: r, status: residentStatus(state, r, today) }))
+    .filter(item => item.status.owed > 0)
+    .sort((a, b) => b.status.owed - a.status.owed);
+
+  const totalDebt = debtors.reduce((sum, d) => sum + d.status.owed, 0);
+  const pdf = new PdfBuilder();
+
+  function drawHeader(isFirst = false) {
+    if (isFirst) {
+      pdf.rect(40, 36, 515, 52, [0.08, 0.28, 0.65]);
+      pdf.text('MAKON', 52, 47, { font: 'bold', size: 17, color: [1, 1, 1] });
+      pdf.text('YOTOQXONA BOSHQARUVI TIZIMI', 52, 68, { font: 'regular', size: 7.5, color: [0.75, 0.88, 1.0] });
+      pdf.text('QARZDORLAR RO\'YXATI', 543, 49, { font: 'bold', size: 12.5, color: [1, 1, 1], align: 'right' });
+      pdf.text(`Sana: ${today}`, 543, 67, { font: 'regular', size: 8, color: [0.85, 0.92, 1.0], align: 'right' });
+    } else {
+      pdf.rect(40, 36, 515, 26, [0.08, 0.28, 0.65]);
+      pdf.text('MAKON - QARZDORLAR RO\'YXATI', 50, 43, { font: 'bold', size: 9.5, color: [1, 1, 1] });
+      pdf.text(`Sana: ${today}`, 545, 44, { font: 'regular', size: 7.5, color: [0.85, 0.92, 1.0], align: 'right' });
+    }
+  }
+
+  function drawTableHeader(y) {
+    pdf.rect(40, y, 515, 20, [0.1, 0.24, 0.48]);
+    pdf.text('T/r', 54, y + 5, { font: 'bold', size: 8, color: [1, 1, 1], align: 'center' });
+    pdf.text('Blok', 86, y + 5, { font: 'bold', size: 8, color: [1, 1, 1], align: 'center' });
+    pdf.text('Xona', 130, y + 5, { font: 'bold', size: 8, color: [1, 1, 1], align: 'center' });
+    pdf.text('Ism va familiya', 160, y + 5, { font: 'bold', size: 8, color: [1, 1, 1] });
+    pdf.text('Telefon raqami', 390, y + 5, { font: 'bold', size: 8, color: [1, 1, 1], align: 'center' });
+    pdf.text('Qarzdorlik', 545, y + 5, { font: 'bold', size: 8, color: [1, 1, 1], align: 'right' });
+    return y + 20;
+  }
+
+  drawHeader(true);
+
+  // Summary badges
+  pdf.rect(40, 96, 160, 34, [0.96, 0.97, 0.99], [0.85, 0.89, 0.94], 0.7);
+  pdf.text('JAMI QARZDORLAR', 48, 102, { font: 'regular', size: 6.5, color: [0.4, 0.45, 0.5] });
+  pdf.text(`${debtors.length} nafar bola`, 48, 114, { font: 'bold', size: 10.5, color: [0.08, 0.15, 0.3] });
+
+  pdf.rect(210, 96, 185, 34, [0.99, 0.95, 0.95], [0.98, 0.8, 0.8], 0.7);
+  pdf.text('UMUMIY QARZDORLIK', 218, 102, { font: 'regular', size: 6.5, color: [0.7, 0.2, 0.2] });
+  pdf.text(`${fmtMoney(totalDebt)} so'm`, 218, 114, { font: 'bold', size: 10.5, color: [0.8, 0.1, 0.1] });
+
+  pdf.rect(405, 96, 150, 34, [0.96, 0.97, 0.99], [0.85, 0.89, 0.94], 0.7);
+  pdf.text('STANDART OYLIK NARX', 413, 102, { font: 'regular', size: 6.5, color: [0.4, 0.45, 0.5] });
+  pdf.text(`${fmtMoney(currentRate)} so'm`, 413, 114, { font: 'bold', size: 10.5, color: [0.08, 0.15, 0.3] });
+
+  let curY = drawTableHeader(138);
+
+  if (debtors.length === 0) {
+    pdf.rect(40, curY, 515, 28, [0.98, 0.99, 0.98], [0.85, 0.9, 0.85], 0.5);
+    pdf.text('Hozirgi kunda qarzdorlar mavjud emas. Barcha to\'lovlar o\'z vaqtida amalga oshirilgan.', 297, curY + 9, { font: 'regular', size: 8.5, color: [0.15, 0.5, 0.2], align: 'center' });
+    curY += 28;
+  } else {
+    debtors.forEach((d, idx) => {
+      if (curY > 770) {
+        pdf.addPage();
+        drawHeader(false);
+        curY = drawTableHeader(68);
+      }
+      const bg = idx % 2 === 0 ? [1, 1, 1] : [0.97, 0.98, 0.99];
+      const r = d.resident;
+      pdf.rect(40, curY, 515, 18, bg, [0.88, 0.91, 0.95], 0.5);
+      pdf.text(String(idx + 1), 54, curY + 4.5, { font: 'regular', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      pdf.text(`${r.block} blok`, 86, curY + 4.5, { font: 'bold', size: 7.5, color: [0.1, 0.2, 0.4], align: 'center' });
+      pdf.text(String(r.room), 130, curY + 4.5, { font: 'regular', size: 7.5, color: [0.1, 0.15, 0.2], align: 'center' });
+      pdf.text(`${r.lastName} ${r.firstName}`, 160, curY + 4.5, { font: 'bold', size: 8, color: [0.08, 0.12, 0.2] });
+      pdf.text(r.phone || '-', 390, curY + 4.5, { font: 'regular', size: 7.5, color: [0.2, 0.3, 0.4], align: 'center' });
+      pdf.text(`${fmtMoney(d.status.owed)} so'm`, 545, curY + 4.5, { font: 'bold', size: 8, color: [0.75, 0.1, 0.1], align: 'right' });
+      curY += 18;
+    });
+
+    if (curY > 760) {
+      pdf.addPage();
+      drawHeader(false);
+      curY = 68;
+    }
+    pdf.rect(40, curY, 515, 20, [0.94, 0.96, 0.99], [0.75, 0.82, 0.9], 0.7);
+    pdf.text('JAMI QARZDORLIK SUMMASI:', 430, curY + 5.5, { font: 'bold', size: 8.5, color: [0.1, 0.2, 0.4], align: 'right' });
+    pdf.text(`${fmtMoney(totalDebt)} so'm`, 545, curY + 5.5, { font: 'bold', size: 9, color: [0.8, 0.1, 0.1], align: 'right' });
+    curY += 26;
+
+    if (curY < 740) {
+      curY += 16;
+      pdf.text('Hisobotni tuzdi: ________________________ (Imzo)', 50, curY, { font: 'regular', size: 8, color: [0.3, 0.35, 0.4] });
+      pdf.text('Rahbar: ________________________ (Imzo)', 350, curY, { font: 'regular', size: 8, color: [0.3, 0.35, 0.4] });
+    }
+  }
+
+  return pdf.build('Makon - Qarzdorlar hisoboti');
+}
+
+export function generateReportPdf(state, today = todayISO()) {
+  const currentRate = state?.settings?.monthlyRate || RATE;
+  const summary = getSummary(state, `${today.slice(0, 7)}-01`, today, today);
+  const totalPaid = state.payments.reduce((sum, p) => sum + p.amount, 0);
+  const totalExpenses = state.expenses.reduce((sum, e) => sum + e.amount, 0);
+  const netProfit = totalPaid - totalExpenses;
+  const occupiedCount = state.residents.filter(r => r.active).length;
+  const occupancyPct = Math.round((occupiedCount / CAPACITY) * 100);
+
+  const pdf = new PdfBuilder();
+
+  function drawHeader(isFirst = false) {
+    if (isFirst) {
+      pdf.rect(40, 36, 515, 52, [0.08, 0.28, 0.65]);
+      pdf.text('MAKON', 52, 47, { font: 'bold', size: 17, color: [1, 1, 1] });
+      pdf.text('YOTOQXONA BOSHQARUVI TIZIMI', 52, 68, { font: 'regular', size: 7.5, color: [0.75, 0.88, 1.0] });
+      pdf.text('UMUMIY HISOBOT', 543, 49, { font: 'bold', size: 13, color: [1, 1, 1], align: 'right' });
+      pdf.text(`Sana: ${today}`, 543, 67, { font: 'regular', size: 8, color: [0.85, 0.92, 1.0], align: 'right' });
+    } else {
+      pdf.rect(40, 36, 515, 26, [0.08, 0.28, 0.65]);
+      pdf.text('MAKON - UMUMIY HISOBOT', 50, 43, { font: 'bold', size: 9.5, color: [1, 1, 1] });
+      pdf.text(`Sana: ${today}`, 545, 44, { font: 'regular', size: 7.5, color: [0.85, 0.92, 1.0], align: 'right' });
+    }
+  }
+
+  drawHeader(true);
+
+  // 4 Financial KPI Cards
+  const kpiW = 122;
+  const kpiGap = 9;
+
+  // 1: Total Paid
+  pdf.rect(40, 96, kpiW, 40, [0.94, 0.99, 0.95], [0.7, 0.9, 0.75], 0.7);
+  pdf.text('JAMI TUSHUM', 46, 102, { font: 'regular', size: 6.5, color: [0.15, 0.5, 0.2] });
+  pdf.text(`${fmtMoney(totalPaid)} so'm`, 46, 116, { font: 'bold', size: 9.5, color: [0.1, 0.55, 0.2] });
+
+  // 2: Total Expenses
+  pdf.rect(40 + kpiW + kpiGap, 96, kpiW, 40, [0.99, 0.95, 0.95], [0.95, 0.75, 0.75], 0.7);
+  pdf.text('JAMI XARAJAT', 40 + kpiW + kpiGap + 6, 102, { font: 'regular', size: 6.5, color: [0.7, 0.2, 0.2] });
+  pdf.text(`${fmtMoney(totalExpenses)} so'm`, 40 + kpiW + kpiGap + 6, 116, { font: 'bold', size: 9.5, color: [0.8, 0.15, 0.15] });
+
+  // 3: Net Profit
+  pdf.rect(40 + (kpiW + kpiGap) * 2, 96, kpiW, 40, [0.94, 0.97, 1.0], [0.7, 0.82, 0.98], 0.7);
+  pdf.text('SOF FOYDA', 40 + (kpiW + kpiGap) * 2 + 6, 102, { font: 'regular', size: 6.5, color: [0.1, 0.35, 0.7] });
+  pdf.text(`${fmtMoney(netProfit)} so'm`, 40 + (kpiW + kpiGap) * 2 + 6, 116, { font: 'bold', size: 9.5, color: netProfit >= 0 ? [0.1, 0.35, 0.7] : [0.8, 0.1, 0.1] });
+
+  // 4: Debt
+  pdf.rect(40 + (kpiW + kpiGap) * 3, 96, kpiW, 40, [0.99, 0.97, 0.93], [0.95, 0.85, 0.65], 0.7);
+  pdf.text('QOLGAN QARZ', 40 + (kpiW + kpiGap) * 3 + 6, 102, { font: 'regular', size: 6.5, color: [0.7, 0.45, 0.1] });
+  pdf.text(`${fmtMoney(summary.owed)} so'm`, 40 + (kpiW + kpiGap) * 3 + 6, 116, { font: 'bold', size: 9.5, color: summary.owed > 0 ? [0.8, 0.1, 0.1] : [0.2, 0.5, 0.2] });
+
+  // Occupancy Row
+  pdf.rect(40, 142, 515, 26, [0.97, 0.98, 0.99], [0.85, 0.89, 0.94], 0.5);
+  pdf.text(`Band o'rinlar: ${occupiedCount} ta (${occupancyPct}%)   |   Bo'sh o'rinlar: ${CAPACITY - occupiedCount} ta   |   Jami sig'im: ${CAPACITY} o'rin`, 52, 151, { font: 'bold', size: 8, color: [0.15, 0.25, 0.4] });
+  pdf.text(`Standart tarif: ${fmtMoney(currentRate)} so'm/oy`, 543, 151, { font: 'regular', size: 8, color: [0.35, 0.4, 0.5], align: 'right' });
+
+  let curY = 180;
+
+  // Section 1: Qarzdorlar
+  const debtors = state.residents
+    .map(r => ({ resident: r, status: residentStatus(state, r, today) }))
+    .filter(item => item.status.owed > 0)
+    .sort((a, b) => b.status.owed - a.status.owed);
+
+  pdf.rect(40, curY, 515, 18, [0.1, 0.24, 0.48]);
+  pdf.text(`QARZDOR BOLALAR (${debtors.length} nafar)`, 48, curY + 4.5, { font: 'bold', size: 8.5, color: [1, 1, 1] });
+  pdf.text(`Jami qarz: ${fmtMoney(summary.owed)} so'm`, 545, curY + 4.5, { font: 'bold', size: 8.5, color: [1, 0.9, 0.9], align: 'right' });
+  curY += 18;
+
+  if (debtors.length === 0) {
+    pdf.rect(40, curY, 515, 20, [1, 1, 1], [0.88, 0.91, 0.95], 0.5);
+    pdf.text('Qarzdorlar yo\'q. Barcha to\'lovlar o\'z vaqtida amalga oshirilgan.', 297, curY + 6, { font: 'regular', size: 8, color: [0.2, 0.5, 0.2], align: 'center' });
+    curY += 24;
+  } else {
+    const shownDebtors = debtors.slice(0, 12);
+    shownDebtors.forEach((d, idx) => {
+      if (curY > 770) {
+        pdf.addPage();
+        drawHeader(false);
+        curY = 70;
+      }
+      const bg = idx % 2 === 0 ? [1, 1, 1] : [0.97, 0.98, 0.99];
+      const r = d.resident;
+      pdf.rect(40, curY, 515, 17, bg, [0.88, 0.91, 0.95], 0.5);
+      pdf.text(String(idx + 1), 54, curY + 4, { font: 'regular', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      pdf.text(`${r.block} blok, ${r.room}-xona`, 100, curY + 4, { font: 'regular', size: 7.5, color: [0.1, 0.2, 0.4] });
+      pdf.text(`${r.lastName} ${r.firstName}`, 210, curY + 4, { font: 'bold', size: 8, color: [0.08, 0.12, 0.2] });
+      pdf.text(r.phone || '-', 380, curY + 4, { font: 'regular', size: 7.5, color: [0.2, 0.3, 0.4], align: 'center' });
+      pdf.text(`${fmtMoney(d.status.owed)} so'm`, 545, curY + 4, { font: 'bold', size: 8, color: [0.75, 0.1, 0.1], align: 'right' });
+      curY += 17;
+    });
+    if (debtors.length > shownDebtors.length) {
+      pdf.rect(40, curY, 515, 16, [0.96, 0.97, 0.99], [0.88, 0.91, 0.95], 0.5);
+      pdf.text(`... va yana ${debtors.length - shownDebtors.length} ta qarzdor (Qarzdorlar ro'yxati alohida faylda)`, 297, curY + 4, { font: 'oblique', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      curY += 16;
+    }
+    curY += 8;
+  }
+
+  // Section 2: Oxirgi to'lovlar
+  if (curY > 730) {
+    pdf.addPage();
+    drawHeader(false);
+    curY = 70;
+  }
+  const recentPayments = [...state.payments].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 12);
+  pdf.rect(40, curY, 515, 18, [0.1, 0.24, 0.48]);
+  pdf.text(`OXIRGI QABUL QILINGAN TO'LOVLAR (${state.payments.length} tadan namunalar)`, 48, curY + 4.5, { font: 'bold', size: 8.5, color: [1, 1, 1] });
+  curY += 18;
+
+  if (recentPayments.length === 0) {
+    pdf.rect(40, curY, 515, 20, [1, 1, 1], [0.88, 0.91, 0.95], 0.5);
+    pdf.text('To\'lovlar tarixi bo\'sh.', 297, curY + 6, { font: 'regular', size: 8, color: [0.5, 0.55, 0.6], align: 'center' });
+    curY += 24;
+  } else {
+    recentPayments.forEach((p, idx) => {
+      if (curY > 770) {
+        pdf.addPage();
+        drawHeader(false);
+        curY = 70;
+      }
+      const bg = idx % 2 === 0 ? [1, 1, 1] : [0.97, 0.98, 0.99];
+      const resident = state.residents.find(r => r.id === p.residentId);
+      const name = resident ? `${resident.lastName} ${resident.firstName}` : 'Noma\'lum';
+      const room = resident ? `${resident.block}-${resident.room}` : '-';
+      pdf.rect(40, curY, 515, 17, bg, [0.88, 0.91, 0.95], 0.5);
+      pdf.text(String(idx + 1), 54, curY + 4, { font: 'regular', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      pdf.text(p.date, 95, curY + 4, { font: 'regular', size: 7.5, color: [0.3, 0.35, 0.4], align: 'center' });
+      pdf.text(room, 145, curY + 4, { font: 'regular', size: 7.5, color: [0.2, 0.3, 0.4], align: 'center' });
+      pdf.text(name, 185, curY + 4, { font: 'bold', size: 8, color: [0.08, 0.12, 0.2] });
+      pdf.text(p.method === 'card' ? 'Karta' : 'Naqd pul', 380, curY + 4, { font: 'regular', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      pdf.text(`+${fmtMoney(p.amount)} so'm`, 545, curY + 4, { font: 'bold', size: 8, color: [0.1, 0.55, 0.2], align: 'right' });
+      curY += 17;
+    });
+    curY += 8;
+  }
+
+  // Section 3: Oxirgi xarajatlar
+  if (curY > 730) {
+    pdf.addPage();
+    drawHeader(false);
+    curY = 70;
+  }
+  const recentExpenses = [...state.expenses].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 10);
+  pdf.rect(40, curY, 515, 18, [0.1, 0.24, 0.48]);
+  pdf.text(`OXIRGI XARAJATLAR (${state.expenses.length} tadan namunalar)`, 48, curY + 4.5, { font: 'bold', size: 8.5, color: [1, 1, 1] });
+  curY += 18;
+
+  if (recentExpenses.length === 0) {
+    pdf.rect(40, curY, 515, 20, [1, 1, 1], [0.88, 0.91, 0.95], 0.5);
+    pdf.text('Xarajatlar tarixi bo\'sh.', 297, curY + 6, { font: 'regular', size: 8, color: [0.5, 0.55, 0.6], align: 'center' });
+    curY += 24;
+  } else {
+    const catMap = { utilities: 'Kommunal', tax: 'Soliq', other: 'Xo\'jalik' };
+    recentExpenses.forEach((e, idx) => {
+      if (curY > 770) {
+        pdf.addPage();
+        drawHeader(false);
+        curY = 70;
+      }
+      const bg = idx % 2 === 0 ? [1, 1, 1] : [0.97, 0.98, 0.99];
+      pdf.rect(40, curY, 515, 17, bg, [0.88, 0.91, 0.95], 0.5);
+      pdf.text(String(idx + 1), 54, curY + 4, { font: 'regular', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      pdf.text(e.date, 95, curY + 4, { font: 'regular', size: 7.5, color: [0.3, 0.35, 0.4], align: 'center' });
+      pdf.text(e.name, 150, curY + 4, { font: 'bold', size: 8, color: [0.08, 0.12, 0.2] });
+      pdf.text(catMap[e.category] || 'Boshqa', 380, curY + 4, { font: 'regular', size: 7.5, color: [0.4, 0.45, 0.5], align: 'center' });
+      pdf.text(`-${fmtMoney(e.amount)} so'm`, 545, curY + 4, { font: 'bold', size: 8, color: [0.8, 0.15, 0.15], align: 'right' });
+      curY += 17;
+    });
+    curY += 16;
+  }
+
+  // Signatures
+  if (curY > 750) {
+    pdf.addPage();
+    drawHeader(false);
+    curY = 70;
+  }
+  pdf.text('Hisobotni tuzdi: ________________________ (Imzo)', 50, curY + 10, { font: 'regular', size: 8, color: [0.3, 0.35, 0.4] });
+  pdf.text('Rahbar: ________________________ (Imzo)', 350, curY + 10, { font: 'regular', size: 8, color: [0.3, 0.35, 0.4] });
+
+  return pdf.build('Makon - Umumiy moliyaviy hisobot');
+}

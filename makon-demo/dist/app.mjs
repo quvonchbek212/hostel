@@ -1,4 +1,4 @@
-import { RATE, BLOCKS, CAPACITY, todayISO, addDays, daysBetween, seedData, emptyData, deletePayment, deleteExpense, validateState, roomList, residentStatus, getSummary, addResident, recordPayment, checkoutResident, addExpense, roomOccupants, generateDocxReport } from './engine.mjs';
+import { RATE, BLOCKS, CAPACITY, todayISO, addDays, daysBetween, seedData, emptyData, deletePayment, deleteExpense, validateState, roomList, residentStatus, getSummary, addResident, recordPayment, checkoutResident, addExpense, roomOccupants, generateDocxReport, generateDebtorsPdf, generateReportPdf } from './engine.mjs';
 
 const STORAGE_KEY = 'makon.hostel.v2';
 const $ = (selector) => document.querySelector(selector);
@@ -180,7 +180,7 @@ function renderResidents(debtors) {
   const base=state.residents.filter(r=>debtors?statusOf(r).owed>0:statusFilter==='inactive'?!r.active:r.active);
   const people=base.filter(r=>(blockFilter==='all'||r.block===blockFilter)&&matchResident(r)&&(debtors||['all','inactive'].includes(statusFilter)||statusOf(r).status===statusFilter)).sort((a,b)=>debtors?statusOf(b).owed-statusOf(a).owed:fullName(a).localeCompare(fullName(b)));
   const sumOwed=state.residents.reduce((a,r)=>a+statusOf(r).owed,0), countOwed=state.residents.filter(r=>statusOf(r).owed>0).length;
-  return heading(debtors?'Qarzlar ham nazoratda.':'Bolalar ro‘yxati',debtors?'Qarzdor bolalarni toping, to‘lovni kiriting va qarzni yoping.':`${state.residents.filter(r=>r.active).length} ta bola · Barcha ma’lumotlar bir joyda`,debtors?addButton('payment-picker','To‘lov qabul qilish'):addButton('add-resident','Bola qo‘shish'))+
+  return heading(debtors?'Qarzlar ham nazoratda.':'Bolalar ro‘yxati',debtors?'Qarzdor bolalarni toping, to‘lovni kiriting va qarzni yoping.':`${state.residents.filter(r=>r.active).length} ta bola · Barcha ma’lumotlar bir joyda`,debtors?`<div style="display:flex;gap:8px;flex-wrap:wrap;"><button class="btn secondary" data-action="telegram-debtors" style="display:flex;align-items:center;gap:6px;">${icon('debt')}<span>Qarzdorlar (PDF)</span></button>${addButton('payment-picker','To‘lov qabul qilish')}</div>`:addButton('add-resident','Bola qo‘shish'))+
   (debtors?`<div class="debt-overview"><div><span>Jami olinishi kerak</span><strong>${money(sumOwed)} <small>so‘m</small></strong></div><div class="debt-overview-count">${icon('users')}<strong>${countOwed}</strong><span>ta qarzdor bola</span></div><div class="debt-overview-note">${icon('info')}Qisman to‘lovdan qolgan summa<br>qarz sifatida saqlanadi.</div></div>`:'')+
   `<section class="card"><div class="toolbar table-toolbar"><label class="search-field">${icon('search')}<input id="resident-query" type="search" placeholder="Ism, familiya yoki telefon..." value="${escapeHTML(query)}" aria-label="Bolani qidirish"></label><div class="filter-group"><select id="block-filter" class="filter-select" aria-label="Blok bo‘yicha saralash"><option value="all">Barcha bloklar</option>${BLOCKS.map(b=>`<option value="${b.id}" ${blockFilter===b.id?'selected':''}>${b.id} blok</option>`).join('')}</select>${debtors?'':`<select id="status-filter" class="filter-select" aria-label="To‘lov holati"><option value="all">Barcha holatlar</option>${[['paid','To‘langan'],['debt','Qarzdor'],['soon','To‘lovi yaqin'],['inactive','Ketgan bolalar']].map(([v,t])=>`<option value="${v}" ${statusFilter===v?'selected':''}>${t}</option>`).join('')}</select>`}</div></div><div class="table-wrap"><table class="data-table"><thead><tr><th class="hide-mobile">№</th><th>Ism, familiya</th><th class="hide-mobile">Telefon raqami</th><th class="hide-mobile">Xonasi</th><th>${debtors?'Qolgan qarz':'Holati'}</th><th class="hide-mobile">${debtors?'To‘lov muddati':'Keyingi to‘lov'}</th><th class="hide-mobile">Kelgan sana</th><th><span class="sr-only">Amallar</span></th></tr></thead><tbody>${people.map((r,i)=>{const s=statusOf(r);return `<tr><td class="hide-mobile muted">${String(i+1).padStart(2,'0')}</td><td><button class="table-person" data-action="profile" data-id="${r.id}"><span class="avatar ${s.owed?'amber':'sage'}">${initials(r)}</span><span><strong>${escapeHTML(fullName(r))}</strong><small>${roomName(r)}${!r.active?' · Ketgan':''}</small></span></button></td><td class="hide-mobile"><a class="phone-link" href="tel:${escapeHTML(r.phone.replace(/\s/g,''))}">${escapeHTML(r.phone)}</a></td><td class="hide-mobile"><span class="room-tag">${r.block}-${String(r.room).padStart(2,'0')}</span></td><td>${debtors?`<strong class="red-text">${money(s.owed)}</strong><small class="cell-sub">so‘m</small>`:statusBadge(r)}</td><td class="hide-mobile">${fmtDate(s.owed?s.cycleStart:s.nextDue)}${s.status==='soon'?'<small class="cell-sub amber-text">To‘lov yaqin</small>':''}</td><td class="hide-mobile muted">${fmtDate(r.joined,true)}</td><td><button class="btn ${debtors?'secondary':'ghost'} small table-action" data-action="${debtors?'pay':'profile'}" data-id="${r.id}" aria-label="${escapeHTML(fullName(r))}: ${debtors?'qarzni yopish':'ma’lumotlar'}"><span class="hide-mobile">${debtors?'Qarzni yopish':'Batafsil'}</span>${icon('right')}</button></td></tr>`;}).join('')}</tbody></table>${!people.length?empty('Bola topilmadi','Qidiruv yoki filtrni o‘zgartirib ko‘ring.'):''}</div><div class="list-footer"><span>${people.length} ta bola ko‘rsatilmoqda</span>${debtors?'<span>Qarzlar bugungi holat bo‘yicha</span>':`<span>Har 30 kunda · ${money(state.settings?.monthlyRate || RATE)} so‘m</span>`}</div></section>`;
 }
@@ -329,19 +329,81 @@ async function sendBackupToTelegram() {
   toast('Telegram ochilmoqda...');
 }
 
-async function sendReportToTelegram() {
-  const docxBytes = generateDocxReport(state, todayISO());
-  const fileName = `makon-hisobot-${todayISO()}.docx`;
-  const summaryText = buildTelegramSummaryText();
+async function sendDebtorsToTelegram() {
+  const pdfBytes = generateDebtorsPdf(state, todayISO());
+  const fileName = `makon-qarzdorlar-${todayISO()}.pdf`;
+  const debtors = state.residents
+    .map(r => ({ resident: r, status: residentStatus(state, r, todayISO()) }))
+    .filter(item => item.status.owed > 0);
+  const totalDebt = debtors.reduce((sum, d) => sum + d.status.owed, 0);
+  const summaryText = `⚠️ MAKON — QARZDORLAR RO‘YXATI\n📅 Sana: ${todayISO()}\n━━━━━━━━━━━━━━━━━━\n👥 Qarzdorlar soni: ${debtors.length} nafar bola\n💸 Jami qarz summasi: ${money(totalDebt)} so‘m\n━━━━━━━━━━━━━━━━━━\n(To‘liq jadval ilova qilingan PDF faylda)`;
 
   const Filesystem = window.Capacitor?.Plugins?.Filesystem;
   const Share = window.Capacitor?.Plugins?.Share;
   if (Filesystem && Share) {
     try {
-      const base64 = uint8ToBase64(docxBytes);
+      const base64 = uint8ToBase64(pdfBytes);
       const writeRes = await Filesystem.writeFile({ path: fileName, data: base64, directory: 'CACHE' });
       await Share.share({
-        title: 'Makon — Hisobot (.docx)',
+        title: 'Makon — Qarzdorlar ro‘yxati (.pdf)',
+        text: summaryText,
+        url: writeRes.uri,
+        files: [writeRes.uri],
+        dialogTitle: 'Telegram orqali qarzdorlar ro‘yxatini yuboring'
+      });
+      toast('Qarzdorlar ro‘yxati yuborildi.');
+      return;
+    } catch (e) {
+      if (e?.message?.includes('canceled') || e?.name === 'AbortError') return;
+    }
+  }
+
+  if (typeof navigator !== 'undefined' && navigator.share && navigator.canShare) {
+    try {
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const file = new File([blob], fileName, { type: 'application/pdf' });
+      if (navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          title: 'Makon — Qarzdorlar ro‘yxati',
+          text: summaryText,
+          files: [file]
+        });
+        toast('Qarzdorlar ro‘yxati yuborildi.');
+        return;
+      }
+    } catch (e) {
+      if (e?.name === 'AbortError') return;
+    }
+  }
+
+  try {
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch {}
+  window.open(`https://t.me/share/url?url=&text=${encodeURIComponent(summaryText)}`, '_blank');
+  toast('Telegram ochilmoqda...');
+}
+
+async function sendReportToTelegram() {
+  const pdfBytes = generateReportPdf(state, todayISO());
+  const fileName = `makon-hisobot-${todayISO()}.pdf`;
+  const summaryText = buildTelegramSummaryText() + `\n\n(To‘liq hisobot ilova qilingan PDF faylda)`;
+
+  const Filesystem = window.Capacitor?.Plugins?.Filesystem;
+  const Share = window.Capacitor?.Plugins?.Share;
+  if (Filesystem && Share) {
+    try {
+      const base64 = uint8ToBase64(pdfBytes);
+      const writeRes = await Filesystem.writeFile({ path: fileName, data: base64, directory: 'CACHE' });
+      await Share.share({
+        title: 'Makon — Hisobot (.pdf)',
         text: summaryText,
         url: writeRes.uri,
         files: [writeRes.uri],
@@ -356,8 +418,8 @@ async function sendReportToTelegram() {
 
   if (typeof navigator !== 'undefined' && navigator.share && navigator.canShare) {
     try {
-      const blob = new Blob([docxBytes], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
-      const file = new File([blob], fileName, { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+      const file = new File([blob], fileName, { type: 'application/pdf' });
       if (navigator.canShare({ files: [file] })) {
         await navigator.share({
           title: 'Makon — Hisobot',
@@ -372,6 +434,17 @@ async function sendReportToTelegram() {
     }
   }
 
+  try {
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  } catch {}
   window.open(`https://t.me/share/url?url=&text=${encodeURIComponent(summaryText)}`, '_blank');
   toast('Telegram ochilmoqda...');
 }
@@ -419,11 +492,12 @@ function showDemoInfo() {
     </div>
 
     <div style="margin-top:14px;padding:14px;background:#edf5ff;border:1px solid #dbe9fc;border-radius:10px;">
-      <h4 style="font-size:12px;font-weight:700;color:#1e40af;margin-bottom:6px;">Telegramga yuborish va zaxira</h4>
-      <p style="font-size:10px;color:#3b82f6;line-height:1.5;margin-bottom:12px;">Ma’lumotlaringiz xavfsiz saqlanishi va hisobotlarni Word (.docx) shaklida ko‘rish uchun Telegramga yuboring.</p>
+      <h4 style="font-size:12px;font-weight:700;color:#1e40af;margin-bottom:6px;">Telegramga yuborish va hisobotlar</h4>
+      <p style="font-size:10px;color:#3b82f6;line-height:1.5;margin-bottom:12px;">Ma’lumotlaringiz xavfsiz saqlanishi va hisobotlarni chiroyli PDF shaklida ko‘rish uchun Telegramga yuboring.</p>
       <div style="display:flex;flex-direction:column;gap:8px;">
-        <button type="button" class="btn primary" data-action="telegram-backup" style="min-height:38px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:8px;">${icon('send')} Telegramga zaxirani yuborish (.json)</button>
-        <button type="button" class="btn primary" data-action="telegram-report" style="min-height:38px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:8px;background:#1d4ed8;">${icon('receipt')} Telegramga hisobot yuborish (.docx)</button>
+        <button type="button" class="btn primary" data-action="telegram-debtors" style="min-height:38px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:8px;background:#dc2626;">${icon('debt')} Qarzdorlar ro‘yxatini yuborish (.pdf)</button>
+        <button type="button" class="btn primary" data-action="telegram-report" style="min-height:38px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:8px;background:#1d4ed8;">${icon('receipt')} Telegramga hisobot yuborish (.pdf)</button>
+        <button type="button" class="btn primary" data-action="telegram-backup" style="min-height:38px;font-size:11px;display:flex;align-items:center;justify-content:center;gap:8px;background:#059669;">${icon('send')} Telegramga zaxirani yuborish (.json)</button>
         <label class="btn secondary" style="min-height:36px;font-size:11px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;">${icon('card')} Zaxiradan tiklash (.json)<input type="file" id="import-backup-input" accept=".json" style="display:none;"></label>
       </div>
     </div>
@@ -648,6 +722,7 @@ document.addEventListener('click',(event)=>{
     'notifications':showNotifications,
     'demo-info':showDemoInfo,
     'settings-info':showDemoInfo,
+    'telegram-debtors':sendDebtorsToTelegram,
     'telegram-backup':sendBackupToTelegram,
     'telegram-report':sendReportToTelegram,
     'lock-app':lockApp,

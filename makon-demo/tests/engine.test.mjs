@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { RATE, CAPACITY, BLOCKS, todayISO, addDays, daysBetween, roomList, roomOccupants, seedData, residentStatus, getSummary, addResident, recordPayment, checkoutResident, addExpense, deletePayment, deleteExpense, createZip, generateDocxReport } from '../dist/engine.mjs';
+import { RATE, CAPACITY, BLOCKS, todayISO, addDays, daysBetween, roomList, roomOccupants, seedData, residentStatus, getSummary, addResident, recordPayment, checkoutResident, addExpense, deletePayment, deleteExpense, createZip, generateDocxReport, generateDebtorsPdf, generateReportPdf } from '../dist/engine.mjs';
 
 const empty = () => ({ version: 1, residents: [], payments: [], expenses: [] });
 const input = (overrides = {}) => ({ firstName: 'Aziz', lastName: 'Karimov', phone: '+998 90 123 45 67', block: 'A', room: 1, joined: '2026-01-01', ...overrides });
@@ -215,4 +215,22 @@ test('custom monthlyRate in settings changes billing calculations', () => {
   const resident = add(state, { joined: '2026-01-01' });
   const status = residentStatus(state, resident, '2026-01-01');
   assert.equal(status.owed, 600000);
+});
+
+test('generateDebtorsPdf produces valid PDF binary', () => {
+  const state = seedData();
+  const pdf = generateDebtorsPdf(state, '2026-11-27');
+  assert.ok(pdf instanceof Uint8Array);
+  assert.ok(pdf.length > 1000);
+  const text = new TextDecoder().decode(pdf.slice(0, 8));
+  assert.equal(text.slice(0, 5), '%PDF-');
+});
+
+test('generateReportPdf produces valid PDF binary', () => {
+  const state = seedData();
+  const pdf = generateReportPdf(state, '2026-11-27');
+  assert.ok(pdf instanceof Uint8Array);
+  assert.ok(pdf.length > 2000);
+  const text = new TextDecoder().decode(pdf.slice(0, 8));
+  assert.equal(text.slice(0, 5), '%PDF-');
 });
